@@ -94,12 +94,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2325,
+                  "duration": 2274,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:53:09.154Z",
+                  "startTime": "2026-10-02T04:11:41.594Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -128,12 +128,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 30342,
+                  "duration": 28691,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:53:12.305Z",
+                  "startTime": "2026-10-02T04:11:44.766Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -162,12 +162,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 613,
+                  "duration": 560,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:53:42.658Z",
+                  "startTime": "2026-10-02T04:12:13.466Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -196,12 +196,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3032,
+                  "duration": 2851,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:53:43.285Z",
+                  "startTime": "2026-10-02T04:12:14.035Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -230,12 +230,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 431,
+                  "duration": 384,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:53:46.329Z",
+                  "startTime": "2026-10-02T04:12:16.893Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -264,12 +264,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1688,
+                  "duration": 1610,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:53:46.769Z",
+                  "startTime": "2026-10-02T04:12:17.284Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -298,12 +298,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3220,
+                  "duration": 3014,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:53:48.467Z",
+                  "startTime": "2026-10-02T04:12:18.900Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -332,12 +332,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 302,
+                  "duration": 497,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:53:56.528Z",
+                  "startTime": "2026-10-02T04:12:26.762Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -366,12 +366,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3545,
+                  "duration": 5519,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:53:56.842Z",
+                  "startTime": "2026-10-02T04:12:27.279Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -408,12 +408,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4818,
+                      "duration": 4829,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-02T04:53:51.698Z",
+                      "startTime": "2026-10-02T04:12:21.923Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -429,167 +429,13 @@
           ]
         }
       ]
-    },
-    {
-      "title": "maker.spec.js",
-      "file": "maker.spec.js",
-      "column": 0,
-      "line": 0,
-      "specs": [
-        {
-          "title": "edit, validate, undo, save, export, import and play a user-authored map",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 45000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "",
-              "projectName": "",
-              "results": [
-                {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 1402,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-10-02T04:54:00.410Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "5ead31cdbd053c3ba186-50a21c04b144b71c7fbf",
-          "file": "maker.spec.js",
-          "line": 9,
-          "column": 1
-        },
-        {
-          "title": "malformed and oversized imports keep the current map; imported text cannot create markup",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 45000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "",
-              "projectName": "",
-              "results": [
-                {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 291,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-10-02T04:54:01.818Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "5ead31cdbd053c3ba186-39325a095eade53cd733",
-          "file": "maker.spec.js",
-          "line": 44,
-          "column": 1
-        },
-        {
-          "title": "mapmaker reloads and publishes while offline; inaccessible storage still allows export",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 45000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "",
-              "projectName": "",
-              "results": [
-                {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 321,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-10-02T04:54:02.116Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "5ead31cdbd053c3ba186-42671271ba834636e41f",
-          "file": "maker.spec.js",
-          "line": 61,
-          "column": 1
-        }
-      ],
-      "suites": [
-        {
-          "title": "touch mapmaker",
-          "file": "maker.spec.js",
-          "line": 76,
-          "column": 6,
-          "specs": [
-            {
-              "title": "touch selection and editing remain accessible at phone widths",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 45000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 586,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-10-02T04:54:02.446Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "5ead31cdbd053c3ba186-ced5a61ae07ad49d5d30",
-              "file": "maker.spec.js",
-              "line": 78,
-              "column": 3
-            }
-          ]
-        }
-      ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-02T04:53:08.387Z",
-    "duration": 54877.167,
-    "expected": 14,
+    "startTime": "2026-10-02T04:11:41.194Z",
+    "duration": 51888.892,
+    "expected": 10,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
