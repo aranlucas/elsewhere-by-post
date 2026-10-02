@@ -8,3 +8,24 @@
 @media(max-width:380px){.desk{padding-left:13px;padding-right:13px}.intro-note p{font-size:12px}.hand-drawn-star{font-size:27px}h1{font-size:55px}.intro .eyebrow{font-size:6px;letter-spacing:1px}.edition{font-size:7px}.edition b{font-size:5px}.help-open{font-size:9px;gap:5px}.map-frame{padding:10px}.board{gap:8px}.tile{padding:4px}.tile-caption{font-size:9px}.tile-turn{width:30px;height:30px;font-size:23px}.tool{font-size:10px;padding:10px}.map-heading h2{font-size:21px}.map-legend{font-size:6px}}
 @media(max-width:480px){.intro{display:block}.intro-note{margin-top:17px;transform:none;gap:10px}.intro-note p{display:flex;flex-wrap:wrap;gap:3px 6px;font-size:12px;line-height:1.4}.intro-note br{display:none}.hand-drawn-star{font-size:27px;flex-shrink:0}.intro-note b{white-space:nowrap}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.courier{transition:none}}
+
+/* Keep the postal micro-print decorative; controls and route feedback stay readable. */
+.journey-label { font-size: 11px; }
+.move-count, .selection-note, #status-detail, .echo-chip, .map-legend,
+.stamp-chip > span, .hint-apply, .delivery > .quiet, .maker-link,
+footer { font-size: 12px; }
+.keyboard-guide { font-size: 12px !important; }
+.maker-link, .delivery > .quiet, .hint-apply { min-height: 44px; }
+.tile-caption { font-size: 12px; line-height: 1.35; }
+.map-legend { flex-wrap: wrap; gap: 8px 16px; }
+.map-legend span:last-child { font-size: 12px; }
+.help-open { font-size: 12px; }
+@media (max-width: 700px) {
+  .journeys { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .journey { flex-direction: row; justify-content: flex-start; gap: 8px; padding: 9px; }
+  .journey-label { margin-top: 0; }
+  .journey-check { position: static; margin-left: auto; }
+  .tile-caption { font-size: 11px; }
+  .help-open { font-size: 12px; }
+  footer { gap: 8px 16px; }
+}

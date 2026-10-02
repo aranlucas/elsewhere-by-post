@@ -29,3 +29,10 @@
 .maker .tile.visited:not(.selected) { box-shadow: 0 0 0 2px #52775a,var(--shadow); }
 @media (max-width:800px) { .maker-layout { grid-template-columns: 1fr; gap: 24px; }.maker-intro h1 { font-size: 43px; }.maker-controls { padding: 22px; }.maker-controls h2 { margin-bottom: 18px; }.maker-intro > p:last-child { font-size: 15px; } }
 @media (max-width:380px) { .maker-intro h1 { font-size: 36px; }.maker .edition { font-size: 7px; letter-spacing: 1px; }.maker .masthead a { font-size: 9px; } }
+
+/* Field names, validation and file actions must remain readable while authoring. */
+.maker .map-title-label, .maker .field, .maker .orientation > span,
+.maker .orientation .tool, .maker .check-field, .maker .validation-note,
+.maker .field-note, .maker .import-label, .maker .import-label input,
+.maker #maker-notice, .maker .masthead a { font-size: 12px; }
+.maker .orientation .tool, .maker .import-label input { min-height: 44px; }
