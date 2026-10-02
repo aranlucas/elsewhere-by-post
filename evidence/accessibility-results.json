@@ -1,0 +1,166 @@
+[
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 1000
+    },
+    "level": "first-turn",
+    "violations": [],
+    "incomplete": [
+      "aria-prohibited-attr",
+      "color-contrast"
+    ],
+    "passes": 23
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 1000
+    },
+    "level": "places-trade",
+    "violations": [],
+    "incomplete": [
+      "aria-prohibited-attr",
+      "color-contrast"
+    ],
+    "passes": 23
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 1000
+    },
+    "level": "scenic-route",
+    "violations": [],
+    "incomplete": [
+      "aria-prohibited-attr",
+      "color-contrast"
+    ],
+    "passes": 23
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 1000
+    },
+    "level": "elsewhere-door",
+    "violations": [],
+    "incomplete": [
+      "aria-prohibited-attr",
+      "color-contrast"
+    ],
+    "passes": 23
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 1000
+    },
+    "level": "detour-in-blue",
+    "violations": [],
+    "incomplete": [
+      "aria-prohibited-attr",
+      "color-contrast"
+    ],
+    "passes": 23
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 1000
+    },
+    "level": "two-fold-world",
+    "violations": [],
+    "incomplete": [
+      "aria-prohibited-attr",
+      "color-contrast"
+    ],
+    "passes": 23
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "level": "first-turn",
+    "violations": [],
+    "incomplete": [
+      "aria-prohibited-attr",
+      "color-contrast"
+    ],
+    "passes": 23
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "level": "places-trade",
+    "violations": [],
+    "incomplete": [
+      "aria-prohibited-attr",
+      "color-contrast"
+    ],
+    "passes": 23
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "level": "scenic-route",
+    "violations": [],
+    "incomplete": [
+      "aria-prohibited-attr",
+      "color-contrast"
+    ],
+    "passes": 23
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "level": "elsewhere-door",
+    "violations": [],
+    "incomplete": [
+      "aria-prohibited-attr",
+      "color-contrast"
+    ],
+    "passes": 23
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "level": "detour-in-blue",
+    "violations": [],
+    "incomplete": [
+      "aria-prohibited-attr",
+      "color-contrast"
+    ],
+    "passes": 23
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "level": "two-fold-world",
+    "violations": [],
+    "incomplete": [
+      "aria-prohibited-attr",
+      "color-contrast"
+    ],
+    "passes": 23
+  },
+  {
+    "view": "help",
+    "violations": [],
+    "incomplete": [
+      "color-contrast"
+    ],
+    "passes": 14
+  }
+]

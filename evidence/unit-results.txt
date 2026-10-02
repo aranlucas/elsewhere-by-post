@@ -1,0 +1,40 @@
+
+> elsewhere-by-post@0.1.0 test
+> node --test tests/*.test.js
+
+✔ authored level data has rectangular boards, unique identities and paired echoes (1.328083ms)
+✔ first-turn: authored witness delivers every stamp and required echo (1.461583ms)
+✔ first-turn: initial map needs work and nudges converge (0.477ms)
+✔ first-turn: shuffles remain valid and recoverable (5.739042ms)
+✔ places-trade: authored witness delivers every stamp and required echo (0.257208ms)
+✔ places-trade: initial map needs work and nudges converge (0.121417ms)
+✔ places-trade: shuffles remain valid and recoverable (7.591459ms)
+✔ scenic-route: authored witness delivers every stamp and required echo (0.351583ms)
+✔ scenic-route: initial map needs work and nudges converge (0.555458ms)
+✔ scenic-route: shuffles remain valid and recoverable (10.516ms)
+✔ elsewhere-door: authored witness delivers every stamp and required echo (0.187416ms)
+✔ elsewhere-door: initial map needs work and nudges converge (0.109125ms)
+✔ elsewhere-door: shuffles remain valid and recoverable (5.185375ms)
+✔ detour-in-blue: authored witness delivers every stamp and required echo (0.060417ms)
+✔ detour-in-blue: initial map needs work and nudges converge (0.085625ms)
+✔ detour-in-blue: shuffles remain valid and recoverable (2.895125ms)
+✔ two-fold-world: authored witness delivers every stamp and required echo (0.0385ms)
+✔ two-fold-world: initial map needs work and nudges converge (0.166958ms)
+✔ two-fold-world: shuffles remain valid and recoverable (9.426125ms)
+✔ roads need reciprocal ports, remain undirected, and never wrap rows (0.144959ms)
+✔ rotation uses a quarter-turn; four turns are identity; reverse turn works (0.078166ms)
+✔ pinned endpoints cannot turn or swap; inputs and source data are immutable (0.049125ms)
+✔ echo doors need the same compass orientation; distance is immaterial (0.039708ms)
+✔ all stamps need one legal journey, rather than plain network reachability (0.100458ms)
+✔ malformed saves and displaced anchors fail validation (0.151125ms)
+✔ valid saved board, history, level, sound and delivery medals round-trip (1.995959ms)
+✔ corrupt, old, unavailable and quota-limited storage is safe (0.164458ms)
+✔ bad slots, levels, completions and history cannot poison a saved desk (0.482875ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 148.975583
