@@ -1,6 +1,6 @@
 // Bump the cache version when shipped assets change. The app has no remote assets.
 const CACHE = 'elsewhere-post-v1';
-const ASSETS = ['/', '/index.html', '/icon.svg', '/manifest.webmanifest', '/src/app.js', '/src/engine.js', '/src/levels.js', '/src/storage.js', '/src/art.js', '/src/style.css'];
+const ASSETS = ['/', '/index.html', '/maker.html', '/icon.svg', '/manifest.webmanifest', '/src/app.js', '/src/engine.js', '/src/levels.js', '/src/storage.js', '/src/art.js', '/src/style.css', '/src/custom-map.js', '/src/maker.js', '/src/maker.css'];
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting())));
 self.addEventListener('activate', event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith('elsewhere-post-') && key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim())));
 self.addEventListener('fetch', event => {

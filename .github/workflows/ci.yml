@@ -3,7 +3,7 @@ name: Puzzle checks
 on:
   pull_request:
   push:
-    branches: [feat/postcard-world]
+    branches: [main]
   workflow_dispatch:
 
 permissions:

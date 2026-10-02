@@ -6,8 +6,8 @@ Verified on 2026-10-02 on Lucas's Mac, using Node 26.10.0 and isolated Google Ch
 
 | Check | Result |
 | --- | --- |
-| Deterministic engine and storage tests | **28 passed**, zero failures |
-| Final browser suite on the built `dist/` site | **10 passed**, zero failures or flaky tests; 51.9 seconds with one worker |
+| Core deterministic engine and storage tests | **28 passed**, zero failures before the mapmaker refinement |
+| Core browser suite on the built `dist/` site | **10 passed**, zero failures or flaky tests; 51.9 seconds with one worker before the mapmaker refinement |
 | Handcrafted levels | All six initial maps need work; all six witness maps deliver every stamp and required echo |
 | Remix solvability | 60 deterministic seeds per level, **360 shuffles** checked for valid anchors and recoverability through legal actions |
 | Desktop inputs | Pointer turns, tap-to-swap, actual drag swap, keyboard focus/arrows/Enter, clockwise and reverse turns, undo, reset, help dismissal |
@@ -18,7 +18,7 @@ Verified on 2026-10-02 on Lucas's Mac, using Node 26.10.0 and isolated Google Ch
 | Offline | Service-worker-controlled reload with the browser context offline; a puzzle can be solved and progress survives a second offline reload |
 | Accessibility scan | axe WCAG 2 A/AA and 2.1 AA: **zero detected violations** across all six initial maps at desktop and phone widths, plus the help dialog (13 views) |
 | Runtime errors | Browser checks asserted no page exceptions or console errors |
-| Static build | 11 static files, approximately 100 KiB on disk; no runtime dependency installation needed |
+| Static build | 15 static files including the mapmaker; no runtime dependency installation needed |
 
 The tests interact with the UI to rearrange and deliver maps. They use the pure engine only to choose legal test actions, and assert the resulting rendered cards. They do not overwrite application state to manufacture success. Keyboard, drag and touch checks independently exercise their input paths.
 
@@ -45,3 +45,11 @@ This is tested in Chrome, not physical iOS/Safari/Firefox. Touch input was emula
 The accessibility scanner reports incomplete `aria-prohibited-attr` and `color-contrast` items for manual review; zero detected violations is not a WCAG certification. Keyboard focus and native dialog behavior were verified, and the screenshots were reviewed visually. A screen-reader user session remains useful.
 
 The Docker image and hosted Cloudflare/Railway deployment were not executed. Their configuration is supplied for later use. No paid resources or public deployment were created.
+
+## Local mapmaker refinement
+
+The core PR was reviewed and merged at `e536b83909585a3ff64079d821e5458b171218ff`, after both hosted CI entries passed at feature commit `1ce3178449ca80663352022a1df8ef41e009ad76`. The core workflow did not trigger on main after merge. The mapmaker refinement enables main-branch CI alongside PR checks.
+
+Six additional deterministic checks verify the map schema, authored itinerary, 120 recoverable custom shuffles, draft/publication failure recovery, revision identity and invalid map rejection. Four additional browser checks cover editing, route feedback, undo, reloads, export downloads, JSON imports, custom-map delivery, preserving built-in progress, malformed/oversized imports, literal rendering of imported HTML-looking names, offline publication, blocked storage, and actual touch events at 390/320 pixels. Desktop and mobile editor views receive axe scans. The combined run passes **34 unit tests and 14 browser tests**, checks **480 recoverable shuffles**, and detects zero axe violations in **15 views**. The final combined run is recorded in the same evidence files.
+
+Before/after evidence is preserved: the original desktop echo map, mobile touch finale and browser report remain in `evidence/before-mapmaker/`. Current game screenshots remain in `evidence/`; `desktop-mapmaker.png` and `mobile-mapmaker.png` show the added authoring desk. The mapmaker proves the supplied arrangement, not that every arbitrary asset set has a solution, and it makes no difficulty/uniqueness claim.

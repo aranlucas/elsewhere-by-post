@@ -2,7 +2,7 @@
 
 A tiny impossible postcard map. Turn a place, swap the world, deliver a little wonder.
 
-The implementation is on `feat/postcard-world`. The private repository's `main` branch is a minimal bootstrap so the complete prototype can be reviewed in a meaningful draft PR.
+The prototype includes a local mapmaker for designing, checking and playing your own six-postcard worlds.
 
 Six handcrafted journeys teach quarter-turn roads, swapping illustrated landmarks, collecting postage stamps, and compass-sensitive **echo doors**. Matching doors connect distant postcards when their arrows agree. Each pair can be crossed once per journey. Departure and delivery stay pinned.
 
@@ -13,7 +13,7 @@ Six handcrafted journeys teach quarter-turn roads, swapping illustrated landmark
 Requires Node.js 22 or later. There are **no runtime dependencies** and no credentials.
 
 ```sh
-git clone --branch feat/postcard-world https://github.com/aranlucas/elsewhere-by-post.git
+git clone https://github.com/aranlucas/elsewhere-by-post.git
 cd elsewhere-by-post
 npm run dev
 ```
@@ -40,6 +40,16 @@ This serves the deployable `dist/` folder on the same local port. Use a local HT
 | Reset | Reset | Focus the Reset button and Enter |
 
 The courier takes a shortest legal journey that visits every stamp and uses each required echo. Failed attempts show a reachable partial journey and name what is missing. There is no clock or failure penalty. Nudges offer an authored clue and optional one-card assistance; they remain undoable. After delivery, Shuffle offers another recoverable arrangement of that map.
+
+## Make your own little world
+
+Open **http://127.0.0.1:4177/maker.html**, or use “Make your own map” in the game footer. Select one of six postcards and choose its landmark, roads, orientation, stamp and echo. Departure and delivery remain pinned. Author a solved arrangement first; the route check uses the same engine as the game and proves that a legal itinerary collects all stamps and crosses each echo once.
+
+Shuffle & play saves a playable custom journey on this device and adds a “Yours” postcard to the game. Its nudge can always restore the authored witness. Some forgiving maps may still be connected after shuffling; validation promises solvability, not difficulty or uniqueness. Publishing a new shuffle gives that custom journey fresh progress while preserving the six built-in journeys.
+
+The editor saves a local draft and supports undo. Export downloads a compact JSON map; import accepts six known landmarks and at most 32 KiB of data, rejects malformed shapes and preserves the current map on failure. Names render as literal text. No custom scripts, asset URLs, credentials, game progress or other personal data are exported. An invalid current layout can be kept as a local draft, but play/export require a validated route. If browser storage is blocked, a valid map can still be exported.
+
+Both the editor and custom play work offline after the first successful cached visit.
 
 ## Verification
 
@@ -81,6 +91,8 @@ Nothing has been provisioned or publicly released.
 | `src/app.js` | Accessible actions, touch and keyboard input, courier animation, progression |
 | `src/art.js` | Original vector landmarks and icons |
 | `src/storage.js` | Versioned save validation and failure recovery |
+| `src/custom-map.js` | Bounded custom-map schema, witness validation, draft/publication storage and shuffle identity |
+| `src/maker.js` | Local editing, route feedback and JSON import/export |
 | `public/sw.js` | Offline cache |
 | `tests/` | Deterministic tests and browser playthroughs |
 

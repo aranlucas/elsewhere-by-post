@@ -1,4 +1,5 @@
-import { LEVELS, compass } from './levels.js';
+import { LEVELS as BUILTIN_LEVELS, compass } from './levels.js';
+import { readPublishedLevel } from './custom-map.js';
 import { copyBoard, definition, portsFor, equalBoards, changeBoard, network, traceJourney, nextHint, remixBoard } from './engine.js';
 import { loadSave, persistSave } from './storage.js';
 import { postcardArt, icons } from './art.js';
@@ -7,12 +8,16 @@ const $ = selector => document.querySelector(selector);
 const escape = text => String(text).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 let storage;
 try { storage = window.localStorage; } catch { storage = null; }
-let save = loadSave(storage, LEVELS), levelIndex = save.levelIndex;
+const LEVELS = [...BUILTIN_LEVELS];
+const customLevel = readPublishedLevel(storage);
+if (customLevel) LEVELS.push(customLevel);
+let save = loadSave(storage, LEVELS), levelIndex = customLevel && new URLSearchParams(location.search).has('your-map') ? LEVELS.length - 1 : save.levelIndex;
 let level, board, moves, history, selected = null, busy = false, delivered = false, hintVisible = false;
 let preview = null, collected = new Set(), activeAt = null, tripToken = 0, audio;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 let storageFailed = !storage;
-const letters = ['01', '02', '03', '04', '05', '06'];
+const letters = LEVELS.map((_, index) => String(index + 1).padStart(2, '0'));
+const journeyNames = ['Turn', 'Swap', 'Wander', 'Echo', 'Detour', 'Elsewhere', 'Yours'];
 
 $('#app').innerHTML = `
   <main class="desk">
@@ -45,7 +50,7 @@ $('#app').innerHTML = `
         <div class="hint-area"><button id="hint" class="quiet" aria-expanded="false" aria-controls="hint-content">${icons.spark} A little nudge</button><div id="hint-content" hidden><p id="hint-copy"></p><button id="apply-hint" class="hint-apply">Place one card for me</button></div></div>
       </aside>
     </section>
-    <footer><span id="save-status">Your desk is saved on this device.</span><label class="sound-option"><input id="sound" type="checkbox" /> Soft sounds</label><span class="footer-motto">No clock. No wrong turns.</span></footer>
+    <footer><span id="save-status">Your desk is saved on this device.</span><label class="sound-option"><input id="sound" type="checkbox" /> Soft sounds</label><a class="maker-link" href="/maker.html">Make your own map ↗</a><span class="footer-motto">No clock. No wrong turns.</span></footer>
   </main>
   <dialog id="help" aria-labelledby="help-title"><button class="close-help" aria-label="Close instructions">×</button><span class="eyebrow">WELCOME TO ELSEWHERE</span><h2 id="help-title">The world is a postcard.</h2><p>Make a route from the <b>departure house</b> to the <b>delivery house</b>. Collect every round postage stamp along the way.</p><ol><li><b>Turn:</b> select a postcard, then press Turn card or <kbd>R</kbd>. The little ↻ button turns it too.</li><li><b>Swap:</b> tap two postcards, or drag one onto another. Cards marked ⌖ are pinned.</li><li><b>Send:</b> the courier follows connected roads. If a route is incomplete, it shows how far it can get. Try as often as you like.</li></ol><div class="echo-explainer"><span>↟</span><p><b>A small impossibility, from journey 04:</b> matching echo doors join distant postcards when both arrows point the same way. Each pair can be crossed once per journey.</p></div><p class="keyboard-guide"><b>Keyboard:</b> Tab to a card; arrow keys move focus. Enter selects. R turns (Shift+R turns back), U undoes, P sends, Escape clears selection. All actions also have buttons.</p><button class="send close-help">Let’s get pleasantly lost ${icons.arrow}</button></dialog>
 `;
@@ -100,7 +105,7 @@ function render(oldBoard, turnDelta) {
     return `<div class="tile ${selected === i ? 'selected' : ''} ${card.locked ? 'pinned' : ''} ${visited ? 'visited' : ''} ${activeAt === i ? 'active' : ''}" data-id="${tile.id}" data-at="${i}">
       <button class="tile-select" data-at="${i}" data-focus="card-${tile.id}" aria-label="${escape(label)}" aria-pressed="${selected === i}" ${busy ? 'disabled' : ''}>
         <span class="art-window"><span class="rotating-art" style="transform:rotate(${tile.rotation * 90}deg)">${postcardArt(card, connected, echoActive)}</span></span>
-        <span class="tile-caption"><span>${card.name}</span><span class="card-number">${String(i + 1).padStart(2, '0')}</span></span>
+        <span class="tile-caption"><span>${escape(card.name)}</span><span class="card-number">${String(i + 1).padStart(2, '0')}</span></span>
       </button>
       ${card.locked ? `<span class="pin-label" aria-hidden="true">⌖ ${tile.id === level.start ? 'START' : 'POST'}</span>` : `<button class="tile-turn" data-at="${i}" data-focus="turn-${tile.id}" aria-label="Turn ${escape(card.name)} clockwise" ${busy ? 'disabled' : ''}>↻</button>`}
       ${card.stamp ? `<span class="stamp ${collected.has(card.id) ? 'collected' : ''}" aria-hidden="true">${collected.has(card.id) ? '✓' : '✳'}</span>` : ''}
@@ -117,7 +122,7 @@ function render(oldBoard, turnDelta) {
     });
   }
   if (focusedId) document.querySelector(`[data-focus="${focusedId}"]`)?.focus({ preventScroll: true });
-  $('.journeys').innerHTML = LEVELS.map((item, i) => `<button class="journey ${i === levelIndex ? 'current' : ''} ${save.completed.includes(item.id) ? 'complete' : ''}" data-level="${i}" aria-label="Journey ${i + 1}: ${escape(item.title)}${save.completed.includes(item.id) ? ', delivered' : ''}" ${i === levelIndex ? 'aria-current="step"' : ''}><span>${letters[i]}</span><span class="journey-label">${i < 3 ? ['Turn', 'Swap', 'Wander'][i] : ['Echo', 'Detour', 'Elsewhere'][i - 3]}</span><span class="journey-check" aria-hidden="true">${save.completed.includes(item.id) ? '✓' : '·'}</span></button>`).join('');
+  $('.journeys').innerHTML = LEVELS.map((item, i) => `<button class="journey ${i === levelIndex ? 'current' : ''} ${save.completed.includes(item.id) ? 'complete' : ''}" data-level="${i}" aria-label="Journey ${i + 1}: ${escape(item.title)}${save.completed.includes(item.id) ? ', delivered' : ''}" ${i === levelIndex ? 'aria-current="step"' : ''}><span>${letters[i]}</span><span class="journey-label">${journeyNames[i]}</span><span class="journey-check" aria-hidden="true">${save.completed.includes(item.id) ? '✓' : '·'}</span></button>`).join('');
   $('#moves').textContent = `${moves} ${moves === 1 ? 'move' : 'moves'}`;
   $('#undo').disabled = busy || !history.length;
   $('#reset').disabled = busy;
@@ -126,7 +131,7 @@ function render(oldBoard, turnDelta) {
   $('#apply-hint').disabled = busy;
   $('#send').innerHTML = busy ? `Stop the courier <span aria-hidden="true">□</span>` : `Send the courier ${icons.arrow}`;
   $('#selection-note').textContent = selected === null ? 'Select a postcard to turn it, or two to swap them.' : `${definition(level, board[selected].id).name} selected. Turn it, or choose another postcard to swap.`;
-  $('#stamp-list').innerHTML = level.cards.filter(card => card.stamp).map(card => `<span class="stamp-chip ${collected.has(card.id) ? 'collected' : ''}" title="${card.name}" aria-label="${escape(card.name)} stamp${collected.has(card.id) ? ', collected' : ''}">${collected.has(card.id) ? '✓' : '✳'}<span>${card.name.replace('Little ', '').replace('Pocket ', '').replace('Upside-down ', '').replace('Floating ', '')}</span></span>`).join('');
+  $('#stamp-list').innerHTML = level.cards.filter(card => card.stamp).map(card => `<span class="stamp-chip ${collected.has(card.id) ? 'collected' : ''}" title="${escape(card.name)}" aria-label="${escape(card.name)} stamp${collected.has(card.id) ? ', collected' : ''}">${collected.has(card.id) ? '✓' : '✳'}<span>${escape(card.name.replace('Little ', '').replace('Pocket ', '').replace('Upside-down ', '').replace('Floating ', ''))}</span></span>`).join('');
   $('#echo-status').innerHTML = level.requiredEchoes.map(echo => {
     const pair = board.map((tile, i) => definition(level, tile.id).echo === echo ? i : -1).filter(i => i >= 0);
     const linked = board[pair[0]].rotation === board[pair[1]].rotation;
@@ -315,4 +320,8 @@ window.addEventListener('resize', () => { if (preview && !busy) drawTrail(previe
 window.addEventListener('offline', () => { $('#save-status').textContent = 'Offline, and happily here. Your desk is saved locally.'; });
 window.addEventListener('online', () => remember());
 selectLevel(levelIndex);
+if (new URLSearchParams(location.search).has('your-map')) {
+  const url = new URL(location.href); url.searchParams.delete('your-map');
+  window.history.replaceState(null, '', url.pathname + url.search + url.hash);
+}
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => { /* First visits still play if caching is unavailable. */ });

@@ -2,39 +2,45 @@
 > elsewhere-by-post@0.1.0 test
 > node --test tests/*.test.js
 
-✔ authored level data has rectangular boards, unique identities and paired echoes (1.328083ms)
-✔ first-turn: authored witness delivers every stamp and required echo (1.461583ms)
-✔ first-turn: initial map needs work and nudges converge (0.477ms)
-✔ first-turn: shuffles remain valid and recoverable (5.739042ms)
-✔ places-trade: authored witness delivers every stamp and required echo (0.257208ms)
-✔ places-trade: initial map needs work and nudges converge (0.121417ms)
-✔ places-trade: shuffles remain valid and recoverable (7.591459ms)
-✔ scenic-route: authored witness delivers every stamp and required echo (0.351583ms)
-✔ scenic-route: initial map needs work and nudges converge (0.555458ms)
-✔ scenic-route: shuffles remain valid and recoverable (10.516ms)
-✔ elsewhere-door: authored witness delivers every stamp and required echo (0.187416ms)
-✔ elsewhere-door: initial map needs work and nudges converge (0.109125ms)
-✔ elsewhere-door: shuffles remain valid and recoverable (5.185375ms)
-✔ detour-in-blue: authored witness delivers every stamp and required echo (0.060417ms)
-✔ detour-in-blue: initial map needs work and nudges converge (0.085625ms)
-✔ detour-in-blue: shuffles remain valid and recoverable (2.895125ms)
-✔ two-fold-world: authored witness delivers every stamp and required echo (0.0385ms)
-✔ two-fold-world: initial map needs work and nudges converge (0.166958ms)
-✔ two-fold-world: shuffles remain valid and recoverable (9.426125ms)
-✔ roads need reciprocal ports, remain undirected, and never wrap rows (0.144959ms)
-✔ rotation uses a quarter-turn; four turns are identity; reverse turn works (0.078166ms)
-✔ pinned endpoints cannot turn or swap; inputs and source data are immutable (0.049125ms)
-✔ echo doors need the same compass orientation; distance is immaterial (0.039708ms)
-✔ all stamps need one legal journey, rather than plain network reachability (0.100458ms)
-✔ malformed saves and displaced anchors fail validation (0.151125ms)
-✔ valid saved board, history, level, sound and delivery medals round-trip (1.995959ms)
-✔ corrupt, old, unavailable and quota-limited storage is safe (0.164458ms)
-✔ bad slots, levels, completions and history cannot poison a saved desk (0.482875ms)
-ℹ tests 28
+✔ mapmaker example proves an authored legal itinerary (1.522708ms)
+✔ custom data boundary rejects missing, oversized, executable-asset and malformed shapes (0.563292ms)
+✔ validation rejects unpaired echoes, no stamps, disconnected roads and mismatched directions (0.330792ms)
+✔ 120 custom shuffles remain valid and reachable through legal reversible actions (17.540916ms)
+✔ draft and publication storage recover safely; publishing invalid maps does not replace the last playable map (0.362167ms)
+✔ map revisions isolate saved-game identity and user text is data rather than a new asset (0.137875ms)
+✔ authored level data has rectangular boards, unique identities and paired echoes (0.630291ms)
+✔ first-turn: authored witness delivers every stamp and required echo (0.694125ms)
+✔ first-turn: initial map needs work and nudges converge (0.21225ms)
+✔ first-turn: shuffles remain valid and recoverable (2.939959ms)
+✔ places-trade: authored witness delivers every stamp and required echo (0.077917ms)
+✔ places-trade: initial map needs work and nudges converge (0.070083ms)
+✔ places-trade: shuffles remain valid and recoverable (3.8905ms)
+✔ scenic-route: authored witness delivers every stamp and required echo (0.12075ms)
+✔ scenic-route: initial map needs work and nudges converge (0.277875ms)
+✔ scenic-route: shuffles remain valid and recoverable (6.212958ms)
+✔ elsewhere-door: authored witness delivers every stamp and required echo (0.198042ms)
+✔ elsewhere-door: initial map needs work and nudges converge (0.097625ms)
+✔ elsewhere-door: shuffles remain valid and recoverable (5.5785ms)
+✔ detour-in-blue: authored witness delivers every stamp and required echo (0.0675ms)
+✔ detour-in-blue: initial map needs work and nudges converge (0.085833ms)
+✔ detour-in-blue: shuffles remain valid and recoverable (4.070417ms)
+✔ two-fold-world: authored witness delivers every stamp and required echo (0.128333ms)
+✔ two-fold-world: initial map needs work and nudges converge (0.442625ms)
+✔ two-fold-world: shuffles remain valid and recoverable (9.386167ms)
+✔ roads need reciprocal ports, remain undirected, and never wrap rows (0.141417ms)
+✔ rotation uses a quarter-turn; four turns are identity; reverse turn works (0.076959ms)
+✔ pinned endpoints cannot turn or swap; inputs and source data are immutable (0.05ms)
+✔ echo doors need the same compass orientation; distance is immaterial (0.04225ms)
+✔ all stamps need one legal journey, rather than plain network reachability (0.109792ms)
+✔ malformed saves and displaced anchors fail validation (0.16875ms)
+✔ valid saved board, history, level, sound and delivery medals round-trip (2.190833ms)
+✔ corrupt, old, unavailable and quota-limited storage is safe (0.139833ms)
+✔ bad slots, levels, completions and history cannot poison a saved desk (0.138916ms)
+ℹ tests 34
 ℹ suites 0
-ℹ pass 28
+ℹ pass 34
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 148.975583
+ℹ duration_ms 185.249125

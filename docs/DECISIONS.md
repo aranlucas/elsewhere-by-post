@@ -23,7 +23,7 @@ All landmark SVGs were drawn in code for this project. Fonts are local system se
 Next useful experiments:
 
 1. Test whether three new players discover the first solution in 30 seconds and can explain the echo rule after journey 04. Automated playthroughs cannot establish human learnability.
-2. A postcard editor with exportable JSON and an explicit solver validation badge. Keep authoring and imported content local.
+2. **Implemented as the next experiment:** a local postcard editor with exportable JSON and an explicit witness-validation badge. The author creates a solved arrangement; the canonical engine verifies one legal itinerary, then reversible shuffles become playable custom journeys. Imports are bounded data using known original art, with no executable content or remote asset URLs.
 3. A constrained “fold” verb that joins opposite edges, then measure whether it adds a distinct spatial insight beyond echo doors.
 4. Better courier routing choices: optionally let players draw their own itinerary, retaining automatic route preview for accessibility.
 5. A longer island atlas with several small unlockable chapters, only after testing the six-level learning curve.

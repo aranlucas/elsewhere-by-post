@@ -1,6 +1,6 @@
 FROM node:24-alpine
 WORKDIR /app
-COPY package.json index.html ./
+COPY package.json index.html maker.html ./
 COPY src ./src
 COPY public ./public
 COPY scripts ./scripts
