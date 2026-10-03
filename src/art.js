@@ -1,10 +1,20 @@
 const palette = {
-  home: ['#e6c9a5', '#a64f39'], lighthouse: ['#c1d9d0', '#bd6143'], windmill: ['#dccb9f', '#b96945'],
-  observatory: ['#c7cddd', '#66577c'], garden: ['#ccd7b1', '#61815f'], orchard: ['#d8d2b4', '#818c58'],
-  greenhouse: ['#c6d8c0', '#65876a'], teahouse: ['#c8d7d4', '#bc7957'], arch: ['#c8d8db', '#538692'], mail: ['#e3c3ac', '#a6503c'],
+  home: ["#e6c9a5", "#a64f39"],
+  lighthouse: ["#c1d9d0", "#bd6143"],
+  windmill: ["#dccb9f", "#b96945"],
+  observatory: ["#c7cddd", "#66577c"],
+  garden: ["#ccd7b1", "#61815f"],
+  orchard: ["#d8d2b4", "#818c58"],
+  greenhouse: ["#c6d8c0", "#65876a"],
+  teahouse: ["#c8d7d4", "#bc7957"],
+  arch: ["#c8d8db", "#538692"],
+  mail: ["#e3c3ac", "#a6503c"],
 };
+
 const cloud = `<g fill="#fff8e4" opacity=".6"><path d="M25 43c0-8 8-11 14-7 5-10 20-8 21 3 9-3 15 5 12 10H26z"/><path d="M139 151c0-6 6-9 11-5 5-8 16-5 17 3 7-2 11 5 8 9h-35z"/></g>`;
+
 const trees = `<g fill="#557766"><path d="m31 112 10-25 10 25z"/><path d="m145 82 10-24 11 24z"/></g><g stroke="#526556" stroke-width="3"><path d="M41 109v10m115-39v11"/></g>`;
+
 const art = {
   home: `<path fill="#b49c70" d="m57 126 46 22 46-22-46-23z"/><path fill="#f8edca" d="M68 85h66v42l-33 16-33-16z"/><path fill="#d1b68a" d="m101 101 33-16v42l-33 16z"/><path fill="#a8583e" d="m59 89 41-42 43 40-42 21z"/><path fill="#d58b63" d="m100 47 43 40-42 21z"/><path fill="#658076" d="m81 112 12 6v20l-12-6z"/><path fill="#fff4d1" d="m112 104 12-6v11l-12 6z"/><path stroke="#704c3d" stroke-width="4" d="M126 66V48"/><path fill="#e5c377" d="m126 48 15 4-15 7z"/>`,
   lighthouse: `<g fill="#779e94"><path d="m36 138 34-6 31 14-20 9-35-6z"/><path d="m106 155 40-14 18 8-33 15z"/></g><path fill="#9ca28c" d="m63 135 38 17 36-16-37-18z"/><path fill="#fff1c9" d="m88 67 26 0 14 69-28 13-26-13z"/><path fill="#c76849" d="m82 94 38 0 5 21-46 0z"/><path fill="#e9cf9a" d="m100 68 14-1 14 69-28 13z"/><path fill="#6d8780" d="M83 53h35v23l-18 8-17-8z"/><path fill="#f8df86" d="M90 59h20v13H90z"/><path fill="#b66447" d="m78 54 23-22 23 22z"/><path stroke="#687b73" stroke-width="3" d="M80 79h40m-40-3v7m40-7v7"/><path fill="#a75942" d="m95 126 10 0v18l-10-5z"/>`,
@@ -19,23 +29,46 @@ const art = {
 };
 
 export function postcardArt(card, connectedPorts = [], echoActive = false) {
-  const [base, accent] = card.echo === 'coral' ? ['#ddd0c1', '#a36b58'] : palette[card.art];
-  const edge = [[100, 0], [200, 100], [100, 200], [0, 100]];
-  const roads = card.ports.map(dir => {
-    const [x, y] = edge[dir];
-    const connected = connectedPorts.includes(dir);
-    return `<path class="road road-paper" d="M100 100L${x} ${y}"/><path class="road road-ink ${connected ? 'joined' : ''}" d="M100 100L${x} ${y}"/><circle cx="${x}" cy="${y}" r="7" fill="${connected ? '#315f50' : '#bd7854'}" stroke="#fcf0ce" stroke-width="3"/>`;
-  }).join('');
-  const echo = card.echo ? `<g class="echo-mark ${echoActive ? 'awake' : ''}" transform="translate(100 165)"><circle r="18" fill="${card.echo === 'blue' ? '#376e83' : '#a65d50'}" stroke="#fff1cb" stroke-width="2"/><path d="M-6 8V-2a6 6 0 0112 0V8M0-12v7m-4-3 4-4 4 4" stroke="#fff1cb" stroke-width="2" fill="none"/><circle r="23" fill="none" stroke="${echoActive ? '#fff1cb' : 'transparent'}" stroke-dasharray="2 4"/></g>` : '';
-  const landmark = card.echo === 'coral' ? art[card.art].replace('#568591', '#a87066') : art[card.art];
+  const [base, accent] =
+    card.echo === "coral" ? ["#ddd0c1", "#a36b58"] : palette[card.art];
+
+  const edge = [
+    [100, 0],
+    [200, 100],
+    [100, 200],
+    [0, 100],
+  ];
+
+  const roads = card.ports
+    .map((dir) => {
+      const [x, y] = edge[dir];
+      const connected = connectedPorts.includes(dir);
+
+      return `<path class="road road-paper" d="M100 100L${x} ${y}"/><path class="road road-ink ${connected ? "joined" : ""}" d="M100 100L${x} ${y}"/><circle cx="${x}" cy="${y}" r="7" fill="${connected ? "#315f50" : "#bd7854"}" stroke="#fcf0ce" stroke-width="3"/>`;
+    })
+    .join("");
+
+  const echo = card.echo
+    ? `<g class="echo-mark ${echoActive ? "awake" : ""}" transform="translate(100 165)"><circle r="18" fill="${card.echo === "blue" ? "#376e83" : "#a65d50"}" stroke="#fff1cb" stroke-width="2"/><path d="M-6 8V-2a6 6 0 0112 0V8M0-12v7m-4-3 4-4 4 4" stroke="#fff1cb" stroke-width="2" fill="none"/><circle r="23" fill="none" stroke="${echoActive ? "#fff1cb" : "transparent"}" stroke-dasharray="2 4"/></g>`
+    : "";
+
+  const landmark =
+    card.echo === "coral"
+      ? art[card.art].replace("#568591", "#a87066")
+      : art[card.art];
+
   return `<svg viewBox="0 0 200 200" aria-hidden="true" class="postcard-art" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="${base}"/><path fill="#fff2cf" opacity=".16" d="M0 0h200L0 200z"/><circle cx="162" cy="34" r="17" fill="#f5da9a" opacity=".7"/>${cloud}${roads}<ellipse cx="100" cy="135" rx="50" ry="24" fill="${accent}" opacity=".12"/>${landmark}${echo}<g fill="${accent}" opacity=".4"><circle cx="21" cy="173" r="2"/><circle cx="30" cy="167" r="1"/><circle cx="179" cy="74" r="1.5"/></g></svg>`;
 }
 
 export const icons = {
-  envelope: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7m-18 12 6-6m12 6-6-6"/></svg>',
+  envelope:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7m-18 12 6-6m12 6-6-6"/></svg>',
   turn: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 8a8 8 0 1 0 1 8M19 3v5h-5"/></svg>',
   undo: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 4-5 5 5 5M3 9h10a7 7 0 0 1 0 14"/></svg>',
-  reset: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8a8 8 0 1 1-1 7M4 3v5h5"/></svg>',
-  arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg>',
-  spark: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5z"/></svg>',
+  reset:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8a8 8 0 1 1-1 7M4 3v5h5"/></svg>',
+  arrow:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg>',
+  spark:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5z"/></svg>',
 };
