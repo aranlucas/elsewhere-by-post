@@ -1,4 +1,10 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": ["tools/oxlint/anti-slop/**", "evidence/**", "dist/**", "package-lock.json"]
+  "ignorePatterns": [
+    "tools/oxlint/anti-slop/**",
+    "evidence/**",
+    "dist/**",
+    "package-lock.json",
+    "pnpm-lock.yaml"
+  ]
 }

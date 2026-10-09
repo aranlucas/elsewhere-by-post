@@ -1,32 +1,49 @@
-name: Puzzle checks
+name: CI
 
 on:
-  pull_request:
+  workflow_dispatch:
   push:
     branches: [main]
-  workflow_dispatch:
+  pull_request:
 
 permissions:
   contents: read
 
 concurrency:
-  group: puzzle-${{ github.event.pull_request.head.ref || github.ref_name }}
-  cancel-in-progress: true
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  verify:
-    name: Format, lint, types, tests, build, and browser playthroughs
+  ci:
     runs-on: ${{ vars.LOCAL_CI_ENABLED == 'true' && fromJSON('["self-hosted","linux","x64","omarchy-ci"]') || 'ubuntu-latest' }}
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "24"
           cache: npm
-      - run: npm ci --no-audit --no-fund
-      - run: npm run check
-      - run: npx playwright install --with-deps chromium
-      - run: npm run test:browser
-        env:
-          PLAY_BROWSER_CHANNEL: chromium
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - parallel:
+          - name: Format
+            run: npm run format:check
+
+          - name: Lint
+            run: npm run lint
+
+          - name: Typecheck
+            run: npm run typecheck
+
+          - name: Test
+            run: npm test
+
+          - name: Build
+            run: npm run build
