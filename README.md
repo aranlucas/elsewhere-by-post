@@ -19,7 +19,7 @@ npm install -g portless@0.15.7
 npm run dev
 ```
 
-Open **https://elsewhere-by-post.localhost**. `PORT=4180 npm run dev:direct` runs the direct server on a chosen port. The local server binds only to loopback by default. Closing the server ends the session; the next visit restores your desk.
+Open **https://elsewhere-by-post.localhost**. The local server binds only to loopback by default. Closing the server ends the session; the next visit restores your desk.
 
 ```sh
 npm run build
@@ -51,7 +51,6 @@ Portless, so it does not compete for its usual fixed port.
 
 Linked Git worktrees receive a branch-name prefix, such as
 `https://fix-ui.elsewhere-by-post.localhost`; use the URL Portless prints.
-Use `npm run dev:direct` to run the original localhost server without Portless.
 
 Browser storage and offline caches belong to each origin. Existing data at a
 numbered localhost URL stays there; use the app's export/import flow when available
