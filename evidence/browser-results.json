@@ -1,12 +1,12 @@
 {
   "config": {
     "argv": [
-      "/opt/homebrew/Cellar/node/26.10.0_1/bin/node",
-      "/Users/lucas/Projects/codex/2026-10-01/task-7/elsewhere-by-post/node_modules/.bin/playwright",
+      "/Users/lucas/.local/share/fnm/node-versions/v24.18.0/installation/bin/node",
+      "/Users/lucas/Projects/elsewhere-by-post/node_modules/.bin/playwright",
       "test"
     ],
-    "configFile": "/Users/lucas/Projects/codex/2026-10-01/task-7/elsewhere-by-post/playwright.config.js",
-    "rootDir": "/Users/lucas/Projects/codex/2026-10-01/task-7/elsewhere-by-post/tests/browser",
+    "configFile": "/Users/lucas/Projects/elsewhere-by-post/playwright.config.ts",
+    "rootDir": "/Users/lucas/Projects/elsewhere-by-post/tests/browser",
     "failOnFlakyTests": false,
     "forbidOnly": false,
     "fullyParallel": false,
@@ -22,7 +22,7 @@
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "/Users/lucas/Projects/codex/2026-10-01/task-7/elsewhere-by-post/test-results",
+        "outputDir": "/Users/lucas/Projects/elsewhere-by-post/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -30,7 +30,7 @@
         },
         "id": "",
         "name": "",
-        "testDir": "/Users/lucas/Projects/codex/2026-10-01/task-7/elsewhere-by-post/tests/browser",
+        "testDir": "/Users/lucas/Projects/elsewhere-by-post/tests/browser",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -62,19 +62,204 @@
     "version": "1.63.0",
     "workers": 1,
     "webServer": {
-      "command": "node scripts/server.mjs --dist",
-      "env": {
-        "PORT": "4187"
-      },
+      "command": "vite preview --host 127.0.0.1 --port 4187 --strictPort",
       "url": "http://127.0.0.1:4187",
       "reuseExistingServer": true,
-      "timeout": 10000
+      "timeout": 30000
     }
   },
   "suites": [
     {
-      "title": "game.spec.js",
-      "file": "game.spec.js",
+      "title": "devices.spec.ts",
+      "file": "devices.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "touch-sized portrait layout plays all stages, opens accessible help, and respects reduced motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2915,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T16:43:39.223Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "441c969b5ac029ba9e26-b3252b85c98214e74a7f",
+          "file": "devices.spec.ts",
+          "line": 17,
+          "column": 1
+        },
+        {
+          "title": "cached offline reload preserves a playable map and saved progress",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1639,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T16:43:42.394Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "441c969b5ac029ba9e26-f742e85bdd3a988b1e34",
+          "file": "devices.spec.ts",
+          "line": 42,
+          "column": 1
+        },
+        {
+          "title": "corrupted or blocked browser storage still boots and plays",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3023,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T16:43:44.039Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "441c969b5ac029ba9e26-3fc02325f3f16bcca69d",
+          "file": "devices.spec.ts",
+          "line": 60,
+          "column": 1
+        },
+        {
+          "title": "WCAG A/AA checks on every map at desktop and mobile sizes, plus the help dialog",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3396,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-09T16:43:52.014Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "441c969b5ac029ba9e26-c56f8049342f64953228",
+          "file": "devices.spec.ts",
+          "line": 102,
+          "column": 1
+        }
+      ],
+      "suites": [
+        {
+          "title": "touch device",
+          "file": "devices.spec.ts",
+          "line": 80,
+          "column": 6,
+          "specs": [
+            {
+              "title": "actual touch taps complete all six maps and large toolbar controls",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4938,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-09T16:43:47.069Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "441c969b5ac029ba9e26-8b5400a1351052d2c5c7",
+              "file": "devices.spec.ts",
+              "line": 87,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "game.spec.ts",
+      "file": "game.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [
@@ -94,12 +279,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2325,
+                  "duration": 1797,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:53:09.154Z",
+                  "startTime": "2026-10-09T16:43:55.423Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -107,9 +292,9 @@
               "status": "expected"
             }
           ],
-          "id": "8739d194ba1dcb8a2e3d-b69cfaf623eda89abc84",
-          "file": "game.spec.js",
-          "line": 36,
+          "id": "8b1bb1493a64c9fc3ab6-0a10308d9b058469215c",
+          "file": "game.spec.ts",
+          "line": 12,
           "column": 1
         },
         {
@@ -128,12 +313,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 30342,
+                  "duration": 28541,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:53:12.305Z",
+                  "startTime": "2026-10-09T16:43:57.224Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -141,9 +326,9 @@
               "status": "expected"
             }
           ],
-          "id": "8739d194ba1dcb8a2e3d-3f512eade150e0ec8f24",
-          "file": "game.spec.js",
-          "line": 60,
+          "id": "8b1bb1493a64c9fc3ab6-39106408cd6328e5840c",
+          "file": "game.spec.ts",
+          "line": 38,
           "column": 1
         },
         {
@@ -162,12 +347,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 613,
+                  "duration": 446,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:53:42.658Z",
+                  "startTime": "2026-10-09T16:44:25.773Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -175,43 +360,9 @@
               "status": "expected"
             }
           ],
-          "id": "8739d194ba1dcb8a2e3d-d1701d3e6ef0cdb5a611",
-          "file": "game.spec.js",
-          "line": 91,
-          "column": 1
-        },
-        {
-          "title": "touch-sized portrait layout plays all stages, opens accessible help, and respects reduced motion",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 45000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "",
-              "projectName": "",
-              "results": [
-                {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 3032,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-10-02T04:53:43.285Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "8739d194ba1dcb8a2e3d-9fd14efb52e4e9f7bf5a",
-          "file": "game.spec.js",
-          "line": 108,
+          "id": "8b1bb1493a64c9fc3ab6-bd0b45e1930e1885ca4c",
+          "file": "game.spec.ts",
+          "line": 65,
           "column": 1
         },
         {
@@ -230,12 +381,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 431,
+                  "duration": 397,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:53:46.329Z",
+                  "startTime": "2026-10-09T16:44:26.227Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -243,77 +394,9 @@
               "status": "expected"
             }
           ],
-          "id": "8739d194ba1dcb8a2e3d-c452b843e6065357690c",
-          "file": "game.spec.js",
-          "line": 128,
-          "column": 1
-        },
-        {
-          "title": "cached offline reload preserves a playable map and saved progress",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 45000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "",
-              "projectName": "",
-              "results": [
-                {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 1688,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-10-02T04:53:46.769Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "8739d194ba1dcb8a2e3d-1e0e8463eed5d2e22a47",
-          "file": "game.spec.js",
-          "line": 142,
-          "column": 1
-        },
-        {
-          "title": "corrupted or blocked browser storage still boots and plays",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 45000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "",
-              "projectName": "",
-              "results": [
-                {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 3220,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-10-02T04:53:48.467Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "8739d194ba1dcb8a2e3d-2ffa082b6d45f48d2228",
-          "file": "game.spec.js",
-          "line": 157,
+          "id": "8b1bb1493a64c9fc3ab6-bee887c6cc09829803f1",
+          "file": "game.spec.ts",
+          "line": 82,
           "column": 1
         },
         {
@@ -332,12 +415,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 302,
+                  "duration": 246,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:53:56.528Z",
+                  "startTime": "2026-10-09T16:44:26.632Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -345,13 +428,13 @@
               "status": "expected"
             }
           ],
-          "id": "8739d194ba1dcb8a2e3d-303862d3e495820afc5b",
-          "file": "game.spec.js",
-          "line": 200,
+          "id": "8b1bb1493a64c9fc3ab6-f54b6b5261d944f43a65",
+          "file": "game.spec.ts",
+          "line": 96,
           "column": 1
         },
         {
-          "title": "WCAG A/AA checks on every map at desktop and mobile sizes, plus the help dialog",
+          "title": "each journey has a URL, so links, reloads and back/forward work",
           "ok": true,
           "tags": [],
           "tests": [
@@ -366,12 +449,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3545,
+                  "duration": 352,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:53:56.842Z",
+                  "startTime": "2026-10-09T16:44:26.883Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -379,60 +462,16 @@
               "status": "expected"
             }
           ],
-          "id": "8739d194ba1dcb8a2e3d-058c6c6895e5ada041e5",
-          "file": "game.spec.js",
-          "line": 218,
+          "id": "8b1bb1493a64c9fc3ab6-55fcf3e10aa8320cbb69",
+          "file": "game.spec.ts",
+          "line": 117,
           "column": 1
-        }
-      ],
-      "suites": [
-        {
-          "title": "touch device",
-          "file": "game.spec.js",
-          "line": 169,
-          "column": 6,
-          "specs": [
-            {
-              "title": "actual touch taps complete all six maps and large toolbar controls",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 45000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 4818,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-10-02T04:53:51.698Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "8739d194ba1dcb8a2e3d-1669d9935ad250cca851",
-              "file": "game.spec.js",
-              "line": 171,
-              "column": 3
-            }
-          ]
         }
       ]
     },
     {
-      "title": "maker.spec.js",
-      "file": "maker.spec.js",
+      "title": "maker.spec.ts",
+      "file": "maker.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [
@@ -452,12 +491,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1402,
+                  "duration": 1361,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:54:00.410Z",
+                  "startTime": "2026-10-09T16:44:27.252Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -465,9 +504,9 @@
               "status": "expected"
             }
           ],
-          "id": "5ead31cdbd053c3ba186-50a21c04b144b71c7fbf",
-          "file": "maker.spec.js",
-          "line": 9,
+          "id": "aa1bea963437f9d16e5c-e4147ce85a200e7d9fe4",
+          "file": "maker.spec.ts",
+          "line": 14,
           "column": 1
         },
         {
@@ -486,12 +525,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 291,
+                  "duration": 248,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:54:01.818Z",
+                  "startTime": "2026-10-09T16:44:28.618Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -499,9 +538,9 @@
               "status": "expected"
             }
           ],
-          "id": "5ead31cdbd053c3ba186-39325a095eade53cd733",
-          "file": "maker.spec.js",
-          "line": 44,
+          "id": "aa1bea963437f9d16e5c-fdfb100824a3ac84fece",
+          "file": "maker.spec.ts",
+          "line": 75,
           "column": 1
         },
         {
@@ -520,12 +559,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 321,
+                  "duration": 436,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-02T04:54:02.116Z",
+                  "startTime": "2026-10-09T16:44:28.872Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -533,17 +572,17 @@
               "status": "expected"
             }
           ],
-          "id": "5ead31cdbd053c3ba186-42671271ba834636e41f",
-          "file": "maker.spec.js",
-          "line": 61,
+          "id": "aa1bea963437f9d16e5c-c2a57b3dcebdce6b1d70",
+          "file": "maker.spec.ts",
+          "line": 105,
           "column": 1
         }
       ],
       "suites": [
         {
           "title": "touch mapmaker",
-          "file": "maker.spec.js",
-          "line": 76,
+          "file": "maker.spec.ts",
+          "line": 132,
           "column": 6,
           "specs": [
             {
@@ -562,12 +601,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 586,
+                      "duration": 629,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-02T04:54:02.446Z",
+                      "startTime": "2026-10-09T16:44:29.318Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -575,9 +614,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "5ead31cdbd053c3ba186-ced5a61ae07ad49d5d30",
-              "file": "maker.spec.js",
-              "line": 78,
+              "id": "aa1bea963437f9d16e5c-59e2771b492de6c9476e",
+              "file": "maker.spec.ts",
+              "line": 138,
               "column": 3
             }
           ]
@@ -587,9 +626,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-02T04:53:08.387Z",
-    "duration": 54877.167,
-    "expected": 14,
+    "startTime": "2026-10-09T16:43:38.071Z",
+    "duration": 52007.823000000004,
+    "expected": 15,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
