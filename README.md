@@ -89,6 +89,8 @@ pnpm run deploy   # cf deploy builds and deploys the project (plain `pnpm deploy
 
 `cloudflare.config.ts` configures the Worker and its single-page-app asset fallback. The Cloudflare Vite plugin builds the static assets, and `cf deploy` validates and deploys them to Workers. Unknown paths fall back to `index.html` so React Router can resolve `/journeys/…` and `/maker`. `public/_headers` supplies a same-origin content security policy.
 
+Cloudflare Workers Builds runs `pnpm run build` before the production deploy command `pnpm exec cf deploy --prebuilt --mode production`. Set the preview command to `pnpm exec cf previews deploy` for pull requests.
+
 ## Source map
 
 | Path                           | Purpose                                                                                     |
