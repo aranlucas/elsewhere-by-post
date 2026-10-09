@@ -6,6 +6,7 @@
   "description": "A tiny impossible postcard map. Turn places, swap the world, deliver a little wonder.",
   "scripts": {
     "dev": "node scripts/server.mjs",
+    "dev:portless": "portless run --name elsewhere-by-post node scripts/server.mjs",
     "start": "node scripts/server.mjs --dist",
     "build": "node scripts/build.mjs",
     "test": "node --test tests/*.test.js",

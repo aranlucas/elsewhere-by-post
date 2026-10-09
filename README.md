@@ -27,6 +27,34 @@ npm start
 
 This serves the deployable `dist/` folder on the same local port. Use a local HTTP server rather than opening `index.html` with `file://`, because ES modules and offline caching require an HTTP origin.
 
+### Named local URL with Portless
+
+[Portless](https://github.com/vercel-labs/portless/tree/v0.15.7) gives this checkout a
+stable local URL. Complete the local setup above, use **Node.js 24 or newer**
+(within this project's supported range), then run:
+
+```sh
+npm install -g portless@0.15.7
+npm run dev:portless
+```
+
+Open **https://elsewhere-by-post.localhost** with the default proxy settings.
+Portless starts its shared proxy automatically. Its first HTTPS run creates and
+trusts a local certificate authority and may prompt for administrator privileges
+to bind port 443 or update local hostname entries. Start it from an interactive
+terminal and review those prompts. `portless doctor` diagnoses local setup issues.
+
+The existing Node server reads the assigned `PORT` and loopback `HOST` from
+Portless, so it does not compete for its usual fixed port.
+
+Linked Git worktrees receive a branch-name prefix, such as
+`https://fix-ui.elsewhere-by-post.localhost`; use the URL Portless prints.
+Use `npm run dev` for the existing direct-server workflow.
+
+Browser storage and offline caches belong to each origin. Existing data at a
+numbered localhost URL stays there; use the app's export/import flow when available
+to move data to the named URL.
+
 ## Controls
 
 | Action | Pointer / touch | Keyboard |
