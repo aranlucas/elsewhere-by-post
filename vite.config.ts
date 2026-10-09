@@ -1,39 +1,31 @@
 import { resolve } from "node:path";
 import { cloudflare } from "@cloudflare/vite-plugin";
 import react from "@vitejs/plugin-react";
-import { defineConfig, type Plugin } from "vite";
+import { defineConfig, type ResolvedConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
-let cloudflareClientAssetsDir: string | undefined;
-
-const captureCloudflareClientAssetsDir: Plugin = {
-  name: "capture-cloudflare-client-assets-dir",
-  configResolved(config) {
-    const clientBuild = config.environments.client?.build;
-    if (!clientBuild)
-      throw new Error("Cloudflare Vite plugin did not resolve a client build environment.");
-    cloudflareClientAssetsDir = resolve(config.root, clientBuild.outDir);
-  },
-};
-
-const cloudflarePlugins = cloudflare();
+let resolvedViteConfig: ResolvedConfig | undefined;
 
 export default defineConfig({
   plugins: [
     react(),
-    ...cloudflarePlugins,
-    captureCloudflareClientAssetsDir,
+    cloudflare(),
     VitePWA({
       integration: {
+        configureOptions(config) {
+          resolvedViteConfig = config;
+        },
         beforeBuildServiceWorker(options) {
-          if (!cloudflareClientAssetsDir) {
-            throw new Error("Cloudflare Vite plugin did not expose its client assets directory.");
-          }
+          const clientAssetsDir = resolvedViteConfig?.environments.client?.build.outDir;
+          if (!resolvedViteConfig || !clientAssetsDir)
+            throw new Error("Cloudflare Vite plugin did not resolve the client assets directory.");
 
-          const serviceWorkerPath = resolve(cloudflareClientAssetsDir, options.filename);
-          options.outDir = cloudflareClientAssetsDir;
+          // Cloudflare sets this output directory after VitePWA's config hook runs.
+          const assetsDir = resolve(resolvedViteConfig.root, clientAssetsDir);
+          const serviceWorkerPath = resolve(assetsDir, options.filename);
+          options.outDir = assetsDir;
           options.swDest = serviceWorkerPath;
-          options.workbox.globDirectory = cloudflareClientAssetsDir;
+          options.workbox.globDirectory = assetsDir;
           options.workbox.swDest = serviceWorkerPath;
         },
       },
