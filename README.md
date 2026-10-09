@@ -18,7 +18,7 @@ cd elsewhere-by-post
 npm run dev
 ```
 
-Open **http://127.0.0.1:4177**. `PORT=4180 npm run dev` changes the port. The local server binds only to loopback by default. Closing the server ends the session; the next visit restores your desk.
+Open **https://elsewhere-by-post.localhost**. `npm run dev` runs through [Portless](https://github.com/vercel-labs/portless) (a dev dependency); its first run may ask for `sudo` to bind port 443 and trust a local certificate. The local server binds only to loopback by default. Closing the server ends the session; the next visit restores your desk.
 
 ```sh
 npm run build
@@ -43,7 +43,7 @@ The courier takes a shortest legal journey that visits every stamp and uses each
 
 ## Make your own little world
 
-Open **http://127.0.0.1:4177/maker.html**, or use “Make your own map” in the game footer. Select one of six postcards and choose its landmark, roads, orientation, stamp and echo. Departure and delivery remain pinned. Author a solved arrangement first; the route check uses the same engine as the game and proves that a legal itinerary collects all stamps and crosses each echo once.
+Open **https://elsewhere-by-post.localhost/maker.html**, or use “Make your own map” in the game footer. Select one of six postcards and choose its landmark, roads, orientation, stamp and echo. Departure and delivery remain pinned. Author a solved arrangement first; the route check uses the same engine as the game and proves that a legal itinerary collects all stamps and crosses each echo once.
 
 Shuffle & play saves a playable custom journey on this device and adds a “Yours” postcard to the game. Its nudge can always restore the authored witness. Some forgiving maps may still be connected after shuffling; validation promises solvability, not difficulty or uniqueness. Publishing a new shuffle gives that custom journey fresh progress while preserving the six built-in journeys.
 
