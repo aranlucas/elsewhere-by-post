@@ -15,11 +15,10 @@ Requires Node.js 22 or later. There are **no runtime dependencies** and no crede
 ```sh
 git clone https://github.com/aranlucas/elsewhere-by-post.git
 cd elsewhere-by-post
-npm install -g portless@0.15.7
 npm run dev
 ```
 
-Open **https://elsewhere-by-post.localhost**. The local server binds only to loopback by default. Closing the server ends the session; the next visit restores your desk.
+Open **https://elsewhere-by-post.localhost**. `npm run dev` runs through [Portless](https://github.com/vercel-labs/portless) (a dev dependency); its first run may ask for `sudo` to bind port 443 and trust a local certificate. The local server binds only to loopback by default. Closing the server ends the session; the next visit restores your desk.
 
 ```sh
 npm run build
@@ -27,34 +26,6 @@ npm start
 ```
 
 This serves the deployable `dist/` folder on the same local port. Use a local HTTP server rather than opening `index.html` with `file://`, because ES modules and offline caching require an HTTP origin.
-
-### Development URL with Portless
-
-The normal `npm run dev` command uses
-[Portless](https://github.com/vercel-labs/portless/tree/v0.15.7) for a stable local URL.
-Install its CLI once with **Node.js 24 or newer** (within this project's supported
-range), then run:
-
-```sh
-npm install -g portless@0.15.7
-npm run dev
-```
-
-Open **https://elsewhere-by-post.localhost** with the default proxy settings.
-Portless starts its shared proxy automatically. Its first HTTPS run creates and
-trusts a local certificate authority and may prompt for administrator privileges
-to bind port 443 or update local hostname entries. Start it from an interactive
-terminal and review those prompts. `portless doctor` diagnoses local setup issues.
-
-The existing Node server reads the assigned `PORT` and loopback `HOST` from
-Portless, so it does not compete for its usual fixed port.
-
-Linked Git worktrees receive a branch-name prefix, such as
-`https://fix-ui.elsewhere-by-post.localhost`; use the URL Portless prints.
-
-Browser storage and offline caches belong to each origin. Existing data at a
-numbered localhost URL stays there; use the app's export/import flow when available
-to move data to the named URL.
 
 ## Controls
 
