@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { EnvelopeIcon } from "../icons.tsx";
 import { Link } from "react-router";
 import { classes } from "../classes.ts";
@@ -6,47 +7,23 @@ import type { Level } from "../types.ts";
 
 const JOURNEY_NAMES = ["Turn", "Swap", "Wander", "Echo", "Detour", "Elsewhere", "Yours"];
 
-export const journeyNumber = (index: number): string => String(index + 1).padStart(2, "0");
-
-export function GameHeader({ onHelp }: { onHelp: () => void }) {
+/** A slim game bar: the title, whatever level picker sits in `children`, and help. */
+export function GameHeader({ onHelp, children }: { onHelp: () => void; children: ReactNode }) {
   return (
-    <>
-      <header className="masthead">
-        <div className="edition">
-          <span className="logo">
-            <EnvelopeIcon />
-          </span>
-          <span>
-            THE ELSEWHERE POSTAL SERVICE
-            <br />
-            <b>A LITTLE EXPERIMENT IN GETTING THERE</b>
-          </span>
-        </div>
-        <button type="button" className="quiet help-open" aria-label="How to play" onClick={onHelp}>
-          How to play <span className="question">?</span>
-        </button>
-      </header>
-      <section className="intro" aria-labelledby="game-title">
-        <div>
-          <p className="eyebrow">SIX POSTCARDS FROM AN IMPOSSIBLE WORLD</p>
-          <h1 id="game-title">
-            Elsewhere,
-            <br />
-            <em>by Post.</em>
-          </h1>
-        </div>
-        <div className="intro-note">
-          <span className="hand-drawn-star">✳</span>
-          <p>
-            <span>Turn a place.</span>
-            <br />
-            <span>Swap the world.</span>
-            <br />
-            <b>Deliver a little wonder.</b>
-          </p>
-        </div>
-      </section>
-    </>
+    <header className="masthead topbar">
+      <div className="brand">
+        <span className="logo">
+          <EnvelopeIcon />
+        </span>
+        <h1 id="game-title">
+          Elsewhere, <em>by Post.</em>
+        </h1>
+      </div>
+      {children}
+      <button type="button" className="help-open" aria-label="How to play" onClick={onHelp}>
+        ?
+      </button>
+    </header>
   );
 }
 
@@ -69,12 +46,15 @@ export function JourneyNav({ levels, current, completed }: JourneyNavProps) {
             className={classes("journey", index === current && "current", done && "complete")}
             aria-label={`Journey ${index + 1}: ${level.title}${done ? ", delivered" : ""}`}
             aria-current={index === current ? "page" : undefined}
+            title={JOURNEY_NAMES[index]}
           >
-            <span>{journeyNumber(index)}</span>
+            <span className="journey-number">{index + 1}</span>
             <span className="journey-label">{JOURNEY_NAMES[index]}</span>
-            <span className="journey-check" aria-hidden="true">
-              {done ? "✓" : "·"}
-            </span>
+            {done && (
+              <span className="journey-check" aria-hidden="true">
+                ✓
+              </span>
+            )}
           </Link>
         );
       })}

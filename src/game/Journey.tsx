@@ -2,14 +2,16 @@ import { useRef } from "react";
 import { Link } from "react-router";
 import { isTextEntry, prefersReducedMotion } from "../browser.ts";
 import { definition } from "../engine.ts";
+import { DeliveryBanner } from "./DeliveryBanner.tsx";
 import { DispatchPanel } from "./DispatchPanel.tsx";
-import { GameHeader, JourneyNav, journeyNumber } from "./GameHeader.tsx";
+import { GameHeader, JourneyNav } from "./GameHeader.tsx";
 import { HelpDialog } from "./HelpDialog.tsx";
 import { MapPanel } from "./MapPanel.tsx";
 import { useDragSwap } from "./useDragSwap.ts";
 import { useGame } from "./useGame.ts";
 import type { JourneySetup } from "./useGame.ts";
 import { useGameKeys } from "./useGameKeys.ts";
+import "../play.css";
 
 export function Journey(setup: JourneySetup) {
   const { levels, levelIndex, session } = setup;
@@ -49,14 +51,15 @@ export function Journey(setup: JourneySetup) {
 
   return (
     <>
-      <main className="desk">
-        <GameHeader onHelp={() => helpRef.current?.showModal()} />
-        <JourneyNav levels={levels} current={levelIndex} completed={session.completed} />
+      <main className="desk play">
+        <GameHeader onHelp={() => helpRef.current?.showModal()}>
+          <JourneyNav levels={levels} current={levelIndex} completed={session.completed} />
+        </GameHeader>
         <section className="play-area" aria-labelledby="level-title">
           <MapPanel
             level={level}
             board={board}
-            chapter={`JOURNEY ${journeyNumber(levelIndex)} / ${String(levels.length).padStart(2, "0")}`}
+            chapter={`JOURNEY ${levelIndex + 1} OF ${levels.length}`}
             moves={game.moves}
             selected={game.selected}
             canUndo={game.canUndo}
@@ -73,6 +76,14 @@ export function Journey(setup: JourneySetup) {
             onReset={actions.reset}
             onPointerDown={drag.onPointerDown}
             onClickCapture={drag.onClickCapture}
+            overlay={
+              <DeliveryBanner
+                delivery={game.delivery}
+                isLastLevel={levelIndex === levels.length - 1}
+                onNext={nextPostcard}
+                onRemix={actions.remix}
+              />
+            }
           />
           <DispatchPanel
             level={level}
@@ -80,12 +91,8 @@ export function Journey(setup: JourneySetup) {
             busy={trip.busy}
             collected={trip.collected}
             status={game.status}
-            delivery={game.delivery}
-            isLastLevel={levelIndex === levels.length - 1}
             hintOpen={game.hintOpen}
             onSend={actions.sendCourier}
-            onNext={nextPostcard}
-            onRemix={actions.remix}
             onToggleHint={actions.toggleHint}
             onApplyHint={actions.applyHint}
           />
@@ -106,7 +113,6 @@ export function Journey(setup: JourneySetup) {
           <Link className="maker-link" to="/maker">
             Make your own map ↗
           </Link>
-          <span className="footer-motto">No clock. No wrong turns.</span>
         </footer>
       </main>
       <HelpDialog ref={helpRef} />

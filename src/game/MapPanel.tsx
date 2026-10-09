@@ -1,4 +1,4 @@
-import type { MouseEvent, PointerEvent, RefObject } from "react";
+import type { MouseEvent, PointerEvent, ReactNode, RefObject } from "react";
 import { EnvelopeIcon, ResetIcon, TurnIcon, UndoIcon } from "../icons.tsx";
 import { classes } from "../classes.ts";
 import { definition, network } from "../engine.ts";
@@ -25,6 +25,8 @@ export interface MapPanelProps {
   onReset: () => void;
   onPointerDown: (event: PointerEvent<HTMLElement>) => void;
   onClickCapture: (event: MouseEvent<HTMLElement>) => void;
+  /** Laid over the table, such as the level-complete banner. */
+  overlay: ReactNode;
 }
 
 function MapLegend({ echoes }: { echoes: boolean }) {
@@ -99,10 +101,9 @@ export function MapPanel(props: MapPanelProps) {
         </span>
       </div>
       <div className="map-frame">
-        <div className="frame-note">
-          <span>POSTCARDS MAY SHIFT IN TRANSIT</span>
-          <span>↗ N</span>
-        </div>
+        <span className="compass" title="North is up and to the right">
+          ↗ N
+        </span>
         <div className="map-stage" ref={stageRef}>
           <fieldset
             id="board"
@@ -111,7 +112,10 @@ export function MapPanel(props: MapPanelProps) {
             tabIndex={-1}
             aria-label="Postcard map"
             data-size={board.length}
-            style={{ "--columns": level.columns }}
+            style={{
+              "--columns": level.columns,
+              "--rows": Math.ceil(board.length / level.columns),
+            }}
             onPointerDown={trip.busy ? undefined : props.onPointerDown}
             onClickCapture={props.onClickCapture}
           >
@@ -161,6 +165,7 @@ export function MapPanel(props: MapPanelProps) {
           </div>
         </div>
         <MapLegend echoes={level.requiredEchoes.length > 0} />
+        {props.overlay}
       </div>
       <MapTools
         busy={trip.busy}

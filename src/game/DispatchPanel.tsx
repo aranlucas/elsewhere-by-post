@@ -11,12 +11,8 @@ export interface DispatchPanelProps {
   busy: boolean;
   collected: string[];
   status: Status;
-  delivery: string | null;
-  isLastLevel: boolean;
   hintOpen: boolean;
   onSend: () => void;
-  onNext: () => void;
-  onRemix: () => void;
   onToggleHint: () => void;
   onApplyHint: () => void;
 }
@@ -70,21 +66,8 @@ export function DispatchPanel(props: DispatchPanelProps) {
 
   return (
     <aside className="dispatch" aria-label="Delivery desk">
-      <div className="letter">
-        <span className="letter-corner" />
-        <p className="eyebrow">A NOTE FROM ELSEWHERE</p>
-        <p id="letter-text">{level.letter}</p>
-        <span className="letter-signature">with love, the map</span>
-        <div className="postmark" aria-hidden="true">
-          ELSEWHERE
-          <br />
-          <span>02 · 10 · 26</span>
-          <br />
-          BY AIR &amp; IMAGINATION
-        </div>
-      </div>
       <div className="mission">
-        <span className="eyebrow">YOUR LITTLE JOURNEY</span>
+        <span className="eyebrow">YOUR GOAL</span>
         <p id="lesson">{level.lesson}</p>
         <StampList level={level} collected={props.collected} />
         <div id="echo-status" className="echo-status">
@@ -93,7 +76,12 @@ export function DispatchPanel(props: DispatchPanelProps) {
           ))}
         </div>
       </div>
-      <button type="button" id="send" className="send" onClick={props.onSend}>
+      <button
+        type="button"
+        id="send"
+        className={classes("send", busy && "busy")}
+        onClick={props.onSend}
+      >
         {busy ? (
           <>
             Stop the courier <span aria-hidden="true">□</span>
@@ -109,16 +97,6 @@ export function DispatchPanel(props: DispatchPanelProps) {
           {status.text}
         </output>
         <p id="status-detail">{status.detail}</p>
-      </div>
-      <div id="delivery" className="delivery" hidden={props.delivery === null}>
-        <span className="delivered-mark">DELIVERED ✓</span>
-        <p id="delivery-copy">{props.delivery}</p>
-        <button type="button" id="next" className="next" onClick={props.onNext}>
-          {props.isLastLevel ? "Back to the first postcard" : "Next postcard"} <ArrowIcon />
-        </button>
-        <button type="button" id="remix" className="quiet" onClick={props.onRemix}>
-          Shuffle this map again ↗
-        </button>
       </div>
       <div className="hint-area">
         <button
@@ -145,6 +123,11 @@ export function DispatchPanel(props: DispatchPanelProps) {
           </button>
         </div>
       </div>
+      <details className="letter">
+        <summary>A note from Elsewhere</summary>
+        <p id="letter-text">{level.letter}</p>
+        <span className="letter-signature">with love, the map</span>
+      </details>
     </aside>
   );
 }
