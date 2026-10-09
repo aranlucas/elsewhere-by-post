@@ -2,6 +2,8 @@
 
 A tiny impossible postcard map. Turn a place, swap the world, deliver a little wonder.
 
+**Play it:** https://elsewhere-by-post.aranlucas.workers.dev
+
 The prototype includes a local mapmaker for designing, checking and playing your own six-postcard worlds.
 
 Six handcrafted journeys teach quarter-turn roads, swapping illustrated landmarks, collecting postage stamps, and compass-sensitive **echo doors**. Matching doors connect distant postcards when their arrows agree. Each pair can be crossed once per journey. Departure and delivery stay pinned.
@@ -79,7 +81,7 @@ GitHub CI installs official Playwright Chromium on an isolated Linux runner and 
 
 ## Deployment
 
-The game is a static single-page app on [Cloudflare Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/); no runtime Worker code runs.
+The game is deployed at https://elsewhere-by-post.aranlucas.workers.dev as a static single-page app on [Cloudflare Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/); no runtime Worker code runs.
 
 ```sh
 npm run deploy   # vite build && wrangler deploy
