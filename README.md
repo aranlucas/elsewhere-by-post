@@ -12,20 +12,20 @@ Six handcrafted journeys teach quarter-turn roads, swapping illustrated landmark
 
 ## Play locally
 
-Requires Node.js 22 or later. Built with React, React Router, TypeScript and Vite; no accounts or credentials.
+Requires Node.js 22 or later and [pnpm](https://pnpm.io) (the version pinned in `package.json`; `corepack enable` provides it). Built with React, React Router, TypeScript and Vite; no accounts or credentials.
 
 ```sh
 git clone https://github.com/aranlucas/elsewhere-by-post.git
 cd elsewhere-by-post
-npm ci
-npm run dev
+pnpm install
+pnpm dev
 ```
 
-Open **https://elsewhere-by-post.localhost**. `npm run dev` runs Vite through [Portless](https://github.com/vercel-labs/portless) (a dev dependency); its first run may ask for `sudo` to bind port 443 and trust a local certificate. Without Portless, `npx vite` serves the same app on a local port. Closing the server ends the session; the next visit restores your desk.
+Open **https://elsewhere-by-post.localhost**. `pnpm dev` runs Vite through [Portless](https://github.com/vercel-labs/portless) (a dev dependency); its first run may ask for `sudo` to bind port 443 and trust a local certificate. Without Portless, `pnpm exec vite` serves the same app on a local port. Closing the server ends the session; the next visit restores your desk.
 
 ```sh
-npm run build
-npm run preview
+pnpm build
+pnpm preview
 ```
 
 `preview` serves the production build from the Cloudflare Workers runtime (workerd) via the [Cloudflare Vite plugin](https://developers.cloudflare.com/workers/vite-plugin/), with the same headers, routing and service worker that ship.
@@ -59,9 +59,9 @@ Both the editor and custom play work offline after the first successful cached v
 ## Verification
 
 ```sh
-npm run check         # oxfmt check, strict oxlint (type-aware), tsc, Vitest, production build
-npm test              # Vitest: deterministic engine, storage and custom-map tests
-npm run test:browser  # Builds, then Playwright playthroughs against `vite preview`
+pnpm check            # oxfmt check, strict oxlint (type-aware), tsc, Vitest, production build
+pnpm test             # Vitest: deterministic engine, storage and custom-map tests
+pnpm test:browser     # Builds, then Playwright playthroughs against `vite preview`
 ```
 
 Linting is strict: every oxlint correctness, suspicious, pedantic and perf rule, plus the TypeScript (type-aware), React, React hooks, jsx-a11y, import, unicorn, promise and Vitest plugins, and the vendored anti-slop rules. `.oxlintrc.json` records the few rules that are configured or turned off and why. Untrusted saves and imported maps are parsed with [zod](https://zod.dev) schemas before they become game data.
@@ -84,7 +84,7 @@ GitHub CI installs official Playwright Chromium on an isolated Linux runner and 
 The game is deployed at https://elsewhere-by-post.aranlucas.workers.dev as a static single-page app on [Cloudflare Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/); no runtime Worker code runs.
 
 ```sh
-npm run deploy   # vite build && wrangler deploy
+pnpm run deploy   # vite build && wrangler deploy (plain `pnpm deploy` is a built-in pnpm command)
 ```
 
 `wrangler.jsonc` is the input configuration; `vite build` writes the deployable `dist/wrangler.json`. Unknown paths fall back to `index.html` so React Router can resolve `/journeys/…` and `/maker`. `public/_headers` supplies a same-origin content security policy.
