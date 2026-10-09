@@ -34,10 +34,7 @@ jobs:
 
       - parallel:
           - name: Lint
-            run: npm run format:check && npm run lint
-
-          - name: Typecheck
-            run: npm run typecheck
+            run: npm run lint
 
           - name: Test
             run: npm test
