@@ -12,7 +12,7 @@ Six handcrafted journeys teach quarter-turn roads, swapping illustrated landmark
 
 ## Play locally
 
-Requires Node.js 22 or later and [pnpm](https://pnpm.io) (the version pinned in `package.json`; `corepack enable` provides it). Built with React, React Router, TypeScript and Vite; no accounts or credentials.
+Requires Node.js 22.18 or later and [pnpm](https://pnpm.io) (the version pinned in `package.json`; `corepack enable` provides it). Built with React, React Router, TypeScript and Vite; no accounts or credentials.
 
 ```sh
 git clone https://github.com/aranlucas/elsewhere-by-post.git
@@ -84,10 +84,12 @@ GitHub CI installs official Playwright Chromium on an isolated Linux runner and 
 The game is deployed at https://elsewhere-by-post.aranlucas.workers.dev as a static single-page app on [Cloudflare Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/); no runtime Worker code runs.
 
 ```sh
-pnpm run deploy   # vite build && wrangler deploy (plain `pnpm deploy` is a built-in pnpm command)
+pnpm run deploy   # cf deploy builds and deploys the project (plain `pnpm deploy` is a built-in pnpm command)
 ```
 
-`wrangler.jsonc` is the input configuration; `vite build` writes the deployable `dist/wrangler.json`. Unknown paths fall back to `index.html` so React Router can resolve `/journeys/…` and `/maker`. `public/_headers` supplies a same-origin content security policy.
+`cloudflare.config.ts` configures the Worker and its single-page-app asset fallback. The Cloudflare Vite plugin builds the static assets, and `cf deploy` validates and deploys them to Workers. Unknown paths fall back to `index.html` so React Router can resolve `/journeys/…` and `/maker`. `public/_headers` supplies a same-origin content security policy.
+
+Cloudflare Workers Builds runs `pnpm run build` before the production deploy command `pnpm exec cf deploy --prebuilt --mode production`. Set the preview command to `pnpm exec cf previews deploy` for pull requests.
 
 ## Source map
 
