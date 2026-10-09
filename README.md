@@ -15,10 +15,11 @@ Requires Node.js 22 or later. There are **no runtime dependencies** and no crede
 ```sh
 git clone https://github.com/aranlucas/elsewhere-by-post.git
 cd elsewhere-by-post
+npm install -g portless@0.15.7
 npm run dev
 ```
 
-Open **http://127.0.0.1:4177**. `PORT=4180 npm run dev` changes the port. The local server binds only to loopback by default. Closing the server ends the session; the next visit restores your desk.
+Open **https://elsewhere-by-post.localhost**. `PORT=4180 npm run dev:direct` runs the direct server on a chosen port. The local server binds only to loopback by default. Closing the server ends the session; the next visit restores your desk.
 
 ```sh
 npm run build
@@ -27,15 +28,16 @@ npm start
 
 This serves the deployable `dist/` folder on the same local port. Use a local HTTP server rather than opening `index.html` with `file://`, because ES modules and offline caching require an HTTP origin.
 
-### Named local URL with Portless
+### Development URL with Portless
 
-[Portless](https://github.com/vercel-labs/portless/tree/v0.15.7) gives this checkout a
-stable local URL. Complete the local setup above, use **Node.js 24 or newer**
-(within this project's supported range), then run:
+The normal `npm run dev` command uses
+[Portless](https://github.com/vercel-labs/portless/tree/v0.15.7) for a stable local URL.
+Install its CLI once with **Node.js 24 or newer** (within this project's supported
+range), then run:
 
 ```sh
 npm install -g portless@0.15.7
-npm run dev:portless
+npm run dev
 ```
 
 Open **https://elsewhere-by-post.localhost** with the default proxy settings.
@@ -49,7 +51,7 @@ Portless, so it does not compete for its usual fixed port.
 
 Linked Git worktrees receive a branch-name prefix, such as
 `https://fix-ui.elsewhere-by-post.localhost`; use the URL Portless prints.
-Use `npm run dev` for the existing direct-server workflow.
+Use `npm run dev:direct` to run the original localhost server without Portless.
 
 Browser storage and offline caches belong to each origin. Existing data at a
 numbered localhost URL stays there; use the app's export/import flow when available
@@ -71,7 +73,7 @@ The courier takes a shortest legal journey that visits every stamp and uses each
 
 ## Make your own little world
 
-Open **http://127.0.0.1:4177/maker.html**, or use “Make your own map” in the game footer. Select one of six postcards and choose its landmark, roads, orientation, stamp and echo. Departure and delivery remain pinned. Author a solved arrangement first; the route check uses the same engine as the game and proves that a legal itinerary collects all stamps and crosses each echo once.
+Open **https://elsewhere-by-post.localhost/maker.html**, or use “Make your own map” in the game footer. Select one of six postcards and choose its landmark, roads, orientation, stamp and echo. Departure and delivery remain pinned. Author a solved arrangement first; the route check uses the same engine as the game and proves that a legal itinerary collects all stamps and crosses each echo once.
 
 Shuffle & play saves a playable custom journey on this device and adds a “Yours” postcard to the game. Its nudge can always restore the authored witness. Some forgiving maps may still be connected after shuffling; validation promises solvability, not difficulty or uniqueness. Publishing a new shuffle gives that custom journey fresh progress while preserving the six built-in journeys.
 
