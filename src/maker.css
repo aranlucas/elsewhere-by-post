@@ -1,38 +1,211 @@
-.maker a { color: var(--ink); text-decoration: none; }
-.maker-intro { padding: 30px 0 24px; }
-.maker-intro h1 { font-size: 53px; line-height: 1.1; letter-spacing: -2px; }
-.maker-intro > p:last-child { font-family: Georgia, serif; font-size: 16px; line-height: 1.6; max-width: 610px; color: #53654d; }
-.maker-layout { display: grid; grid-template-columns: minmax(0,1fr) 290px; gap: 35px; }
-.map-title-label { display: block; font-size: 11px; margin-bottom: 20px; }
-.map-title-label input { display: block; width: 100%; max-width: 550px; margin-top: 8px; }
-.maker input:not([type="checkbox"]):not([type="file"]), .maker select { width: 100%; min-height: 44px; background: #fff8e9; color: #244b45; border: 1px solid #aab59c; border-radius: 3px; padding: 10px; font-size: 12px; }
-.maker-controls { background: #f9f2df; border: 1px solid #d8d1b8; padding: 22px; }
-.maker-controls .eyebrow { color: var(--rust); font-size: 8px; }
-.maker-controls h2 { margin-bottom: 22px; font-size: 24px; }
-.field { display: block; font-size: 10px; margin-bottom: 15px; color: #52654d; }
-.field input, .field select { display: block; margin-top: 7px; }
-.orientation { display: flex; align-items: center; justify-content: space-between; gap: 5px; margin-bottom: 17px; }
-.orientation > span { font-size: 10px; }
-.orientation .tool { font-size: 10px; padding: 9px; }
-.check-field { display: flex; align-items: center; gap: 6px; min-height: 44px; font-size: 11px; margin-bottom: 14px; }
-.check-field input { width: 16px; height: 16px; accent-color: var(--ink); }
-.maker .map-tools { margin-bottom: 18px; }
-.maker .map-tools .tool { flex: 1; }
-.validation-card { margin-top: 21px; padding: 18px; border: 1px dashed #b4bea3; background: #e9ecd9; }
-.validation-card .eyebrow { font-size: 8px; color: var(--rust); }
-#validation { font-family: Georgia, serif; line-height: 1.5; font-size: 17px; margin: 9px 0; }
-.validation-note, .field-note { font-size: 10px; line-height: 1.7; color: #52654d; margin-bottom: 0; }
-.maker-publish { border-top: 1px solid #c9cfb6; margin-top: 20px; padding-top: 20px; display: flex; flex-direction: column; gap: 13px; }
-.import-label { font-size: 11px; border: 1px dashed #abb59d; padding: 13px; display: block; }
-.import-label input { display: block; width: 100%; font-size: 10px; margin-top: 10px; min-height: 30px; color: #52654d; }
-#maker-notice { font-size: 11px; line-height: 1.7; color: #52654d; margin: 0; min-height: 16px; }
-.maker .tile.visited:not(.selected) { box-shadow: 0 0 0 2px #52775a,var(--shadow); }
-@media (max-width:800px) { .maker-layout { grid-template-columns: 1fr; gap: 24px; }.maker-intro h1 { font-size: 43px; }.maker-controls { padding: 22px; }.maker-controls h2 { margin-bottom: 18px; }.maker-intro > p:last-child { font-size: 15px; } }
-@media (max-width:380px) { .maker-intro h1 { font-size: 36px; }.maker .edition { font-size: 7px; letter-spacing: 1px; }.maker .masthead a { font-size: 9px; } }
+.maker a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.maker-intro {
+  padding: 30px 0 24px;
+}
+.maker-intro h1 {
+  font-size: 53px;
+  line-height: 1.1;
+  letter-spacing: -2px;
+}
+.maker-intro > p:last-child {
+  font-family: Georgia, serif;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 610px;
+  color: #53654d;
+}
+.maker-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 290px;
+  gap: 35px;
+}
+.map-title-label {
+  display: block;
+  font-size: 11px;
+  margin-bottom: 20px;
+}
+.map-title-label input {
+  display: block;
+  width: 100%;
+  max-width: 550px;
+  margin-top: 8px;
+}
+.maker input:not([type="checkbox"]):not([type="file"]),
+.maker select {
+  width: 100%;
+  min-height: 44px;
+  background: #fff8e9;
+  color: #244b45;
+  border: 1px solid #aab59c;
+  border-radius: 3px;
+  padding: 10px;
+  font-size: 12px;
+}
+.maker-controls {
+  background: #f9f2df;
+  border: 1px solid #d8d1b8;
+  padding: 22px;
+}
+.maker-controls .eyebrow {
+  color: var(--rust);
+  font-size: 8px;
+}
+.maker-controls h2 {
+  margin-bottom: 22px;
+  font-size: 24px;
+}
+.field {
+  display: block;
+  font-size: 10px;
+  margin-bottom: 15px;
+  color: #52654d;
+}
+.field input,
+.field select {
+  display: block;
+  margin-top: 7px;
+}
+.orientation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  margin-bottom: 17px;
+}
+.orientation > span {
+  font-size: 10px;
+}
+.orientation .tool {
+  font-size: 10px;
+  padding: 9px;
+}
+.check-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-size: 11px;
+  margin-bottom: 14px;
+}
+.check-field input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--ink);
+}
+.maker .map-tools {
+  margin-bottom: 18px;
+}
+.maker .map-tools .tool {
+  flex: 1;
+}
+.validation-card {
+  margin-top: 21px;
+  padding: 18px;
+  border: 1px dashed #b4bea3;
+  background: #e9ecd9;
+}
+.validation-card .eyebrow {
+  font-size: 8px;
+  color: var(--rust);
+}
+#validation {
+  display: block;
+  font-family: Georgia, serif;
+  line-height: 1.5;
+  font-size: 17px;
+  margin: 9px 0;
+}
+.validation-note,
+.field-note {
+  font-size: 10px;
+  line-height: 1.7;
+  color: #52654d;
+  margin-bottom: 0;
+}
+.maker-publish {
+  border-top: 1px solid #c9cfb6;
+  margin-top: 20px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.import-label {
+  font-size: 11px;
+  border: 1px dashed #abb59d;
+  padding: 13px;
+  display: block;
+}
+.import-label input {
+  display: block;
+  width: 100%;
+  font-size: 10px;
+  margin-top: 10px;
+  min-height: 30px;
+  color: #52654d;
+}
+#maker-notice {
+  display: block;
+  font-size: 11px;
+  line-height: 1.7;
+  color: #52654d;
+  margin: 0;
+  min-height: 16px;
+}
+.maker .tile.visited:not(.selected) {
+  box-shadow:
+    0 0 0 2px #52775a,
+    var(--shadow);
+}
+@media (max-width: 800px) {
+  .maker-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .maker-intro h1 {
+    font-size: 43px;
+  }
+  .maker-controls {
+    padding: 22px;
+  }
+  .maker-controls h2 {
+    margin-bottom: 18px;
+  }
+  .maker-intro > p:last-child {
+    font-size: 15px;
+  }
+}
+@media (max-width: 380px) {
+  .maker-intro h1 {
+    font-size: 36px;
+  }
+  .maker .edition {
+    font-size: 7px;
+    letter-spacing: 1px;
+  }
+  .maker .masthead a {
+    font-size: 9px;
+  }
+}
 
 /* Field names, validation and file actions must remain readable while authoring. */
-.maker .map-title-label, .maker .field, .maker .orientation > span,
-.maker .orientation .tool, .maker .check-field, .maker .validation-note,
-.maker .field-note, .maker .import-label, .maker .import-label input,
-.maker #maker-notice, .maker .masthead a { font-size: 12px; }
-.maker .orientation .tool, .maker .import-label input { min-height: 44px; }
+.maker .map-title-label,
+.maker .field,
+.maker .orientation > span,
+.maker .orientation .tool,
+.maker .check-field,
+.maker .validation-note,
+.maker .field-note,
+.maker .import-label,
+.maker .import-label input,
+.maker #maker-notice,
+.maker .masthead a {
+  font-size: 12px;
+}
+.maker .orientation .tool,
+.maker .import-label input {
+  min-height: 44px;
+}

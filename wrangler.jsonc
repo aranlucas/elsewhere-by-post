@@ -2,5 +2,9 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "elsewhere-by-post",
   "compatibility_date": "2026-10-02",
-  "assets": { "directory": "./dist" }
+  // Assets-only site: the Cloudflare Vite plugin adds the built client as static assets.
+  // Unknown paths such as /journeys/3 serve index.html, and React Router takes over.
+  "assets": {
+    "not_found_handling": "single-page-application",
+  },
 }

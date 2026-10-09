@@ -1,4 +1,16 @@
 {
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "oxc", "react", "jsx-a11y", "import", "promise", "vitest"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "pedantic": "error",
+    "perf": "error"
+  },
+  "env": {
+    "browser": true,
+    "es2024": true
+  },
   "ignorePatterns": [
     ".agent/**",
     ".agents/**",
@@ -12,7 +24,9 @@
     ".roo/**",
     ".windsurf/**",
     "tools/oxlint/anti-slop/**",
-    "dist/**"
+    "dist/**",
+    "evidence/**",
+    "pnpm-lock.yaml"
   ],
   "jsPlugins": [
     {
@@ -21,6 +35,26 @@
     }
   ],
   "rules": {
+    "eqeqeq": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "no-console": "error",
+    "typescript/no-explicit-any": "error",
+    "typescript/consistent-type-imports": "error",
+    "typescript/no-non-null-assertion": "error",
+    "typescript/no-floating-promises": "error",
+    "typescript/no-misused-promises": "error",
+    "typescript/await-thenable": "error",
+    "typescript/no-unnecessary-type-assertion": "error",
+    "typescript/switch-exhaustiveness-check": "error",
+    "typescript/prefer-nullish-coalescing": "error",
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "error",
+    "react/button-has-type": "error",
+    "react/no-array-index-key": "error",
+    "react/jsx-no-useless-fragment": "error",
+    "import/no-cycle": "error",
+    "import/no-duplicates": "error",
     "oxc/no-accumulating-spread": "error",
     "anti-slop/no-array-filter-map": "error",
     "anti-slop/no-reduce-accumulator-copy": "error",
@@ -39,6 +73,32 @@
     "anti-slop/no-unsafe-dictionary-type": "error",
     "anti-slop/no-widen-then-assert": "error",
     "anti-slop/require-readable-spacing": "error",
-    "anti-slop/require-safety-comment-for-type-assertion": "error"
-  }
+    "anti-slop/require-safety-comment-for-type-assertion": "error",
+    // The automatic JSX runtime (react-jsx) needs no React import.
+    "react/react-in-jsx-scope": "off",
+    "import/no-unassigned-import": ["error", { "allow": ["**/*.css"] }],
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      { "controlComponents": ["CommitInput"], "assert": "either" }
+    ],
+    // Blank lines and comments don't count toward file size.
+    "max-lines": ["error", { "max": 300, "skipBlankLines": true, "skipComments": true }],
+    // Components and hooks above 120 lines get split.
+    "max-lines-per-function": [
+      "error",
+      { "max": 120, "skipBlankLines": true, "skipComments": true }
+    ],
+    // Would require deeply readonly domain types plus allow-listing every DOM and React event type; the engine copies before it changes anything.
+    "typescript/prefer-readonly-parameter-types": "off",
+    // Not type-aware: it mistakes zod's .catch() fallbacks for promise chains.
+    "unicorn/prefer-top-level-await": "off",
+    // Route and container modules compose more than ten modules; barrel files would only hide the count.
+    "import/max-dependencies": ["error", { "max": 16 }]
+  },
+  "overrides": [
+    // Browser playthroughs must act on the page one step at a time.
+    { "files": ["tests/browser/**"], "rules": { "no-await-in-loop": "off" } },
+    // `export {}` makes a declaration file a module, so `declare module` augments rather than replaces.
+    { "files": ["**/*.d.ts"], "rules": { "unicorn/require-module-specifiers": "off" } }
+  ]
 }

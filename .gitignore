@@ -4,3 +4,6 @@ test-results/
 playwright-report/
 .npm-cache/
 .DS_Store
+.wrangler/
+.dev.vars*
+dev-dist/

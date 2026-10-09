@@ -7,10 +7,9 @@
     "level": "first-turn",
     "violations": [],
     "incomplete": [
-      "aria-prohibited-attr",
       "color-contrast"
     ],
-    "passes": 23
+    "passes": 22
   },
   {
     "viewport": {
@@ -20,10 +19,9 @@
     "level": "places-trade",
     "violations": [],
     "incomplete": [
-      "aria-prohibited-attr",
       "color-contrast"
     ],
-    "passes": 23
+    "passes": 22
   },
   {
     "viewport": {
@@ -33,10 +31,9 @@
     "level": "scenic-route",
     "violations": [],
     "incomplete": [
-      "aria-prohibited-attr",
       "color-contrast"
     ],
-    "passes": 23
+    "passes": 22
   },
   {
     "viewport": {
@@ -46,10 +43,9 @@
     "level": "elsewhere-door",
     "violations": [],
     "incomplete": [
-      "aria-prohibited-attr",
       "color-contrast"
     ],
-    "passes": 23
+    "passes": 22
   },
   {
     "viewport": {
@@ -59,10 +55,9 @@
     "level": "detour-in-blue",
     "violations": [],
     "incomplete": [
-      "aria-prohibited-attr",
       "color-contrast"
     ],
-    "passes": 23
+    "passes": 22
   },
   {
     "viewport": {
@@ -72,10 +67,9 @@
     "level": "two-fold-world",
     "violations": [],
     "incomplete": [
-      "aria-prohibited-attr",
       "color-contrast"
     ],
-    "passes": 23
+    "passes": 22
   },
   {
     "viewport": {
@@ -85,10 +79,9 @@
     "level": "first-turn",
     "violations": [],
     "incomplete": [
-      "aria-prohibited-attr",
       "color-contrast"
     ],
-    "passes": 23
+    "passes": 22
   },
   {
     "viewport": {
@@ -98,10 +91,9 @@
     "level": "places-trade",
     "violations": [],
     "incomplete": [
-      "aria-prohibited-attr",
       "color-contrast"
     ],
-    "passes": 23
+    "passes": 22
   },
   {
     "viewport": {
@@ -111,10 +103,9 @@
     "level": "scenic-route",
     "violations": [],
     "incomplete": [
-      "aria-prohibited-attr",
       "color-contrast"
     ],
-    "passes": 23
+    "passes": 22
   },
   {
     "viewport": {
@@ -124,10 +115,9 @@
     "level": "elsewhere-door",
     "violations": [],
     "incomplete": [
-      "aria-prohibited-attr",
       "color-contrast"
     ],
-    "passes": 23
+    "passes": 22
   },
   {
     "viewport": {
@@ -137,10 +127,9 @@
     "level": "detour-in-blue",
     "violations": [],
     "incomplete": [
-      "aria-prohibited-attr",
       "color-contrast"
     ],
-    "passes": 23
+    "passes": 22
   },
   {
     "viewport": {
@@ -150,10 +139,9 @@
     "level": "two-fold-world",
     "violations": [],
     "incomplete": [
-      "aria-prohibited-attr",
       "color-contrast"
     ],
-    "passes": 23
+    "passes": 22
   },
   {
     "view": "help",
