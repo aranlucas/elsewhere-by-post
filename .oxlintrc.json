@@ -23,7 +23,6 @@
     ".pi/**",
     ".roo/**",
     ".windsurf/**",
-    "tools/oxlint/anti-slop/**",
     "dist/**",
     "evidence/**",
     "pnpm-lock.yaml"
@@ -31,7 +30,7 @@
   "jsPlugins": [
     {
       "name": "anti-slop",
-      "specifier": "./tools/oxlint/anti-slop/index.ts"
+      "specifier": "@aranlucas/oxlint-plugin-anti-slop"
     }
   ],
   "rules": {

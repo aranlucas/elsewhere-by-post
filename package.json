@@ -24,9 +24,9 @@
     "zod": "4.6.5"
   },
   "devDependencies": {
+    "@aranlucas/oxlint-plugin-anti-slop": "0.1.0",
     "@axe-core/playwright": "^4.13.0",
     "@cloudflare/vite-plugin": "2.0.0-beta.sha-805ec1ff3",
-    "@oxlint/plugins": "1.87.0",
     "@playwright/test": "^1.64.0",
     "@types/node": "^26.6.4",
     "@types/react": "^19.3.0",
