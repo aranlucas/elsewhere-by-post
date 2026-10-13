@@ -60,7 +60,7 @@ export function JourneyRoute() {
   const { levels, session } = useOutletContext<GameContext>();
   const index = journeyIndex(journey, levels);
 
-  if (index === null) return <Navigate to={journeyPath(levels, session.lastVisited())} replace />;
+  if (index === null) {return <Navigate to={journeyPath(levels, session.lastVisited())} replace />;}
 
   return <Journey key={levels[index].id} levels={levels} levelIndex={index} session={session} />;
 }

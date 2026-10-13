@@ -33,7 +33,7 @@ const router = createBrowserRouter([
 
 const root = document.querySelector("#app");
 
-if (!root) throw new Error("Missing #app root");
+if (!root) {throw new Error("Missing #app root");}
 
 createRoot(root).render(
   <StrictMode>

@@ -29,9 +29,9 @@ export function arrowNeighbor(
 
   const next = at + delta;
 
-  if (!delta || next < 0 || next >= count) return null;
+  if (!delta || next < 0 || next >= count) {return null;}
 
-  if (Math.abs(delta) === 1 && Math.floor(at / columns) !== Math.floor(next / columns)) return null;
+  if (Math.abs(delta) === 1 && Math.floor(at / columns) !== Math.floor(next / columns)) {return null;}
 
   return next;
 }

@@ -49,18 +49,19 @@ export function useGridArrows(
   count: number,
 ): void {
   useDocumentEvent("keydown", (event) => {
-    if (event.ctrlKey || event.metaKey || event.altKey || isTextEntry(event.target)) return;
+    if (event.ctrlKey || event.metaKey || event.altKey || isTextEntry(event.target)) {return;}
 
     const tile =
       event.target instanceof Element ? event.target.closest<HTMLElement>(".tile") : null;
 
-    if (!tile || !event.key.startsWith("Arrow")) return;
+    if (!tile || !event.key.startsWith("Arrow")) {return;}
+
     event.preventDefault();
     const next = arrowNeighbor(event.key, Number(tile.dataset.at), columns, count);
 
     if (next !== null)
-      boardRef.current
+      {boardRef.current
         ?.querySelector<HTMLElement>(`.tile[data-at="${next}"] .tile-select`)
-        ?.focus();
+        ?.focus();}
   });
 }

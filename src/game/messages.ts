@@ -40,18 +40,18 @@ export function retryStatus(level: Level, journey: Journey): Status {
   const text = journey.steps.length === 1 ? "A road is waiting to meet." : "Nearly somewhere.";
 
   if (missing.length > 0)
-    return status(
+    {return status(
       text,
       `Still need: ${missing.join(", ")}. Turn or swap a postcard, then try again.`,
       "retry",
-    );
+    );}
 
   if (journey.missingEchoes.length > 0)
-    return status(
+    {return status(
       text,
       `Use the ${journey.missingEchoes.join(" and ")} echo on the journey. Align its arrows.`,
       "retry",
-    );
+    );}
 
   return status(text, "The stamps are collected. Now connect the last road to delivery.", "retry");
 }

@@ -39,12 +39,13 @@ export function useDragSwap({ canMove, onSwap }: DragSwapOptions) {
   useDocumentEvent("pointermove", (event) => {
     const current = pending.current;
 
-    if (!current) return;
+    if (!current) {return;}
 
     if (Math.hypot(event.clientX - current.x, event.clientY - current.y) > DRAG_THRESHOLD)
-      current.moved = true;
+      {current.moved = true;}
 
-    if (!current.moved) return;
+    if (!current.moved) {return;}
+
     const target = tileIndexAt(event.clientX, event.clientY);
 
     setDrag({
@@ -56,15 +57,17 @@ export function useDragSwap({ canMove, onSwap }: DragSwapOptions) {
   useDocumentEvent("pointerup", (event) => {
     const current = pending.current;
 
-    if (!current) return;
+    if (!current) {return;}
+
     pending.current = null;
     setDrag(null);
 
-    if (!current.moved) return;
+    if (!current.moved) {return;}
+
     release.current = { x: event.clientX, y: event.clientY, time: event.timeStamp };
     const target = tileIndexAt(event.clientX, event.clientY);
 
-    if (target !== null) onSwap(current.at, target);
+    if (target !== null) {onSwap(current.at, target);}
   });
 
   useDocumentEvent("pointercancel", () => {
@@ -76,10 +79,11 @@ export function useDragSwap({ canMove, onSwap }: DragSwapOptions) {
     const button =
       event.target instanceof Element ? event.target.closest<HTMLElement>(".tile-select") : null;
 
-    if (!button || event.button !== 0) return;
+    if (!button || event.button !== 0) {return;}
+
     const at = Number(button.dataset.at);
 
-    if (canMove(at)) pending.current = { at, x: event.clientX, y: event.clientY, moved: false };
+    if (canMove(at)) {pending.current = { at, x: event.clientX, y: event.clientY, moved: false };}
   }
 
   // A drag ends with a click on the tile under the pointer; that click is not a selection.
