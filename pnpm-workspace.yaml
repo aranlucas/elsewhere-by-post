@@ -8,3 +8,5 @@ minimumReleaseAgeExclude:
   - "@cloudflare/config@0.24.1"
   - "@cloudflare/runtime-types@0.1.9"
   - cf@1.0.0-beta.14
+  - "@aranlucas/*"
+  - "@oxlint/plugins@1.88.0"

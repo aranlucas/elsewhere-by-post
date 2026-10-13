@@ -64,7 +64,7 @@ pnpm test             # Vitest: deterministic engine, storage and custom-map tes
 pnpm test:browser     # Builds, then Playwright playthroughs against `vite preview`
 ```
 
-Linting is strict: every oxlint correctness, suspicious, pedantic and perf rule, plus the TypeScript (type-aware), React, React hooks, jsx-a11y, import, unicorn, promise and Vitest plugins, and the vendored anti-slop rules. `.oxlintrc.json` records the few rules that are configured or turned off and why. Untrusted saves and imported maps are parsed with [zod](https://zod.dev) schemas before they become game data.
+Linting is strict: every oxlint correctness, suspicious, pedantic and perf rule, plus the TypeScript (type-aware), React, React hooks, jsx-a11y, import, unicorn, promise and Vitest plugins, and the anti-slop rules from `@aranlucas/oxlint-plugin-anti-slop`. `.oxlintrc.json` records the few rules that are configured or turned off and why. Untrusted saves and imported maps are parsed with [zod](https://zod.dev) schemas before they become game data.
 
 Browser tests use Chrome through Playwright's `channel: 'chrome'`. They never use your personal Chrome profile. Install Chrome from its official vendor if it is absent, or change the config to an installed Playwright Chromium. The suite includes axe WCAG A/AA checks.
 
