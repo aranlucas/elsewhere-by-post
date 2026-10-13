@@ -77,7 +77,7 @@ export function Maker() {
     const input = event.target;
     const file = input.files?.[0];
 
-    if (!file) return;
+    if (!file) {return;}
 
     try {
       draft.replace(

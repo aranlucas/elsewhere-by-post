@@ -17,8 +17,9 @@ export default defineConfig({
         },
         beforeBuildServiceWorker(options) {
           const clientAssetsDir = resolvedViteConfig?.environments.client?.build.outDir;
+
           if (!resolvedViteConfig || !clientAssetsDir)
-            throw new Error("Cloudflare Vite plugin did not resolve the client assets directory.");
+            {throw new Error("Cloudflare Vite plugin did not resolve the client assets directory.");}
 
           // Cloudflare sets this output directory after VitePWA's config hook runs.
           const assetsDir = resolve(resolvedViteConfig.root, clientAssetsDir);

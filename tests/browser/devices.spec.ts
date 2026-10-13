@@ -93,7 +93,8 @@ test.describe("touch device", () => {
     await page.getByRole("button", { name: "Send the courier" }).tap();
     await expect(page.getByRole("status")).toHaveText(DELIVERED);
 
-    for (const index of [1, 2, 3, 4, 5]) await openAndSolve(page, index, "tap");
+    for (const index of [1, 2, 3, 4, 5]) {await openAndSolve(page, index, "tap");}
+
     await expect(page.locator(".journey.complete")).toHaveCount(6);
     await snapshot(page, "mobile-touch-finale");
   });

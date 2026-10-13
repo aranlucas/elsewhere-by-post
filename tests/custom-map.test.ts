@@ -126,7 +126,8 @@ test("validation rejects unpaired echoes, no stamps, disconnected roads and mism
   map.cards[0].ports = [];
   expect(validateMap(map).valid).toBe(false);
 
-  for (const card of map.cards) card.stamp = false;
+  for (const card of map.cards) {card.stamp = false;}
+
   expect(validateMap(map).message).toMatch(/at least one/u);
 });
 

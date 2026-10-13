@@ -44,7 +44,7 @@ export function useDesk(
     flip.current = null;
 
     if (pending && boardRef.current && !prefersReducedMotion())
-      playFlip(boardRef.current, pending, desk.board);
+      {playFlip(boardRef.current, pending, desk.board);}
   }, [boardRef, desk.board]);
 
   function change(next: Desk, turnDelta: number | null) {
@@ -57,7 +57,8 @@ export function useDesk(
   function perform(action: Action): Board | null {
     const next = changeBoard(level, desk.board, action);
 
-    if (equalBoards(next, desk.board)) return null;
+    if (equalBoards(next, desk.board)) {return null;}
+
     change(
       {
         board: next,
@@ -78,7 +79,8 @@ export function useDesk(
   function undo(): boolean {
     const previous = desk.history.at(-1);
 
-    if (!previous) return false;
+    if (!previous) {return false;}
+
     change({ ...previous, history: desk.history.slice(0, -1) }, null);
     setSelected(null);
 

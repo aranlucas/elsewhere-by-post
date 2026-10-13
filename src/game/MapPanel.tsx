@@ -174,7 +174,7 @@ export function MapPanel(props: MapPanelProps) {
         onUndo={props.onUndo}
         onReset={props.onReset}
         onTurn={() => {
-          if (selected !== null) props.onTurn(selected);
+          if (selected !== null) {props.onTurn(selected);}
         }}
       />
       <p className="selection-note" id="selection-note">

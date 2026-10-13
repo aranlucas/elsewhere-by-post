@@ -41,7 +41,8 @@ export function useMapDraft(
       return false;
     }
 
-    if (JSON.stringify(candidate) === JSON.stringify(map)) return true;
+    if (JSON.stringify(candidate) === JSON.stringify(map)) {return true;}
+
     setHistory([...history, copyMap(map)].slice(-HISTORY_LIMIT));
     commit(next, "");
 
@@ -60,13 +61,14 @@ export function useMapDraft(
       candidate.cards = next.cards;
     });
 
-    if (accepted) setNotice(message);
+    if (accepted) {setNotice(message);}
   }
 
   function undo() {
     const previous = history.at(-1);
 
-    if (!previous) return;
+    if (!previous) {return;}
+
     setHistory(history.slice(0, -1));
     commit(previous, "One edit back.");
   }

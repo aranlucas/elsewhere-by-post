@@ -25,11 +25,12 @@ test("authored level data has rectangular boards, unique identities and paired e
     for (const card of level.cards) {
       expect(new Set(card.ports).size).toBe(card.ports.length);
 
-      for (const port of card.ports) expect([0, 1, 2, 3]).toContain(port);
+      for (const port of card.ports) {expect([0, 1, 2, 3]).toContain(port);}
     }
 
     for (const echo of level.requiredEchoes)
-      expect(level.cards.filter((card) => card.echo === echo).length).toBe(2);
+      {expect(level.cards.filter((card) => card.echo === echo).length).toBe(2);}
+
     expect(validBoard(level, level.initial)).toBeTruthy();
     expect(validBoard(level, level.solution)).toBeTruthy();
   }
@@ -49,9 +50,9 @@ for (const level of LEVELS) {
 
     // Each step follows an edge out of the step before it.
     for (const [previous, step] of route.steps.slice(1).entries())
-      expect(route.graph[route.steps[previous].at]).toContainEqual(
+      {expect(route.graph[route.steps[previous].at]).toContainEqual(
         expect.objectContaining({ to: step.at, type: step.via?.type }),
-      );
+      );}
   });
   test(`${level.id}: initial map needs work and nudges converge`, () => {
     expect(traceJourney(level, level.initial).success).toBe(false);
@@ -80,7 +81,7 @@ test("roads need reciprocal ports, remain undirected, and never wrap rows", () =
     const { graph } = network(level, board);
 
     for (let i = 0; i < graph.length; i++)
-      for (const edge of graph[i].filter((candidate) => candidate.type === "road")) {
+      {for (const edge of graph[i].filter((candidate) => candidate.type === "road")) {
         const to = edge.to;
         expect(graph[to]).toContainEqual(expect.objectContaining({ to: i, type: "road" }));
         expect(
@@ -89,7 +90,7 @@ test("roads need reciprocal ports, remain undirected, and never wrap rows", () =
             1,
         ).toBeTruthy();
         expect(portsFor(level, board[to]).includes((edge.direction + 2) % 4)).toBeTruthy();
-      }
+      }}
   }
 });
 
@@ -100,7 +101,8 @@ test("rotation uses a quarter-turn; four turns are identity; reverse turn works"
   board = changeBoard(level, board, { type: "rotate", at: 1 });
   expect(portsFor(level, board[1])).toEqual([1, 2]);
 
-  for (let i = 0; i < 3; i++) board = changeBoard(level, board, { type: "rotate", at: 1 });
+  for (let i = 0; i < 3; i++) {board = changeBoard(level, board, { type: "rotate", at: 1 });}
+
   expect(board).toEqual(level.initial);
   expect(
     changeBoard(level, board, {

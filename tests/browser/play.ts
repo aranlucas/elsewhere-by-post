@@ -66,7 +66,7 @@ export async function solveJourney(page: Page, level: Level, gesture: Gesture = 
     board = changeBoard(level, board, action);
     attempts += 1;
 
-    if (gesture === "click") await expect.poll(() => shownBoard(page)).toEqual(board);
+    if (gesture === "click") {await expect.poll(() => shownBoard(page)).toEqual(board);}
   }
 
   expect(attempts).toBeLessThan(40);
@@ -87,7 +87,7 @@ export async function nudgeUntilReady(page: Page) {
   for (let i = 0; i < 40; i++) {
     await page.getByRole("button", { name: "Place one card for me" }).click();
 
-    if ((await page.getByRole("status").textContent()) === "Your journey is ready.") return;
+    if ((await page.getByRole("status").textContent()) === "Your journey is ready.") {return;}
   }
 
   throw new Error("The nudges never finished the journey");
@@ -98,7 +98,7 @@ export async function waitForOfflineCache(page: Page) {
   await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
 
-    if (navigator.serviceWorker.controller) return;
+    if (navigator.serviceWorker.controller) {return;}
 
     await new Promise<void>((resolve) => {
       navigator.serviceWorker.addEventListener(

@@ -104,9 +104,9 @@ export function CardSettings({ index, card, onEdit }: CardSettingsProps) {
             const art = event.target.value;
 
             if (isLandmark(art))
-              onEdit((target) => {
+              {onEdit((target) => {
                 target.art = art;
-              });
+              });}
           }}
         >
           {pinned ? (

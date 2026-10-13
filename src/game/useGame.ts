@@ -25,7 +25,7 @@ export function useGame({ levels, levelIndex, session }: JourneySetup) {
   const { visit } = session;
 
   const play = (frequency: number, duration?: number) => {
-    if (session.sound) tone(frequency, duration);
+    if (session.sound) {tone(frequency, duration);}
   };
 
   const desk = useDesk(
@@ -52,24 +52,25 @@ export function useGame({ levels, levelIndex, session }: JourneySetup) {
   }, [visit, levelIndex]);
 
   function perform(action: Action, announce = true) {
-    if (trip.busy) return;
+    if (trip.busy) {return;}
+
     const next = desk.perform(action);
 
-    if (!next) return;
+    if (!next) {return;}
 
     respond(announce ? moveStatus(action, next) : dispatch.status);
     play(action.type === "swap" ? 440 : 330, 0.06);
   }
 
   function selectCard(at: number) {
-    if (trip.busy) return;
+    if (trip.busy) {return;}
 
     if (definition(level, board[at].id).locked) {
       desk.setSelected(null);
       setStatus(NOTES.pinned);
-    } else if (selected === at) desk.setSelected(null);
-    else if (selected === null) desk.setSelected(at);
-    else perform({ type: "swap", at: selected, to: at });
+    } else if (selected === at) {desk.setSelected(null);}
+    else if (selected === null) {desk.setSelected(at);}
+    else {perform({ type: "swap", at: selected, to: at });}
   }
 
   const actions = {
@@ -79,14 +80,16 @@ export function useGame({ levels, levelIndex, session }: JourneySetup) {
       void navigate(journeyPath(levels, (levelIndex + 1) % levels.length));
     },
     sendCourier: () => {
-      if (!trip.busy) desk.setSelected(null);
+      if (!trip.busy) {desk.setSelected(null);}
+
       dispatch.send(level, board);
     },
     undo: () => {
-      if (!trip.busy && desk.undo()) respond(NOTES.undone);
+      if (!trip.busy && desk.undo()) {respond(NOTES.undone);}
     },
     reset: () => {
-      if (trip.busy) return;
+      if (trip.busy) {return;}
+
       desk.reset();
       respond(NOTES.reset);
     },
@@ -97,7 +100,8 @@ export function useGame({ levels, levelIndex, session }: JourneySetup) {
     applyHint: () => {
       const action = nextHint(level, board);
 
-      if (action) perform(action, false);
+      if (action) {perform(action, false);}
+
       setStatus(action ? NOTES.hinted : NOTES.hintReady);
     },
     toggleHint: () => {
@@ -109,7 +113,7 @@ export function useGame({ levels, levelIndex, session }: JourneySetup) {
     setSound: (enabled: boolean) => {
       session.setSound(enabled);
 
-      if (enabled) tone(660, 0.15);
+      if (enabled) {tone(660, 0.15);}
     },
   };
 

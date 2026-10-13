@@ -8,7 +8,7 @@ export const test = base.extend<{ pageErrors: string[] }>({
       const errors: string[] = [];
       page.on("pageerror", (error) => errors.push(error.message));
       page.on("console", (message) => {
-        if (message.type() === "error") errors.push(message.text());
+        if (message.type() === "error") {errors.push(message.text());}
       });
       await provide(errors);
       expect(errors).toEqual([]);
@@ -22,7 +22,7 @@ export { expect };
 export async function boxOf(locator: Locator) {
   const box = await locator.boundingBox();
 
-  if (!box) throw new Error("Expected a visible element");
+  if (!box) {throw new Error("Expected a visible element");}
 
   return box;
 }
