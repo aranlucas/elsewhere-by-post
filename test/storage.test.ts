@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
-import { LEVELS } from "../src/levels.ts";
-import { decodeSave, loadSave, persistSave, freshSave, SAVE_KEY } from "../src/storage.ts";
-import { memoryStorage } from "./helpers.ts";
+import { LEVELS } from "@/levels.ts";
+import { decodeSave, loadSave, persistSave, freshSave, SAVE_KEY } from "@/storage.ts";
+import { memoryStorage } from "@test/helpers.ts";
 
 test("valid saved board, history, level, sound and delivery medals round-trip", () => {
   const saved = freshSave();

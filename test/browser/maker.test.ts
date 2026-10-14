@@ -1,7 +1,7 @@
 import { AxeBuilder } from "@axe-core/playwright";
 import { writeFile } from "node:fs/promises";
-import { exampleMap } from "../../src/custom-map.ts";
-import { expect, test } from "./fixtures.ts";
+import { exampleMap } from "@/custom-map.ts";
+import { expect, test } from "@test/browser/fixtures.ts";
 import {
   AXE_TAGS,
   DELIVERED,
@@ -9,7 +9,7 @@ import {
   nudgeUntilReady,
   snapshot,
   waitForOfflineCache,
-} from "./play.ts";
+} from "@test/browser/play.ts";
 
 test("edit, validate, undo, save, export, import and play a user-authored map", async ({
   page,

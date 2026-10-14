@@ -96,10 +96,10 @@
   "overrides": [
     {
       "files": [
-        "tests/browser/game.spec.ts",
-        "tests/browser/maker.spec.ts",
-        "tests/browser/devices.spec.ts",
-        "tests/browser/play.ts"
+        "test/browser/game.test.ts",
+        "test/browser/maker.test.ts",
+        "test/browser/devices.test.ts",
+        "test/browser/play.ts"
       ],
       "rules": {
         "no-await-in-loop": "off"

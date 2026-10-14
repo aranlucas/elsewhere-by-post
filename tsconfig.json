@@ -14,7 +14,11 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "types": ["node", "vite/client", "vite-plugin-pwa/client"]
+    "types": ["node", "vite/client", "vite-plugin-pwa/client"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@test/*": ["./test/*"]
+    }
   },
-  "include": ["src", "tests", "*.ts"]
+  "include": ["src", "test", "*.ts"]
 }

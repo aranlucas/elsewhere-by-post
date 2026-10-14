@@ -13,10 +13,10 @@ import {
   copyMap,
   DRAFT_KEY,
   PUBLISHED_KEY,
-} from "../src/custom-map.ts";
-import { validBoard, traceJourney } from "../src/engine.ts";
-import type { PostcardMap } from "../src/custom-map.ts";
-import { memoryStorage, required, solveWithHints } from "./helpers.ts";
+} from "@/custom-map.ts";
+import { validBoard, traceJourney } from "@/engine.ts";
+import type { PostcardMap } from "@/custom-map.ts";
+import { memoryStorage, required, solveWithHints } from "@test/helpers.ts";
 
 type Loose = string | number | boolean | null | Loose[] | { [key: string]: Loose };
 

@@ -1,8 +1,8 @@
 import { expect, test } from "vitest";
-import { LEVELS } from "../src/levels.ts";
-import type { Puzzle } from "../src/types.ts";
-import { boardSchema } from "../src/storage.ts";
-import { echoesCrossed, solveWithHints } from "./helpers.ts";
+import { LEVELS } from "@/levels.ts";
+import type { Puzzle } from "@/types.ts";
+import { boardSchema } from "@/storage.ts";
+import { echoesCrossed, solveWithHints } from "@test/helpers.ts";
 import {
   portsFor,
   validBoard,
@@ -11,7 +11,7 @@ import {
   network,
   traceJourney,
   remixBoard,
-} from "../src/engine.ts";
+} from "@/engine.ts";
 
 test("authored level data has rectangular boards, unique identities and paired echoes", () => {
   expect(new Set(LEVELS.map((level) => level.id)).size).toBe(LEVELS.length);

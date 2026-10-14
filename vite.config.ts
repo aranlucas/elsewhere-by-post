@@ -7,6 +7,7 @@ import { VitePWA } from "vite-plugin-pwa";
 let resolvedViteConfig: ResolvedConfig | undefined;
 
 export default defineConfig({
+  resolve: { tsconfigPaths: true },
   plugins: [
     react(),
     cloudflare(),

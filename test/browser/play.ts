@@ -1,9 +1,9 @@
 import type { Page } from "@playwright/test";
-import { changeBoard, copyBoard, definition, traceJourney } from "../../src/engine.ts";
-import { LEVELS } from "../../src/levels.ts";
-import type { Action, Board, Level } from "../../src/types.ts";
-import { hintFor } from "../helpers.ts";
-import { expect } from "./fixtures.ts";
+import { changeBoard, copyBoard, definition, traceJourney } from "@/engine.ts";
+import { LEVELS } from "@/levels.ts";
+import type { Action, Board, Level } from "@/types.ts";
+import { hintFor } from "@test/helpers.ts";
+import { expect } from "@test/browser/fixtures.ts";
 
 export const DELIVERED = "Delivered. Beautifully improbable.";
 

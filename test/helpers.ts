@@ -1,5 +1,5 @@
-import { changeBoard, nextHint, traceJourney } from "../src/engine.ts";
-import type { Action, Board, EchoColor, Journey, KeyValueStore, Puzzle } from "../src/types.ts";
+import { changeBoard, nextHint, traceJourney } from "@/engine.ts";
+import type { Action, Board, EchoColor, Journey, KeyValueStore, Puzzle } from "@/types.ts";
 
 /** The next nudge for a board the caller knows is still unsolved. */
 export function hintFor(level: Puzzle, board: Board): Action {
