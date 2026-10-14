@@ -1,8 +1,11 @@
 import type { OxfmtConfig } from "oxfmt";
 import base from "@aranlucas/oxforge/format-config";
 
+const sharedConfig: OxfmtConfig = base;
+
 const config: OxfmtConfig = {
-  ...base,
+  ...sharedConfig,
+  ignorePatterns: [...(sharedConfig.ignorePatterns ?? []), "evidence/**"],
 };
 
 export default config;

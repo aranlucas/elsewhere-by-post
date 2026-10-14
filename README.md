@@ -61,7 +61,7 @@ Both the editor and custom play work offline after the first successful cached v
 ```sh
 pnpm check            # oxfmt check, strict oxlint (type-aware), tsc, Vitest, production build
 pnpm test             # Vitest: deterministic engine, storage and custom-map tests
-pnpm test:browser     # Builds, then Playwright playthroughs against `vite preview`
+pnpm test:e2e     # Builds, then Playwright playthroughs against `vite preview`
 ```
 
 Linting is strict: every oxlint correctness, suspicious, pedantic and perf rule, plus the TypeScript (type-aware), React, React hooks, jsx-a11y, import, unicorn, promise and Vitest plugins, and the anti-slop rules from `@aranlucas/oxlint-plugin-anti-slop`. `.oxlintrc.json` records the few rules that are configured or turned off and why. Untrusted saves and imported maps are parsed with [zod](https://zod.dev) schemas before they become game data.

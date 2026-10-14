@@ -95,12 +95,7 @@
   },
   "overrides": [
     {
-      "files": [
-        "test/browser/game.test.ts",
-        "test/browser/maker.test.ts",
-        "test/browser/devices.test.ts",
-        "test/browser/play.ts"
-      ],
+      "files": ["e2e/game.e2e.ts", "e2e/maker.e2e.ts", "e2e/devices.e2e.ts", "e2e/play.ts"],
       "rules": {
         "no-await-in-loop": "off"
       }
