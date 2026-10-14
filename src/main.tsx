@@ -2,7 +2,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, redirect } from "react-router";
 import { RouterProvider } from "react-router/dom";
-import { GameLayout, JourneyRoute, lastJourneyRedirect, loadGame } from "./game/routes.tsx";
+import { GameLayout, JourneyRoute } from "./game/routes.tsx";
+import { lastJourneyRedirect, loadGame } from "./game/loaders.ts";
 import { registerOfflineCache } from "./offline.ts";
 import "./style.css";
 
@@ -22,8 +23,8 @@ const router = createBrowserRouter([
   {
     path: "/maker",
     lazy: {
-      loader: async () => (await import("./maker/Maker.tsx")).loader,
-      Component: async () => (await import("./maker/Maker.tsx")).Maker,
+      loader: async () => (await import("./maker/loader.ts")).loader,
+      Component: async () => (await import("./maker/maker.tsx")).Maker,
     },
   },
   // Links from before the game had routes.
@@ -33,7 +34,9 @@ const router = createBrowserRouter([
 
 const root = document.querySelector("#app");
 
-if (!root) {throw new Error("Missing #app root");}
+if (!root) {
+  throw new Error("Missing #app root");
+}
 
 createRoot(root).render(
   <StrictMode>

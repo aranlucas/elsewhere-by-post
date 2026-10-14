@@ -2,7 +2,7 @@ import { LANDMARKS, isEcho, isLandmark } from "../custom-map.ts";
 import type { MapCard } from "../custom-map.ts";
 import { compass } from "../levels.ts";
 import type { EchoColor } from "../types.ts";
-import { CommitInput } from "./CommitInput.tsx";
+import { CommitInput } from "./commit-input.tsx";
 
 const ROAD_OPTIONS = Array.from({ length: 16 }, (_, mask) => {
   const ports = compass.flatMap((_direction, i) => ((mask & (1 << i)) === 0 ? [] : [i]));
@@ -18,7 +18,12 @@ const ROAD_OPTIONS = Array.from({ length: 16 }, (_, mask) => {
 
 type CardEdit = (change: (card: MapCard) => void) => void;
 
-function RoadsField({ ports, onEdit }: { ports: number[]; onEdit: CardEdit }) {
+interface RoadsFieldProps {
+  ports: number[];
+  onEdit: CardEdit;
+}
+
+function RoadsField({ ports, onEdit }: RoadsFieldProps) {
   return (
     <label className="field" htmlFor="roads">
       <span id="roads-label">Roads before turning</span>
@@ -44,15 +49,13 @@ function RoadsField({ ports, onEdit }: { ports: number[]; onEdit: CardEdit }) {
   );
 }
 
-function EchoField({
-  echo,
-  disabled,
-  onEdit,
-}: {
+interface EchoFieldProps {
   echo: EchoColor | null;
   disabled: boolean;
   onEdit: CardEdit;
-}) {
+}
+
+function EchoField({ echo, disabled, onEdit }: EchoFieldProps) {
   return (
     <label className="field" htmlFor="echo">
       <span id="echo-label">Echo door</span>
@@ -103,10 +106,11 @@ export function CardSettings({ index, card, onEdit }: CardSettingsProps) {
           onChange={(event) => {
             const art = event.target.value;
 
-            if (isLandmark(art))
-              {onEdit((target) => {
+            if (isLandmark(art)) {
+              onEdit((target) => {
                 target.art = art;
-              });}
+              });
+            }
           }}
         >
           {pinned ? (

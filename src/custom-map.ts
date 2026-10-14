@@ -93,10 +93,11 @@ const mapSchema = z
     for (const [index, card] of map.cards.entries()) {
       const pinned = PINNED_ART.get(index);
 
-      if (pinned === undefined ? !isLandmark(card.art) : card.art !== pinned)
-        {context.addIssue({ code: "custom", path: ["cards", index, "art"] });}
-      else if (pinned !== undefined && (card.stamp || card.echo !== null))
-        {context.addIssue({ code: "custom", path: ["cards", index, "pinned"] });}
+      if (pinned === undefined ? !isLandmark(card.art) : card.art !== pinned) {
+        context.addIssue({ code: "custom", path: ["cards", index, "art"] });
+      } else if (pinned !== undefined && (card.stamp || card.echo !== null)) {
+        context.addIssue({ code: "custom", path: ["cards", index, "pinned"] });
+      }
     }
   });
 
@@ -114,10 +115,13 @@ const publicationSchema = z.object({
 function describeIssue(issue: z.core.$ZodIssue): string {
   const [field, index, property] = issue.path;
 
-  if (field === "title") {return "Give your map a title of 1–60 characters.";}
+  if (field === "title") {
+    return "Give your map a title of 1–60 characters.";
+  }
 
-  if (field !== "cards" || index === undefined)
-    {return "A postcard map needs version 1 and exactly six cards.";}
+  if (field !== "cards" || index === undefined) {
+    return "A postcard map needs version 1 and exactly six cards.";
+  }
 
   const card = `Card ${Number(index) + 1}`;
 
@@ -162,7 +166,9 @@ export function exampleMap(): PostcardMap {
 
 /** The canonical map, or a player-facing Error naming the first problem zod found. */
 function mapFrom(result: ReturnType<typeof mapSchema.safeParse>): PostcardMap {
-  if (result.success) {return result.data;}
+  if (result.success) {
+    return result.data;
+  }
 
   const [issue] = result.error.issues;
 
@@ -177,14 +183,16 @@ export function normalizeMap(input: PostcardMap): PostcardMap {
 }
 
 export function parseMap(text: string): PostcardMap {
-  if (new TextEncoder().encode(text).length > MAX_MAP_BYTES)
-    {throw new Error("Choose a postcard JSON file smaller than 32 KiB.");}
+  if (new TextEncoder().encode(text).length > MAX_MAP_BYTES) {
+    throw new Error("Choose a postcard JSON file smaller than 32 KiB.");
+  }
 
   try {
     return mapFrom(mapSchema.safeParse(JSON.parse(text)));
   } catch (error) {
-    if (error instanceof SyntaxError)
-      {throw new TypeError("That file is not valid postcard JSON.", { cause: error });}
+    if (error instanceof SyntaxError) {
+      throw new TypeError("That file is not valid postcard JSON.", { cause: error });
+    }
 
     throw error;
   }
@@ -221,24 +229,27 @@ export function validateMap(input: PostcardMap): MapValidation {
     const map = normalizeMap(input);
     const level = authoredLevel(map);
 
-    for (const echo of level.requiredEchoes)
-      {if (level.cards.filter((card) => card.echo === echo).length !== 2)
-        {return {
+    for (const echo of level.requiredEchoes) {
+      if (level.cards.filter((card) => card.echo === echo).length !== 2) {
+        return {
           valid: false,
           message: `The ${echo} echo needs exactly two doors.`,
           map,
           level,
           journey: null,
-        };}}
+        };
+      }
+    }
 
-    if (!level.cards.some((card) => card.stamp))
-      {return {
+    if (!level.cards.some((card) => card.stamp)) {
+      return {
         valid: false,
         message: "Give at least one landmark a postage stamp.",
         map,
         level,
         journey: null,
-      };}
+      };
+    }
 
     const journey = traceJourney(level, level.solution);
 
@@ -268,8 +279,9 @@ export function validateMap(input: PostcardMap): MapValidation {
 function fingerprint(value: PostcardMap): string {
   let hash = 2166136261;
 
-  for (const char of JSON.stringify(value))
-    {hash = Math.imul(hash ^ (char.codePointAt(0) ?? 0), 16777619);}
+  for (const char of JSON.stringify(value)) {
+    hash = Math.imul(hash ^ (char.codePointAt(0) ?? 0), 16777619);
+  }
 
   return (hash >>> 0).toString(16);
 }
@@ -277,10 +289,13 @@ function fingerprint(value: PostcardMap): string {
 export function playableLevel(input: PostcardMap, seed: number): Level {
   const { valid, message, map, level } = validateMap(input);
 
-  if (!valid || !map || !level) {throw new Error(message);}
+  if (!valid || !map || !level) {
+    throw new Error(message);
+  }
 
-  if (!Number.isInteger(seed) || seed < 0 || seed > 0xffffffff)
-    {throw new Error("Invalid shuffle seed.");}
+  if (!Number.isInteger(seed) || seed < 0 || seed > 0xffffffff) {
+    throw new Error("Invalid shuffle seed.");
+  }
 
   return {
     ...level,
@@ -304,7 +319,9 @@ export function readDraft(storage: KeyValueStore | null): PostcardMap {
 
 export function saveDraft(storage: KeyValueStore | null, map: PostcardMap): boolean {
   try {
-    if (!storage) {return false;}
+    if (!storage) {
+      return false;
+    }
 
     storage.setItem(DRAFT_KEY, JSON.stringify(normalizeMap(map)));
 
@@ -317,7 +334,9 @@ export function saveDraft(storage: KeyValueStore | null, map: PostcardMap): bool
 export function publishMap(storage: KeyValueStore | null, map: PostcardMap, seed: number): Level {
   const level = playableLevel(map, seed);
 
-  if (!storage) {throw new Error("Storage is unavailable.");}
+  if (!storage) {
+    throw new Error("Storage is unavailable.");
+  }
 
   storage.setItem(PUBLISHED_KEY, JSON.stringify({ version: 1, map: normalizeMap(map), seed }));
 
@@ -328,7 +347,9 @@ export function readPublishedLevel(storage: KeyValueStore | null): Level | null 
   try {
     const text = storage?.getItem(PUBLISHED_KEY) ?? "";
 
-    if (text === "" || new TextEncoder().encode(text).length > MAX_MAP_BYTES) {return null;}
+    if (text === "" || new TextEncoder().encode(text).length > MAX_MAP_BYTES) {
+      return null;
+    }
 
     const publication = publicationSchema.safeParse(JSON.parse(text));
 

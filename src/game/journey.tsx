@@ -2,15 +2,15 @@ import { useRef } from "react";
 import { Link } from "react-router";
 import { isTextEntry, prefersReducedMotion } from "../browser.ts";
 import { definition } from "../engine.ts";
-import { DeliveryBanner } from "./DeliveryBanner.tsx";
-import { DispatchPanel } from "./DispatchPanel.tsx";
-import { GameHeader, JourneyNav } from "./GameHeader.tsx";
-import { HelpDialog } from "./HelpDialog.tsx";
-import { MapPanel } from "./MapPanel.tsx";
-import { useDragSwap } from "./useDragSwap.ts";
-import { useGame } from "./useGame.ts";
-import type { JourneySetup } from "./useGame.ts";
-import { useGameKeys } from "./useGameKeys.ts";
+import { DeliveryBanner } from "./delivery-banner.tsx";
+import { DispatchPanel } from "./dispatch-panel.tsx";
+import { GameHeader, JourneyNav } from "./game-header.tsx";
+import { HelpDialog } from "./help-dialog.tsx";
+import { MapPanel } from "./map-panel.tsx";
+import { useDragSwap } from "./use-drag-swap.ts";
+import { useGame } from "./use-game.ts";
+import type { JourneySetup } from "./use-game.ts";
+import { useGameKeys } from "./use-game-keys.ts";
 import "../play.css";
 
 export function Journey(setup: JourneySetup) {

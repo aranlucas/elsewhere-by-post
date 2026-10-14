@@ -24,7 +24,6 @@
     "no-console": "error",
     "typescript/no-explicit-any": "error",
     "typescript/consistent-type-imports": "error",
-    "typescript/no-non-null-assertion": "off",
     "typescript/no-floating-promises": "error",
     "typescript/no-misused-promises": "error",
     "typescript/await-thenable": "error",
@@ -33,13 +32,11 @@
     "typescript/prefer-nullish-coalescing": "error",
     "react/rules-of-hooks": "error",
     "react/exhaustive-deps": "error",
-    "react/button-has-type": "off",
     "react/no-array-index-key": "error",
     "react/jsx-no-useless-fragment": "error",
     "import/no-cycle": "error",
     "import/no-duplicates": "error",
     "oxc/no-accumulating-spread": "error",
-    "react/react-in-jsx-scope": "off",
     "import/no-unassigned-import": [
       "error",
       {
@@ -69,65 +66,13 @@
         "skipComments": true
       }
     ],
-    "typescript/prefer-readonly-parameter-types": "off",
-    "unicorn/prefer-top-level-await": "off",
     "import/max-dependencies": [
       "error",
       {
         "max": 16
       }
-    ],
-    "eslint/curly": "off",
-    "eslint/no-console": "off",
-    "eslint/no-magic-numbers": "off",
-    "eslint/id-length": "off",
-    "eslint/max-lines": "off",
-    "eslint/max-lines-per-function": "off",
-    "eslint/max-statements": "off",
-    "eslint/func-style": "off",
-    "eslint/no-inline-comments": "off",
-    "eslint/no-negated-condition": "off",
-    "eslint/new-cap": "off",
-    "eslint/no-restricted-imports": "off",
-    "unicorn/no-useless-undefined": "off",
-    "unicorn/prefer-add-event-listener": "off",
-    "unicorn/prefer-code-point": "off",
-    "unicorn/no-this-assignment": "off",
-    "unicorn/consistent-function-scoping": "off",
-    "eslint/radix": "off",
-    "anti-slop/no-array-filter-map": "off",
-    "anti-slop/no-chained-type-assertions": "off",
-    "anti-slop/no-conditional-empty-object-spread": "off",
-    "anti-slop/no-known-value-widening": "off",
-    "anti-slop/no-module-mocking": "off",
-    "anti-slop/no-object-parameters": "off",
-    "anti-slop/no-reduce-accumulator-copy": "off",
-    "anti-slop/no-reflect-apply": "off",
-    "anti-slop/no-reflect-get": "off",
-    "anti-slop/no-runtime-typeof": "off",
-    "anti-slop/no-shape-in-symbol-names": "off",
-    "anti-slop/no-unknown-parameters": "off",
-    "anti-slop/no-unknown-returns": "off",
-    "anti-slop/no-unknown-type-aliases": "off",
-    "anti-slop/no-unsafe-dictionary-type": "off",
-    "anti-slop/no-widen-then-assert": "off",
-    "anti-slop/require-readable-spacing": "off",
-    "anti-slop/require-safety-comment-for-type-assertion": "off"
+    ]
   },
-  "overrides": [
-    {
-      "files": ["tests/browser/**"],
-      "rules": {
-        "no-await-in-loop": "off"
-      }
-    },
-    {
-      "files": ["**/*.d.ts"],
-      "rules": {
-        "unicorn/require-module-specifiers": "off"
-      }
-    }
-  ],
   "ignorePatterns": [
     ".agent/**",
     ".agents/**",
@@ -164,5 +109,18 @@
   ],
   "options": {
     "typeAware": true
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "tests/browser/game.spec.ts",
+        "tests/browser/maker.spec.ts",
+        "tests/browser/devices.spec.ts",
+        "tests/browser/play.ts"
+      ],
+      "rules": {
+        "no-await-in-loop": "off"
+      }
+    }
+  ]
 }

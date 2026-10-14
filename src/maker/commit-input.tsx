@@ -22,7 +22,9 @@ export function CommitInput({ id, value, maxLength, onCommit }: CommitInputProps
   }
 
   const commit = () => {
-    if (draft !== value) {onCommit(draft);}
+    if (draft !== value) {
+      onCommit(draft);
+    }
 
     setDraft(value);
   };
@@ -37,7 +39,9 @@ export function CommitInput({ id, value, maxLength, onCommit }: CommitInputProps
       }}
       onBlur={commit}
       onKeyDown={(event) => {
-        if (event.key === "Enter") {commit();}
+        if (event.key === "Enter") {
+          commit();
+        }
       }}
     />
   );

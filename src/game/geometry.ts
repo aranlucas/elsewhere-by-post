@@ -31,7 +31,9 @@ export function pointOf(stage: HTMLElement, index: number): Point {
 
 /** The dotted route drawn behind the courier, up to and including step `through`. */
 export function trailOf(stage: HTMLElement, journey: Journey, through: number): Trail | null {
-  if (through < 1) {return null;}
+  if (through < 1) {
+    return null;
+  }
 
   return {
     viewBox: `0 0 ${stage.clientWidth} ${stage.clientHeight}`,

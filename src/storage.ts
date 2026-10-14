@@ -31,7 +31,9 @@ export function freshSave(): SaveData {
 }
 
 function decodeLevel(level: Level, saved: SavedLevel | null | undefined): LevelSave | null {
-  if (!saved || !validBoard(level, saved.board)) {return null;}
+  if (!saved || !validBoard(level, saved.board)) {
+    return null;
+  }
 
   const history: HistoryEntry[] = saved.history
     .slice(-100)
@@ -52,7 +54,9 @@ export function decodeSave(raw: string | null | undefined, levels: Level[]): Sav
     return fresh;
   }
 
-  if (!parsed.success) {return fresh;}
+  if (!parsed.success) {
+    return fresh;
+  }
 
   const data = parsed.data;
 
@@ -65,7 +69,9 @@ export function decodeSave(raw: string | null | undefined, levels: Level[]): Sav
   for (const level of levels) {
     const saved = decodeLevel(level, data.levels[level.id]);
 
-    if (saved) {fresh.levels[level.id] = saved;}
+    if (saved) {
+      fresh.levels[level.id] = saved;
+    }
   }
 
   return fresh;
@@ -81,7 +87,9 @@ export function loadSave(storage: KeyValueStore | null, levels: Level[]): SaveDa
 
 export function persistSave(storage: KeyValueStore | null, save: SaveData): boolean {
   try {
-    if (!storage) {return false;}
+    if (!storage) {
+      return false;
+    }
 
     storage.setItem(SAVE_KEY, JSON.stringify(save));
 

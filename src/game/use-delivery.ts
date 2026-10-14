@@ -4,7 +4,7 @@ import { definition, traceJourney } from "../engine.ts";
 import type { Board, Journey, Level } from "../types.ts";
 import { NOTES, READY, deliveredStatus, deliveryNote, retryStatus } from "./messages.ts";
 import type { Status } from "./messages.ts";
-import { useCourier } from "./useCourier.ts";
+import { useCourier } from "./use-courier.ts";
 
 export interface DeliverySetup {
   stageRef: RefObject<HTMLElement | null>;

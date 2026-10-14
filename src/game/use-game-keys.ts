@@ -17,7 +17,9 @@ export interface GameKeysOptions {
 /** R turns, U undoes, P sends, Escape clears and arrow keys move between postcards. */
 export function useGameKeys(options: GameKeysOptions): void {
   useDocumentEvent("keydown", (event) => {
-    if (event.ctrlKey || event.metaKey || event.altKey || options.ignore(event)) {return;}
+    if (event.ctrlKey || event.metaKey || event.altKey || options.ignore(event)) {
+      return;
+    }
 
     const tile =
       event.target instanceof Element ? event.target.closest<HTMLElement>(".tile") : null;
@@ -29,7 +31,9 @@ export function useGameKeys(options: GameKeysOptions): void {
         event.preventDefault();
         const at = options.selected ?? tileAt;
 
-        if (at !== null) {options.onTurn(at, event.shiftKey);}
+        if (at !== null) {
+          options.onTurn(at, event.shiftKey);
+        }
 
         return;
       }
@@ -52,14 +56,17 @@ export function useGameKeys(options: GameKeysOptions): void {
         break;
     }
 
-    if (tileAt === null || !event.key.startsWith("Arrow")) {return;}
+    if (tileAt === null || !event.key.startsWith("Arrow")) {
+      return;
+    }
 
     event.preventDefault();
     const next = arrowNeighbor(event.key, tileAt, options.columns, options.count);
 
-    if (next !== null)
-      {options.boardRef.current
+    if (next !== null) {
+      options.boardRef.current
         ?.querySelector<HTMLElement>(`.tile[data-at="${next}"] .tile-select`)
-        ?.focus();}
+        ?.focus();
+    }
   });
 }

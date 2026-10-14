@@ -1,4 +1,6 @@
-export {};
+import type { CSSProperties } from "react";
+
+export type { CSSProperties };
 
 declare module "react" {
   interface CSSProperties {
