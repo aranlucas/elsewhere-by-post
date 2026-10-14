@@ -27,6 +27,8 @@ interface ImportedMap {
   cards: { [key: string]: Loose }[];
 }
 
+type InvalidMapCase = [(map: ImportedMap) => void, RegExp];
+
 const asImported = (map: PostcardMap): ImportedMap => structuredClone(map);
 
 const importText = (map: ImportedMap) => parseMap(JSON.stringify(map));
@@ -44,7 +46,7 @@ test("custom data boundary rejects missing, oversized, executable-asset and malf
   expect(() => parseMap("{broken")).toThrow(/not valid postcard JSON/u);
   expect(() => parseMap(" ".repeat(32769))).toThrow(/32 KiB/u);
 
-  const mutations: [(map: ImportedMap) => void, RegExp][] = [
+  const mutations: InvalidMapCase[] = [
     [
       (map) => {
         map.cards.pop();
@@ -126,7 +128,9 @@ test("validation rejects unpaired echoes, no stamps, disconnected roads and mism
   map.cards[0].ports = [];
   expect(validateMap(map).valid).toBe(false);
 
-  for (const card of map.cards) {card.stamp = false;}
+  for (const card of map.cards) {
+    card.stamp = false;
+  }
 
   expect(validateMap(map).message).toMatch(/at least one/u);
 });

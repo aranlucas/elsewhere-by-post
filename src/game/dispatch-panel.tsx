@@ -24,7 +24,12 @@ const shortName = (name: string) =>
     .replace("Upside-down ", "")
     .replace("Floating ", "");
 
-function StampList({ level, collected }: { level: Level; collected: string[] }) {
+interface StampListProps {
+  level: Level;
+  collected: string[];
+}
+
+function StampList({ level, collected }: StampListProps) {
   return (
     <ul id="stamp-list" className="stamp-list" aria-label="Required postage stamps">
       {level.cards
@@ -48,7 +53,13 @@ function StampList({ level, collected }: { level: Level; collected: string[] }) 
   );
 }
 
-function EchoChip({ level, board, echo }: { level: Level; board: Board; echo: EchoColor }) {
+interface EchoChipProps {
+  level: Level;
+  board: Board;
+  echo: EchoColor;
+}
+
+function EchoChip({ level, board, echo }: EchoChipProps) {
   const [first, second] = board.filter((tile) => definition(level, tile.id).echo === echo);
   const linked = first !== undefined && first.rotation === second?.rotation;
 

@@ -1,7 +1,11 @@
 import type { RefObject } from "react";
 import { ArrowIcon } from "../icons.tsx";
 
-export function HelpDialog({ ref }: { ref: RefObject<HTMLDialogElement | null> }) {
+interface HelpDialogProps {
+  ref: RefObject<HTMLDialogElement | null>;
+}
+
+export function HelpDialog({ ref }: HelpDialogProps) {
   const close = () => {
     ref.current?.close();
   };

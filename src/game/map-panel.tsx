@@ -3,9 +3,9 @@ import { EnvelopeIcon, ResetIcon, TurnIcon, UndoIcon } from "../icons.tsx";
 import { classes } from "../classes.ts";
 import { definition, network } from "../engine.ts";
 import type { Board, Level } from "../types.ts";
-import { PostcardTile } from "./PostcardTile.tsx";
-import type { Trip } from "./useCourier.ts";
-import type { DragState } from "./useDragSwap.ts";
+import { PostcardTile } from "./postcard-tile.tsx";
+import type { Trip } from "./use-courier.ts";
+import type { DragState } from "./use-drag-swap.ts";
 
 export interface MapPanelProps {
   level: Level;
@@ -29,7 +29,11 @@ export interface MapPanelProps {
   overlay: ReactNode;
 }
 
-function MapLegend({ echoes }: { echoes: boolean }) {
+interface MapLegendProps {
+  echoes: boolean;
+}
+
+function MapLegend({ echoes }: MapLegendProps) {
   return (
     <div className="map-legend">
       <span>
@@ -174,7 +178,9 @@ export function MapPanel(props: MapPanelProps) {
         onUndo={props.onUndo}
         onReset={props.onReset}
         onTurn={() => {
-          if (selected !== null) {props.onTurn(selected);}
+          if (selected !== null) {
+            props.onTurn(selected);
+          }
         }}
       />
       <p className="selection-note" id="selection-note">

@@ -18,9 +18,11 @@ export function captureFlip(
 ): Flip {
   const rects = new Map<string, DOMRect>();
 
-  if (container)
-    {for (const element of tilesIn(container))
-      {rects.set(element.dataset.id ?? "", element.getBoundingClientRect());}}
+  if (container) {
+    for (const element of tilesIn(container)) {
+      rects.set(element.dataset.id ?? "", element.getBoundingClientRect());
+    }
+  }
 
   return { rects, oldBoard, turnDelta };
 }
@@ -32,8 +34,8 @@ export function playFlip(container: HTMLElement, flip: Flip, board: Board): void
     const previous = flip.rects.get(id);
     const now = element.getBoundingClientRect();
 
-    if (previous && (previous.x !== now.x || previous.y !== now.y))
-      {element.animate(
+    if (previous && (previous.x !== now.x || previous.y !== now.y)) {
+      element.animate(
         [
           {
             transform: `translate(${previous.x - now.x}px,${previous.y - now.y}px) rotate(-3deg)`,
@@ -42,12 +44,15 @@ export function playFlip(container: HTMLElement, flip: Flip, board: Board): void
           { transform: "translate(0,0) rotate(0)", zIndex: 4 },
         ],
         GLIDE,
-      );}
+      );
+    }
 
     const oldTile = flip.oldBoard.find((tile) => tile.id === id);
     const newTile = board.find((tile) => tile.id === id);
 
-    if (!oldTile || !newTile || oldTile.rotation === newTile.rotation) {continue;}
+    if (!oldTile || !newTile || oldTile.rotation === newTile.rotation) {
+      continue;
+    }
 
     const difference = (newTile.rotation - oldTile.rotation + 4) % 4;
     const turn = flip.turnDelta ?? (difference === 3 ? -1 : difference);

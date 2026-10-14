@@ -1,36 +1,39 @@
+import type { loader } from "./loader.ts";
 import { useRef, useState } from "react";
 import type { ChangeEvent } from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { browserStorage } from "../browser.ts";
-import {
-  authoredLevel,
-  exampleMap,
-  publishMap,
-  readDraft,
-  saveDraft,
-  validateMap,
-} from "../custom-map.ts";
-import { YOUR_MAP_PATH } from "../game/journeyUrl.ts";
+import { authoredLevel, exampleMap, publishMap, validateMap } from "../custom-map.ts";
+import { YOUR_MAP_PATH } from "../game/journey-url.ts";
 import { useGridArrows } from "../hooks.ts";
 import "../maker.css";
-import { CardSettings } from "./CardSettings.tsx";
-import { CommitInput } from "./CommitInput.tsx";
-import { MakerIntro } from "./MakerIntro.tsx";
-import { downloadMap, readMapFile } from "./mapFile.ts";
-import { PublishPanel } from "./PublishPanel.tsx";
-import { RouteColumn } from "./RouteColumn.tsx";
-import { useMapDraft } from "./useMapDraft.ts";
-
-/** The saved draft, or the example map; saving it straight away tells us whether storage works. */
-export function loader() {
-  const storage = browserStorage();
-  const initialMap = readDraft(storage);
-
-  return { initialMap, initiallySaved: saveDraft(storage, initialMap) };
-}
+import { CardSettings } from "./card-settings.tsx";
+import { CommitInput } from "./commit-input.tsx";
+import { MakerIntro } from "./maker-intro.tsx";
+import { downloadMap, readMapFile } from "./map-file.ts";
+import { PublishPanel } from "./publish-panel.tsx";
+import { RouteColumn } from "./route-column.tsx";
+import { useMapDraft } from "./use-map-draft.ts";
 
 /** A shuffle seed. Read only from event handlers, never while rendering. */
 const shuffleSeed = () => Date.now() >>> 0;
+
+interface DraftFooterProps {
+  saved: boolean;
+}
+
+function DraftFooter({ saved }: DraftFooterProps) {
+  return (
+    <footer>
+      <span id="draft-status">
+        {saved
+          ? "Your draft is saved on this device."
+          : "Saving is unavailable. You can still export a valid map."}
+      </span>
+      <span className="footer-motto">The world fits on your desk.</span>
+    </footer>
+  );
+}
 
 export function Maker() {
   const { initialMap, initiallySaved } = useLoaderData<typeof loader>();
@@ -77,7 +80,9 @@ export function Maker() {
     const input = event.target;
     const file = input.files?.[0];
 
-    if (!file) {return;}
+    if (!file) {
+      return;
+    }
 
     try {
       draft.replace(
@@ -150,14 +155,7 @@ export function Maker() {
             />
           </aside>
         </section>
-        <footer>
-          <span id="draft-status">
-            {draft.saved
-              ? "Your draft is saved on this device."
-              : "Saving is unavailable. You can still export a valid map."}
-          </span>
-          <span className="footer-motto">The world fits on your desk.</span>
-        </footer>
+        <DraftFooter saved={draft.saved} />
       </main>
     </>
   );

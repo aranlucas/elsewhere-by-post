@@ -1,7 +1,9 @@
 import type { ReactElement } from "react";
 import type { ArtKey, Card } from "./types.ts";
 
-const palette: Record<ArtKey, [string, string]> = {
+type PalettePair = [string, string];
+
+const palette: Record<ArtKey, PalettePair> = {
   home: ["#e6c9a5", "#a64f39"],
   lighthouse: ["#c1d9d0", "#bd6143"],
   windmill: ["#dccb9f", "#b96945"],

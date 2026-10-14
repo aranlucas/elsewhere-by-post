@@ -8,12 +8,16 @@ export function useSound(initial: boolean) {
   return {
     enabled,
     play: (frequency: number, duration?: number) => {
-      if (enabled) {tone(frequency, duration);}
+      if (enabled) {
+        tone(frequency, duration);
+      }
     },
     set: (next: boolean) => {
       setEnabled(next);
 
-      if (next) {tone(660, 0.15);}
+      if (next) {
+        tone(660, 0.15);
+      }
     },
   };
 }

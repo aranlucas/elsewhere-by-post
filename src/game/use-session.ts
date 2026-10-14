@@ -70,7 +70,9 @@ export function useSession(
     },
     /** Marks a journey delivered and returns every delivered journey. */
     markDelivered: (levelId: string): string[] => {
-      if (completed.includes(levelId)) {return completed;}
+      if (completed.includes(levelId)) {
+        return completed;
+      }
 
       const next = [...completed, levelId];
 

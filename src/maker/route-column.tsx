@@ -1,7 +1,7 @@
 import type { RefObject } from "react";
 import type { AuthoredLevel, MapValidation } from "../custom-map.ts";
 import type { Journey } from "../types.ts";
-import { MakerBoard } from "./MakerBoard.tsx";
+import { MakerBoard } from "./maker-board.tsx";
 
 export interface RouteColumnProps {
   level: AuthoredLevel;

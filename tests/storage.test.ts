@@ -23,8 +23,9 @@ test("valid saved board, history, level, sound and delivery medals round-trip", 
 });
 
 test("corrupt, old, unavailable and quota-limited storage is safe", () => {
-  for (const raw of [null, "", "{bad", "{}", '{"version":2}', "null", "true"])
-    {expect(decodeSave(raw, LEVELS)).toEqual(freshSave());}
+  for (const raw of [null, "", "{bad", "{}", '{"version":2}', "null", "true"]) {
+    expect(decodeSave(raw, LEVELS)).toEqual(freshSave());
+  }
 
   const blocked = {
     getItem: () => {

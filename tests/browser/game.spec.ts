@@ -40,12 +40,16 @@ test("all six maps deliver through pointer controls, echoes render, and progress
 }) => {
   await page.goto("/");
 
-  for (const index of [0, 1, 2, 3]) {await openAndSolve(page, index);}
+  for (const index of [0, 1, 2, 3]) {
+    await openAndSolve(page, index);
+  }
 
   await expect(page.locator(".echo-trail.blue")).toHaveCount(1);
   await snapshot(page, "desktop-echo-map");
 
-  for (const index of [4, 5]) {await openAndSolve(page, index);}
+  for (const index of [4, 5]) {
+    await openAndSolve(page, index);
+  }
 
   await expect(page.locator(".echo-trail")).toHaveCount(2);
   await snapshot(page, "desktop-finale");

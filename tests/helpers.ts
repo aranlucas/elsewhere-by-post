@@ -5,12 +5,18 @@ import type { Action, Board, EchoColor, Journey, KeyValueStore, Puzzle } from ".
 export function hintFor(level: Puzzle, board: Board): Action {
   const hint = nextHint(level, board);
 
-  if (!hint) {throw new Error("Expected a nudge for an unsolved board");}
+  if (!hint) {
+    throw new Error("Expected a nudge for an unsolved board");
+  }
 
   return hint;
 }
 
-export function memoryStorage(): KeyValueStore & { store: Map<string, string> } {
+interface MemoryStorage extends KeyValueStore {
+  store: Map<string, string>;
+}
+
+export function memoryStorage(): MemoryStorage {
   const store = new Map<string, string>();
 
   return {
@@ -46,7 +52,9 @@ export const echoesCrossed = (journey: Journey): EchoColor[] =>
 
 /** Narrows a value the test expects to exist. */
 export function required<T>(value: T | null | undefined, what: string): T {
-  if (value === null || value === undefined) {throw new Error(`Expected ${what}`);}
+  if (value === null || value === undefined) {
+    throw new Error(`Expected ${what}`);
+  }
 
   return value;
 }

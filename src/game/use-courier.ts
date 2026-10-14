@@ -39,9 +39,13 @@ export interface CourierRun {
 }
 
 function pauseAt(step: number, echoing: boolean): number {
-  if (prefersReducedMotion()) {return 20;}
+  if (prefersReducedMotion()) {
+    return 20;
+  }
 
-  if (step === 0) {return 180;}
+  if (step === 0) {
+    return 180;
+  }
 
   return echoing ? 650 : 420;
 }
@@ -64,7 +68,9 @@ export function useCourier(stageRef: RefObject<HTMLElement | null>) {
   useWindowEvent("resize", () => {
     const stage = stageRef.current;
 
-    if (!stage || !trip.journey) {return;}
+    if (!stage || !trip.journey) {
+      return;
+    }
 
     const { journey, through, courierAt } = trip;
 
@@ -86,7 +92,9 @@ export function useCourier(stageRef: RefObject<HTMLElement | null>) {
     window.clearTimeout(timer.current);
     setTrip({ ...IDLE_TRIP, busy: true, journey });
 
-    if (!stage) {return;}
+    if (!stage) {
+      return;
+    }
 
     const visit = (index: number, collected: string[]) => {
       const step = journey.steps.at(index);
@@ -112,7 +120,9 @@ export function useCourier(stageRef: RefObject<HTMLElement | null>) {
           const stamped = card.stamp && !collected.includes(card.id);
           const next = stamped ? [...collected, card.id] : collected;
 
-          if (stamped) {onStamp(next.length);}
+          if (stamped) {
+            onStamp(next.length);
+          }
 
           setTrip((current) => ({
             ...current,

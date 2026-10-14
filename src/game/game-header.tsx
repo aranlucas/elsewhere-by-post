@@ -2,13 +2,18 @@ import type { ReactNode } from "react";
 import { EnvelopeIcon } from "../icons.tsx";
 import { Link } from "react-router";
 import { classes } from "../classes.ts";
-import { journeyPath } from "./journeyUrl.ts";
+import { journeyPath } from "./journey-url.ts";
 import type { Level } from "../types.ts";
 
 const JOURNEY_NAMES = ["Turn", "Swap", "Wander", "Echo", "Detour", "Elsewhere", "Yours"];
 
+interface GameHeaderProps {
+  onHelp: () => void;
+  children: ReactNode;
+}
+
 /** A slim game bar: the title, whatever level picker sits in `children`, and help. */
-export function GameHeader({ onHelp, children }: { onHelp: () => void; children: ReactNode }) {
+export function GameHeader({ onHelp, children }: GameHeaderProps) {
   return (
     <header className="masthead topbar">
       <div className="brand">
