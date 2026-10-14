@@ -8,3 +8,4 @@ playwright-report/
 .cloudflare/
 .dev.vars*
 dev-dist/
+evidence/

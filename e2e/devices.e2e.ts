@@ -2,7 +2,7 @@ import { AxeBuilder } from "@axe-core/playwright";
 import { writeFile } from "node:fs/promises";
 import { LEVELS } from "@/levels.ts";
 import { SAVE_KEY } from "@/storage.ts";
-import { expect, test } from "@test/browser/fixtures.ts";
+import { expect, test } from "@e2e/fixtures.ts";
 import {
   AXE_TAGS,
   DELIVERED,
@@ -12,7 +12,7 @@ import {
   snapshot,
   solveJourney,
   waitForOfflineCache,
-} from "@test/browser/play.ts";
+} from "@e2e/play.ts";
 
 test("touch-sized portrait layout plays all stages, opens accessible help, and respects reduced motion", async ({
   page,

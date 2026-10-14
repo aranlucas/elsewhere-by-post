@@ -17,8 +17,9 @@
     "types": ["node", "vite/client", "vite-plugin-pwa/client"],
     "paths": {
       "@/*": ["./src/*"],
-      "@test/*": ["./test/*"]
+      "@test/*": ["./test/*"],
+      "@e2e/*": ["./e2e/*"]
     }
   },
-  "include": ["src", "test", "*.ts"]
+  "include": ["src", "test", "e2e", "*.ts"]
 }

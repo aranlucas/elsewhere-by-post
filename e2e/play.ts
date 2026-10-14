@@ -3,7 +3,7 @@ import { changeBoard, copyBoard, definition, traceJourney } from "@/engine.ts";
 import { LEVELS } from "@/levels.ts";
 import type { Action, Board, Level } from "@/types.ts";
 import { hintFor } from "@test/helpers.ts";
-import { expect } from "@test/browser/fixtures.ts";
+import { expect } from "@e2e/fixtures.ts";
 
 export const DELIVERED = "Delivered. Beautifully improbable.";
 

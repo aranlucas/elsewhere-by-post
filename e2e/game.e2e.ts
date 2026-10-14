@@ -1,5 +1,5 @@
 import { LEVELS } from "@/levels.ts";
-import { boxOf, expect, test } from "@test/browser/fixtures.ts";
+import { boxOf, expect, test } from "@e2e/fixtures.ts";
 import {
   DELIVERED,
   journeyLink,
@@ -7,7 +7,7 @@ import {
   openAndSolve,
   openJourney,
   snapshot,
-} from "@test/browser/play.ts";
+} from "@e2e/play.ts";
 
 test("first visit teaches through feedback; keyboard turn, retry, undo, reset and reload work", async ({
   page,
