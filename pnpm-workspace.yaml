@@ -2,12 +2,12 @@ allowBuilds:
   esbuild: true
   workerd: true
 minimumReleaseAgeExclude:
-  - miniflare@5.20261006.1-alpha
-  - "@cloudflare/build-output-utils@0.9.0"
+  - miniflare@5.20261006.1-alpha || 5.20261012.0-beta
+  - "@cloudflare/build-output-utils@0.9.0 || 0.9.2"
   - "@cloudflare/codemods@0.4.2"
-  - "@cloudflare/config@0.24.1"
-  - "@cloudflare/runtime-types@0.1.9"
-  - cf@1.0.0-beta.14
+  - "@cloudflare/config@0.24.1 || 0.26.0"
+  - "@cloudflare/runtime-types@0.1.9 || 0.1.11"
+  - cf@1.0.0-beta.14 || 1.0.0-beta.17
   - "@aranlucas/*"
   - "@oxlint/plugins@1.88.0"
   - "@oxfmt/binding-android-arm-eabi@0.73.0"
@@ -50,3 +50,8 @@ minimumReleaseAgeExclude:
   - "@oxlint/binding-win32-x64-msvc@1.88.0"
   - oxfmt@0.73.0
   - oxlint@1.88.0
+  - "@playwright/test@1.64.1"
+  - playwright-core@1.64.1
+  - playwright@1.64.1
+  - react-dom@19.3.1
+  - react@19.3.1
