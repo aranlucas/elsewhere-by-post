@@ -6,7 +6,7 @@ const port = 4187;
 // it from the Workers runtime with the same headers and service worker that ship.
 // `npm run test:browser` builds first.
 export default defineConfig({
-  testDir: "./tests/browser",
+  testDir: "./test/browser",
   fullyParallel: false,
   workers: 1,
   timeout: 45000,
