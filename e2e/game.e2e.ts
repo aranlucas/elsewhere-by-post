@@ -58,6 +58,15 @@ test("all six maps deliver through pointer controls, echoes render, and progress
   await page.reload();
   await expect(page.getByRole("heading", { name: LEVELS[5].title })).toBeVisible();
   await expect(page.locator(".journey.complete")).toHaveCount(6);
+});
+
+test("a delivered map can be replayed and reshuffled into another solvable journey", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await openAndSolve(page, 5);
+  await page.reload();
+  await expect(page.getByRole("heading", { name: LEVELS[5].title })).toBeVisible();
   await page.getByRole("button", { name: "Send the courier" }).click();
   await expect(page.getByRole("status")).toHaveText(DELIVERED);
   await page.getByRole("button", { name: "Shuffle this map again" }).click();
