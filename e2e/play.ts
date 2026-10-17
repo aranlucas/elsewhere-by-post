@@ -35,7 +35,7 @@ async function playAction(
 }
 
 /** The board as the page shows it: tile ids and quarter turns, read from the DOM. */
-const shownBoard = (page: Page) =>
+export const shownBoard = (page: Page) =>
   page.locator(".tile").evaluateAll((tiles) =>
     tiles.map((tile) => ({
       id: tile instanceof HTMLElement ? tile.dataset.id : undefined,
