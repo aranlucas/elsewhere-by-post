@@ -8,9 +8,9 @@ const port = 4187;
 export default defineConfig({
   testDir: "./e2e",
   testMatch: "**/*.e2e.ts",
-  fullyParallel: false,
+  fullyParallel: true,
   forbidOnly: process.env.CI !== undefined,
-  workers: 1,
+  workers: process.env.CI !== undefined ? 2 : 1,
   timeout: 45000,
   reporter: [["list"], ["json", { outputFile: "evidence/browser-results.json" }]],
   use: {
