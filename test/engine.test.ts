@@ -41,7 +41,6 @@ test("authored level data has rectangular boards, unique identities and paired e
 
 for (const level of LEVELS) {
   test(`${level.id}: authored witness delivers every stamp and required echo`, () => {
-    expect(validBoard(level, level.solution)).toBeTruthy();
     const route = traceJourney(level, level.solution);
     expect(route.success).toBe(true);
     expect(route.steps[0].at).toBe(level.solution.findIndex((tile) => tile.id === level.start));

@@ -49,12 +49,3 @@ export function solveWithHints(level: Puzzle, start: Board, limit = 40): Solved 
 /** The echo colours a journey crosses, in order. */
 export const echoesCrossed = (journey: Journey): EchoColor[] =>
   journey.steps.flatMap((step) => (step.via?.type === "echo" ? [step.via.echo] : []));
-
-/** Narrows a value the test expects to exist. */
-export function required<T>(value: T | null | undefined, what: string): T {
-  if (value === null || value === undefined) {
-    throw new Error(`Expected ${what}`);
-  }
-
-  return value;
-}
