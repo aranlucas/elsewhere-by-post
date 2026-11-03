@@ -1,10 +1,10 @@
 # Feature roadmap
 
-Planning baseline: `cf2463a08a5c` on `origin/main`, 2026-10-26. This local puzzle remains a later portfolio priority.
+This local puzzle remains a later portfolio priority.
 
 ## Outcome
 
-Let someone make a small postcard world and give another person an enjoyable first attempt. The [current prototype](README.md) already has six journeys, nudges, undo, a mapmaker, validated JSON import/export and offline play.
+Let someone make a small postcard world and give another person an enjoyable first attempt.
 
 ## 1. Preview an imported postcard before replacing the current one
 
