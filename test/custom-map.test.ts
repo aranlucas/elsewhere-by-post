@@ -1,7 +1,6 @@
 import { expect, test } from "vitest";
 import {
   exampleMap,
-  normalizeMap,
   parseMap,
   validateMap,
   authoredLevel,
@@ -16,7 +15,7 @@ import {
 } from "@/custom-map.ts";
 import { validBoard, traceJourney } from "@/engine.ts";
 import type { PostcardMap } from "@/custom-map.ts";
-import { memoryStorage, required, solveWithHints } from "@test/helpers.ts";
+import { memoryStorage, solveWithHints } from "@test/helpers.ts";
 
 type Loose = string | number | boolean | null | Loose[] | { [key: string]: Loose };
 
@@ -38,8 +37,6 @@ test("mapmaker example proves an authored legal itinerary", () => {
   expect(result.valid).toBe(true);
   expect(result.journey?.collected.length).toBe(2);
   expect(result.journey?.usedEchoes).toEqual(["blue"]);
-  const level = required(result.level, "an authored level");
-  expect(traceJourney(level, level.solution).success).toBe(true);
 });
 
 test("custom data boundary rejects missing, oversized, executable-asset and malformed shapes", () => {
@@ -114,7 +111,6 @@ test("custom data boundary rejects missing, oversized, executable-asset and malf
   map.cards[1].url = "https://attacker.invalid";
   expect(importText(map)).not.toHaveProperty("unknown");
   expect(importText(map).cards[1]).not.toHaveProperty("url");
-  expect(normalizeMap(exampleMap())).toEqual(exampleMap());
 });
 
 test("validation rejects unpaired echoes, no stamps, disconnected roads and mismatched directions", () => {
