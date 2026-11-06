@@ -7,7 +7,6 @@ const YOURS = "yours";
 
 const isCustom = (level: Level) => level.id.startsWith("custom-");
 
-/** The journey a route parameter names, or null when it names none that exists. */
 export function journeyIndex(param: string | undefined, levels: Level[]): number | null {
   if (param === YOURS) {
     const index = levels.findIndex((level) => isCustom(level));

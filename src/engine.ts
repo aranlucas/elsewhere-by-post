@@ -19,7 +19,6 @@ export const equalBoards = (a: Board, b: Board): boolean =>
   a.length === b.length &&
   a.every((tile, i) => tile.id === b[i].id && tile.rotation === b[i].rotation);
 
-/** Whether a well-formed board is a legal arrangement of this level's cards. */
 export function validBoard(level: Puzzle, board: Board): boolean {
   if (board.length !== level.cards.length) {
     return false;
@@ -77,7 +76,6 @@ export function changeBoard(level: Puzzle, board: Board, action: Action): Board 
   return next;
 }
 
-/** Which cards connect: roads between neighbours, and echo doors that currently agree. */
 export interface Network {
   graph: Edge[][];
   echoPairs: EchoColor[];

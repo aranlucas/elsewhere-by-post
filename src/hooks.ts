@@ -2,7 +2,6 @@ import { useEffect, useEffectEvent } from "react";
 import type { RefObject } from "react";
 import { arrowNeighbor, isTextEntry } from "./browser.ts";
 
-/** Listens on `document` for the component's lifetime, always calling the latest handler. */
 export function useDocumentEvent<K extends keyof DocumentEventMap>(
   type: K,
   handler: (event: DocumentEventMap[K]) => void,
@@ -22,7 +21,6 @@ export function useDocumentEvent<K extends keyof DocumentEventMap>(
   }, [type]);
 }
 
-/** Listens on `window` for the component's lifetime, always calling the latest handler. */
 export function useWindowEvent<K extends keyof WindowEventMap>(
   type: K,
   handler: (event: WindowEventMap[K]) => void,
@@ -42,14 +40,20 @@ export function useWindowEvent<K extends keyof WindowEventMap>(
   }, [type]);
 }
 
-/** Arrow keys move focus between the postcards of a grid board. */
 export function useGridArrows(
   boardRef: RefObject<HTMLElement | null>,
   columns: number,
   count: number,
+  ignore?: (event: KeyboardEvent) => boolean,
 ): void {
   useDocumentEvent("keydown", (event) => {
-    if (event.ctrlKey || event.metaKey || event.altKey || isTextEntry(event.target)) {
+    if (
+      event.ctrlKey ||
+      event.metaKey ||
+      event.altKey ||
+      isTextEntry(event.target) ||
+      ignore?.(event)
+    ) {
       return;
     }
 

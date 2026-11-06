@@ -129,23 +129,7 @@ button:active:not(:disabled) {
   font-size: 12px;
   padding: 8px 0;
 }
-.question {
-  display: grid;
-  place-items: center;
-  border: 1px solid #728373;
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
-  font-family: Georgia, serif;
-  font-size: 14px;
-  margin-left: 3px;
-}
-.intro {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 26px 2px 28px;
-}
+
 .eyebrow {
   font-size: 9px;
   letter-spacing: 2px;
@@ -153,10 +137,7 @@ button:active:not(:disabled) {
   margin: 0 0 12px;
   line-height: 1.6;
 }
-.intro .eyebrow {
-  color: var(--rust);
-  font-size: 9px;
-}
+
 h1 {
   font-family: Georgia, "Times New Roman", serif;
   font-weight: 400;
@@ -169,32 +150,7 @@ h1 em {
   font-weight: 400;
   color: var(--rust);
 }
-.intro-note {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding-right: 53px;
-  transform: rotate(-3deg);
-}
-.hand-drawn-star {
-  font-family: Georgia, serif;
-  font-size: 57px;
-  font-weight: 400;
-  color: #c0784f;
-  line-height: 1;
-}
-.intro-note p {
-  font-family: Georgia, serif;
-  font-size: 19px;
-  line-height: 1.45;
-  margin: 0;
-  color: #5f705d;
-}
-.intro-note b {
-  font-weight: 400;
-  color: var(--ink);
-  font-style: italic;
-}
+
 .journeys {
   display: flex;
   align-items: center;
@@ -569,17 +525,7 @@ kbd {
   margin-bottom: 27px;
   overflow: hidden;
 }
-.letter-corner {
-  display: block;
-  position: absolute;
-  right: -1px;
-  top: -1px;
-  width: 24px;
-  height: 24px;
-  background: linear-gradient(45deg, #e2d8bd 0 49%, var(--paper) 50% 100%);
-  border-bottom: 1px solid #d7cbb0;
-  border-left: 1px solid #d7cbb0;
-}
+
 .letter .eyebrow {
   font-size: 7px;
   letter-spacing: 1.6px;
@@ -601,26 +547,7 @@ kbd {
   color: #8d7455;
   display: block;
 }
-.postmark {
-  position: absolute;
-  right: 8px;
-  bottom: 5px;
-  width: 77px;
-  height: 77px;
-  border: 2px double #a36d3e;
-  border-radius: 50%;
-  color: #a36d3e;
-  opacity: 0.24;
-  transform: rotate(-20deg);
-  text-align: center;
-  font-size: 7px;
-  padding-top: 18px;
-  letter-spacing: 0.5px;
-  line-height: 1.4;
-}
-.postmark span {
-  font-size: 10px;
-}
+
 .mission .eyebrow {
   font-size: 8px;
   color: var(--rust);
@@ -990,11 +917,7 @@ kbd {
 .letter-signature {
   color: #7b654d;
 }
-.postmark {
-  opacity: 1;
-  color: #7b654d;
-  border-color: #7b654d;
-}
+
 .maker-link {
   color: #244b45;
   min-height: 32px;
@@ -1014,10 +937,7 @@ kbd {
   .desk {
     padding-top: 34px;
   }
-  .intro {
-    padding-top: 32px;
-    padding-bottom: 32px;
-  }
+
   h1 {
     font-size: 84px;
   }
@@ -1030,9 +950,7 @@ kbd {
     gap: 23px;
     grid-template-columns: minmax(0, 1fr) 250px;
   }
-  .intro-note {
-    padding-right: 15px;
-  }
+
   .board {
     gap: 10px;
   }
@@ -1097,28 +1015,12 @@ kbd {
   .help-open {
     font-size: 10px;
   }
-  .intro {
-    padding: 23px 0;
-  }
-  .intro .eyebrow {
-    font-size: 7px;
-    letter-spacing: 1.4px;
-    margin-bottom: 12px;
-  }
+
   h1 {
     font-size: 62px;
     letter-spacing: -3px;
   }
-  .intro-note {
-    padding-right: 0;
-    gap: 8px;
-  }
-  .intro-note p {
-    font-size: 14px;
-  }
-  .hand-drawn-star {
-    font-size: 34px;
-  }
+
   .journeys {
     gap: 3px;
     padding: 10px 0;
@@ -1304,19 +1206,11 @@ kbd {
     padding-left: 13px;
     padding-right: 13px;
   }
-  .intro-note p {
-    font-size: 12px;
-  }
-  .hand-drawn-star {
-    font-size: 27px;
-  }
+
   h1 {
     font-size: 55px;
   }
-  .intro .eyebrow {
-    font-size: 6px;
-    letter-spacing: 1px;
-  }
+
   .edition {
     font-size: 7px;
   }
@@ -1353,33 +1247,6 @@ kbd {
   }
   .map-legend {
     font-size: 6px;
-  }
-}
-@media (max-width: 480px) {
-  .intro {
-    display: block;
-  }
-  .intro-note {
-    margin-top: 17px;
-    transform: none;
-    gap: 10px;
-  }
-  .intro-note p {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3px 6px;
-    font-size: 12px;
-    line-height: 1.4;
-  }
-  .intro-note br {
-    display: none;
-  }
-  .hand-drawn-star {
-    font-size: 27px;
-    flex-shrink: 0;
-  }
-  .intro-note b {
-    white-space: nowrap;
   }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -13,13 +13,11 @@ export interface DeliverySetup {
   play: (frequency: number, duration?: number) => void;
 }
 
-/** Sending the courier, what the desk says about it, and which journeys are delivered. */
 export function useDelivery({ stageRef, levelCount, markDelivered, play }: DeliverySetup) {
   const { trip, ...courier } = useCourier(stageRef);
   const [status, setStatus] = useState(READY);
   const [delivery, setDelivery] = useState<string | null>(null);
 
-  /** Calls the courier back and clears the last delivery, then says something new. */
   function respond(next: Status) {
     courier.stop();
     setDelivery(null);
@@ -40,7 +38,6 @@ export function useDelivery({ stageRef, levelCount, markDelivered, play }: Deliv
     play(880, 0.3);
   }
 
-  /** Sends the courier along the board's best journey, or recalls one already out. */
   function send(level: Level, board: Board) {
     if (trip.busy) {
       respond(NOTES.recalled);

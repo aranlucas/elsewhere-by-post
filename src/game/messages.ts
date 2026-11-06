@@ -1,5 +1,5 @@
 import { definition } from "../engine.ts";
-import { compass } from "../levels.ts";
+import { compass } from "../directions.ts";
 import type { Action, Board, Journey, Level } from "../types.ts";
 
 export interface Status {
@@ -64,7 +64,6 @@ export function deliveryNote(level: Level, allDelivered: boolean): string {
     : `A small miracle for ${level.place.toLowerCase()}.`;
 }
 
-/** Fixed responses to the player's actions. */
 export const NOTES = {
   pinned: status(
     "This place is pinned.",

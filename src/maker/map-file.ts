@@ -25,7 +25,6 @@ export function downloadMap(map: PostcardMap): void {
   }, 1000);
 }
 
-/** Reads a chosen file as a map, or throws a player-facing Error. */
 export async function readMapFile(file: File): Promise<PostcardMap> {
   if (file.size > MAX_MAP_BYTES) {
     throw new Error("Choose a postcard JSON file smaller than 32 KiB.");

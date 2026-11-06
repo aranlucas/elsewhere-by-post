@@ -9,7 +9,6 @@ import {
   saveDraft,
   publishMap,
   readPublishedLevel,
-  copyMap,
   DRAFT_KEY,
   PUBLISHED_KEY,
 } from "@/custom-map.ts";
@@ -167,11 +166,13 @@ test("draft and publication storage recover safely; publishing invalid maps does
 
 test("map revisions isolate saved-game identity and user text is data rather than a new asset", () => {
   const map = exampleMap();
-  const copy = copyMap(map);
+  const copy = structuredClone(map);
 
   copy.cards[1].name = "<b>hello</b>";
-  expect(map.cards[1].name).toBe("Near archway");
   expect(playableLevel(map, 10).id).not.toBe(playableLevel(copy, 10).id);
   expect(playableLevel(map, 10).id).not.toBe(playableLevel(map, 11).id);
-  expect(authoredLevel(copy).cards[1].name).toBe("<b>hello</b>");
+  const authored = authoredLevel(copy);
+  expect(authored.cards[1].name).toBe("<b>hello</b>");
+  authored.cards[1].ports.push(2);
+  expect(copy.cards[1].ports).toEqual([3]);
 });

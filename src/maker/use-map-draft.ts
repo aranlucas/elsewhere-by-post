@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { copyMap, normalizeMap, saveDraft } from "../custom-map.ts";
+import { normalizeMap, saveDraft } from "../custom-map.ts";
 import type { MapCard, PostcardMap } from "../custom-map.ts";
 import type { Journey, KeyValueStore } from "../types.ts";
 
@@ -29,7 +29,7 @@ export function useMapDraft(
 
   /** Applies a change if the result is still a well-formed map; otherwise explains why not. */
   function edit(mutate: (candidate: PostcardMap) => void): boolean {
-    const candidate = copyMap(map);
+    const candidate = structuredClone(map);
     mutate(candidate);
     let next: PostcardMap;
 
@@ -45,7 +45,7 @@ export function useMapDraft(
       return true;
     }
 
-    setHistory([...history, copyMap(map)].slice(-HISTORY_LIMIT));
+    setHistory([...history, structuredClone(map)].slice(-HISTORY_LIMIT));
     commit(next, "");
 
     return true;

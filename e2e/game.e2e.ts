@@ -116,6 +116,8 @@ test("keyboard focus navigation, selection, reverse turn and help dismissal", as
   await page.locator('.tile[data-at="0"] .tile-select').focus();
   await page.keyboard.press("ArrowRight");
   await expect(page.locator('.tile[data-at="1"] .tile-select')).toBeFocused();
+  await page.keyboard.press("ArrowRight");
+  await expect(page.locator('.tile[data-at="1"] .tile-select')).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.locator(".tile.selected")).toHaveAttribute("data-at", "1");
   await page.keyboard.press("Shift+r");

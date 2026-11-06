@@ -1,6 +1,6 @@
 import { PostcardArt } from "../art.tsx";
 import { classes } from "../classes.ts";
-import { compass } from "../levels.ts";
+import { compass } from "../directions.ts";
 import type { Card, Edge, Tile } from "../types.ts";
 
 export interface PostcardTileProps {

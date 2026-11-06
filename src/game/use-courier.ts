@@ -6,7 +6,6 @@ import type { Card, Journey } from "../types.ts";
 import { pointOf, trailOf } from "./geometry.ts";
 import type { Point, Trail } from "./geometry.ts";
 
-/** One courier run: the planned journey and how far the courier has come. */
 export interface Trip {
   busy: boolean;
   journey: Journey | null;

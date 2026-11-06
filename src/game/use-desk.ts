@@ -1,3 +1,4 @@
+import { GAME_HISTORY_LIMIT } from "../types.ts";
 import { useLayoutEffect, useRef, useState } from "react";
 import type { RefObject } from "react";
 import { prefersReducedMotion } from "../browser.ts";
@@ -5,8 +6,6 @@ import { changeBoard, copyBoard, equalBoards, remixBoard } from "../engine.ts";
 import type { Action, Board, HistoryEntry, Level, LevelSave } from "../types.ts";
 import { captureFlip, playFlip } from "./flip.ts";
 import type { Flip } from "./flip.ts";
-
-const HISTORY_LIMIT = 100;
 
 export interface Desk {
   board: Board;
@@ -67,7 +66,7 @@ export function useDesk(
         board: next,
         moves: desk.moves + 1,
         history: [...desk.history, { board: copyBoard(desk.board), moves: desk.moves }].slice(
-          -HISTORY_LIMIT,
+          -GAME_HISTORY_LIMIT,
         ),
       },
       action.type === "rotate" && action.counterclockwise === true ? -1 : 1,

@@ -1,6 +1,6 @@
-import { LANDMARKS, isEcho, isLandmark } from "../custom-map.ts";
+import { LANDMARKS, isEcho, isLandmark, pinnedArtAt } from "../custom-map.ts";
 import type { MapCard } from "../custom-map.ts";
-import { compass } from "../levels.ts";
+import { compass } from "../directions.ts";
 import type { EchoColor } from "../types.ts";
 import { CommitInput } from "./commit-input.tsx";
 
@@ -87,7 +87,8 @@ export interface CardSettingsProps {
 }
 
 export function CardSettings({ index, card, onEdit }: CardSettingsProps) {
-  const pinned = index === 0 || index === 5;
+  const endpoint = pinnedArtAt(index);
+  const pinned = endpoint !== undefined;
 
   return (
     <>
@@ -114,7 +115,9 @@ export function CardSettings({ index, card, onEdit }: CardSettingsProps) {
           }}
         >
           {pinned ? (
-            <option value={card.art}>{index === 0 ? "Departure house" : "Delivery house"}</option>
+            <option value={card.art}>
+              {endpoint === "home" ? "Departure house" : "Delivery house"}
+            </option>
           ) : (
             Object.entries(LANDMARKS).map(([key, label]) => (
               <option key={key} value={key}>
