@@ -40,4 +40,6 @@ Current published npm metadata confirms `e2e@0.23.0` and `@e2e-dev/web@0.15.5`, 
 
 ## Validation and independent review
 
-Pending CI and independent static review. No claim of local test/build success.
+Independent static review confirmed both findings, rejected the solved-custom-shuffle hypothesis, and found no remaining concrete objections after reviewing implementation and regression contracts (resumed after the server cancelled the first review). No local tests or builds ran.
+
+[Initial CI run](https://github.com/aranlucas/elsewhere-by-post/actions/runs/42300451888): baseline reproduction passed, establishing that all four regressions fail on the original implementations with the intended value assertions. Formatting, typecheck, unit tests and production build passed. Main job stopped on lint before browser execution; lint corrections are included and CI will rerun. Final browser/e2e evidence pending.

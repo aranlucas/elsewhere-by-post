@@ -95,7 +95,13 @@
   },
   "overrides": [
     {
-      "files": ["e2e/game.e2e.ts", "e2e/maker.e2e.ts", "e2e/devices.e2e.ts", "e2e/play.ts"],
+      "files": [
+        "e2e/game.e2e.ts",
+        "e2e/maker.e2e.ts",
+        "e2e/devices.e2e.ts",
+        "e2e/play.ts",
+        "journeys/*.e2e.ts"
+      ],
       "rules": {
         "no-await-in-loop": "off"
       }

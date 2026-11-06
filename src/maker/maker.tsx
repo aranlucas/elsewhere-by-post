@@ -11,6 +11,7 @@ import {
   MAP_COLUMNS,
   MAP_CARD_COUNT,
 } from "../custom-map.ts";
+import type { PostcardMap } from "../custom-map.ts";
 import { YOUR_MAP_PATH } from "../game/journey-url.ts";
 import { useGridArrows } from "../hooks.ts";
 import "../maker.css";
@@ -42,6 +43,23 @@ function DraftFooter({ saved }: DraftFooterProps) {
   );
 }
 
+function useImportVersion(map: PostcardMap) {
+  const importVersion = useRef(0);
+
+  // An import may finish only while its original draft is still current.
+  useEffect(
+    () => () => {
+      importVersion.current += 1;
+    },
+    [map],
+  );
+
+  return {
+    begin: () => ++importVersion.current,
+    isCurrent: (version: number) => version === importVersion.current,
+  };
+}
+
 export function Maker() {
   const { initialMap, initiallySaved } = useLoaderData<typeof loader>();
   const storage = browserStorage();
@@ -51,16 +69,7 @@ export function Maker() {
   const boardRef = useRef<HTMLFieldSetElement>(null);
   const { map, setNotice } = draft;
   const validation = validateMap(map);
-  const importVersion = useRef(0);
-
-  // An import may finish only while its original draft is still current.
-  useEffect(() => {
-    importVersion.current += 1;
-
-    return () => {
-      importVersion.current += 1;
-    };
-  }, [map]);
+  const imports = useImportVersion(map);
 
   function checkRoute() {
     draft.setPreview(validation.journey);
@@ -102,16 +111,16 @@ export function Maker() {
     }
 
     input.value = "";
-    const version = ++importVersion.current;
+    const version = imports.begin();
 
     try {
       const imported = await readMapFile(file);
 
-      if (version === importVersion.current) {
+      if (imports.isCurrent(version)) {
         draft.replace(imported, "Map imported. Check its route before export or play.");
       }
     } catch (error) {
-      if (version === importVersion.current) {
+      if (imports.isCurrent(version)) {
         setNotice(
           `Import kept your current map. ${error instanceof Error ? error.message : String(error)}`,
         );

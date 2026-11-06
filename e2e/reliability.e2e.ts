@@ -1,15 +1,19 @@
 import { test, expect } from "@e2e/fixtures.ts";
 import { exampleMap } from "@/custom-map.ts";
-import { SAVE_KEY } from "@/storage.ts";
+import { LEVELS } from "@/levels.ts";
+import { decodeSave, SAVE_KEY } from "@/storage.ts";
 
 test("failed navigation save stays unavailable offline and recovers online", async ({ page }) => {
   await page.goto("/journeys/1");
   await expect(page.locator("#save-status")).toContainText("saved on this device");
   await page.evaluate(() => {
+    // Preserve the method receiver when restoring the simulated storage failure.
+    // eslint-disable-next-line typescript/unbound-method
     const original = Storage.prototype.setItem;
     Storage.prototype.setItem = () => {
       throw new Error("Quota test");
     };
+
     window.addEventListener("restore-storage", () => {
       Storage.prototype.setItem = original;
     });
@@ -23,12 +27,9 @@ test("failed navigation save stays unavailable offline and recovers online", asy
     window.dispatchEvent(new Event("online"));
   });
   await expect(page.locator("#save-status")).toContainText("saved on this device");
-  expect(
-    await page.evaluate(
-      (key) => JSON.parse(localStorage.getItem(key) ?? "null").levelIndex,
-      SAVE_KEY,
-    ),
-  ).toBe(1);
+  const raw = await page.evaluate((key) => localStorage.getItem(key), SAVE_KEY);
+
+  expect(decodeSave(raw, LEVELS).levelIndex).toBe(1);
   await page.goto("/");
   await expect(page).toHaveURL(/\/journeys\/2$/u);
 });
@@ -51,15 +52,19 @@ for (const newer of ["edit", "import"] as const) {
   test(`delayed import cannot replace a newer ${newer}`, async ({ page }) => {
     await page.goto("/maker");
     await page.evaluate(() => {
+      // Called with the File receiver below.
+      // eslint-disable-next-line typescript/unbound-method
       const original = File.prototype.text;
       File.prototype.text = async function () {
         const text = await original.call(this);
+
         if (this.name === "slow.json") {
           document.documentElement.dataset.importWaiting = "true";
-          await new Promise<void>((resolve) =>
-            window.addEventListener("finish-import", () => resolve(), { once: true }),
-          );
+          await new Promise<void>((resolve) => {
+            window.addEventListener("finish-import", () => resolve(), { once: true });
+          });
         }
+
         return text;
       };
     });
@@ -73,6 +78,7 @@ for (const newer of ["edit", "import"] as const) {
     });
     await expect(page.locator("html")).toHaveAttribute("data-import-waiting", "true");
     const title = page.getByLabel("Your map’s title");
+
     if (newer === "edit") {
       await title.fill("My latest world");
       await title.blur();
@@ -84,12 +90,13 @@ for (const newer of ["edit", "import"] as const) {
         buffer: Buffer.from(JSON.stringify(map)),
       });
     }
+
     await expect(title).toHaveValue("My latest world");
     await page.evaluate(async () => {
       window.dispatchEvent(new Event("finish-import"));
-      await new Promise<void>((resolve) =>
-        requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
-      );
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+      });
     });
     // Reload proves the stale completion did not overwrite the durable draft either.
     await expect(title).toHaveValue("My latest world");

@@ -20,10 +20,15 @@ test("author, validate, undo, publish, deliver and resume a custom map", async (
   await expect(browser).toHaveURL("/journeys/yours");
   await expect(screen.getByRole("heading", "CI little world")).toBeVisible();
   await screen.getByRole("button", "A little nudge").click();
+
   for (let move = 0; move < 40; move++) {
     await screen.getByRole("button", "Place one card for me").click();
-    if ((await screen.getByRole("status").textContent()) === "Your journey is ready.") break;
+
+    if ((await screen.getByRole("status").textContent()) === "Your journey is ready.") {
+      break;
+    }
   }
+
   await expect(screen.getByRole("status")).toHaveText("Your journey is ready.");
   await screen.getByRole("button", "Send the courier").click();
   await expect(screen.getByRole("status")).toHaveText("Delivered. Beautifully improbable.", {
