@@ -55,3 +55,73 @@ jobs:
         run: pnpm exec playwright test
         env:
           PLAY_BROWSER_CHANNEL: chromium
+
+      - name: Install e2e engine Chromium
+        run: pnpm exec e2e-web install chromium --with-deps
+
+      - name: Deterministic e2e journeys
+        run: pnpm test:journeys
+        env:
+          E2E_TELEMETRY_DISABLED: "1"
+
+      - name: Upload browser evidence
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: browser-evidence
+          path: |
+            evidence/
+            test-results/
+            .e2e/report.json
+            .e2e/junit.xml
+            .e2e/results/
+            .e2e/logs/
+          include-hidden-files: true
+
+  reproduce-baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4
+        with:
+          node-version-file: .node-version
+          cache: true
+          require-lockfile: true
+      - name: Restore audited defective implementations
+        run: |
+          git show 093fc9e:src/game/use-session.ts > src/game/use-session.ts
+          git show 093fc9e:src/maker/maker.tsx > src/maker/maker.tsx
+      - run: pnpm build
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Require all four regressions to detect baseline defects
+        env:
+          PLAY_BROWSER_CHANNEL: chromium
+        run: |
+          if pnpm exec playwright test e2e/reliability.e2e.ts --reporter=json > baseline-results.json; then
+            echo "Regressions unexpectedly passed against baseline"
+            exit 1
+          fi
+          python - <<'PYCODE'
+          import json
+          report = json.load(open("baseline-results.json"))
+          assert not report.get("errors"), report.get("errors")
+          specs = [spec for suite in report["suites"] for spec in suite.get("specs", [])]
+          assert len(specs) == 4, specs
+          for spec in specs:
+              result = spec["tests"][0]["results"][0]
+              assert result["status"] == "failed", result
+              message = result["error"]["message"]
+              assert "toContainText" in message or "toHaveValue" in message, message
+          PYCODE
+      - name: Upload baseline reproduction evidence
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: baseline-reproduction
+          path: |
+            baseline-results.json
+            test-results/

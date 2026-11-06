@@ -1,5 +1,5 @@
 import type { loader } from "./loader.ts";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ChangeEvent } from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { browserStorage } from "../browser.ts";
@@ -51,6 +51,16 @@ export function Maker() {
   const boardRef = useRef<HTMLFieldSetElement>(null);
   const { map, setNotice } = draft;
   const validation = validateMap(map);
+  const importVersion = useRef(0);
+
+  // An import may finish only while its original draft is still current.
+  useEffect(() => {
+    importVersion.current += 1;
+
+    return () => {
+      importVersion.current += 1;
+    };
+  }, [map]);
 
   function checkRoute() {
     draft.setPreview(validation.journey);
@@ -91,17 +101,21 @@ export function Maker() {
       return;
     }
 
+    input.value = "";
+    const version = ++importVersion.current;
+
     try {
-      draft.replace(
-        await readMapFile(file),
-        "Map imported. Check its route before export or play.",
-      );
+      const imported = await readMapFile(file);
+
+      if (version === importVersion.current) {
+        draft.replace(imported, "Map imported. Check its route before export or play.");
+      }
     } catch (error) {
-      setNotice(
-        `Import kept your current map. ${error instanceof Error ? error.message : String(error)}`,
-      );
-    } finally {
-      input.value = "";
+      if (version === importVersion.current) {
+        setNotice(
+          `Import kept your current map. ${error instanceof Error ? error.message : String(error)}`,
+        );
+      }
     }
   }
 

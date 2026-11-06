@@ -75,6 +75,8 @@ PLAY_BROWSER_CHANNEL=chromium pnpm test:e2e
 
 CI runs these checks with Playwright Chromium, including offline and accessibility checks; it does not deploy.
 
+`pnpm test:journeys` uses the real [e2e](https://github.com/tester-army/e2e) runner and `@e2e-dev/web` against the production preview after building. The deterministic mapmaker journey validates edits, undo, publication, hint-assisted solving, courier delivery and durable completion after reload. It needs no model or credentials. CI retains reports and failure traces. See [the reliability audit](docs/reliability-audit.md) for findings and baseline reproduction evidence.
+
 ## Deployment
 
 The app uses [Cloudflare Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/). `cloudflare.config.ts` sets the Worker name and single-page-app fallback; `public/_headers` supplies the same-origin content security policy.
