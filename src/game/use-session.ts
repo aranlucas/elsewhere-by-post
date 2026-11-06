@@ -34,7 +34,7 @@ export function useSession(
   const visit = useCallback(
     (levelIndex: number) => {
       save.current = { ...save.current, levelIndex };
-      persistSave(storage, save.current);
+      setSaved(persistSave(storage, save.current));
     },
     [storage],
   );
@@ -51,7 +51,7 @@ export function useSession(
   return {
     completed,
     sound,
-    message: offline ? OFFLINE : saved ? SAVED : UNSAVED,
+    message: saved ? (offline ? OFFLINE : SAVED) : UNSAVED,
     deskFor: (levelId: string): LevelSave | undefined => save.current.levels[levelId],
     /** Remembers the open journey, so `/` returns to it. */
     visit,
