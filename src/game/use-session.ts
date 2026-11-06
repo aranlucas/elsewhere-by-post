@@ -9,8 +9,6 @@ const UNSAVED = "Saving is unavailable. This desk lasts for this visit.";
 
 const OFFLINE = "Offline, and happily here. Your desk is saved locally.";
 
-const HISTORY_LIMIT = 100;
-
 /**
  * Progress that outlives a single journey: every desk, delivered journeys, the
  * sound preference and the last journey visited. Each change is written to
@@ -54,7 +52,6 @@ export function useSession(
     completed,
     sound,
     message: offline ? OFFLINE : saved ? SAVED : UNSAVED,
-    /** The saved desk for a journey, if it has one. */
     deskFor: (levelId: string): LevelSave | undefined => save.current.levels[levelId],
     /** Remembers the open journey, so `/` returns to it. */
     visit,
@@ -64,11 +61,10 @@ export function useSession(
         ...save.current,
         levels: {
           ...save.current.levels,
-          [levelId]: { ...desk, history: desk.history.slice(-HISTORY_LIMIT) },
+          [levelId]: desk,
         },
       });
     },
-    /** Marks a journey delivered and returns every delivered journey. */
     markDelivered: (levelId: string): string[] => {
       if (completed.includes(levelId)) {
         return completed;

@@ -16,7 +16,6 @@ export interface RouteColumnProps {
   onCheck: () => void;
 }
 
-/** The map being authored, its edit tools and the route check. */
 export function RouteColumn(props: RouteColumnProps) {
   const { validation } = props;
 

@@ -7,7 +7,6 @@ export interface DeliveryBannerProps {
   onRemix: () => void;
 }
 
-/** The level-complete banner that lands on the table once the courier delivers. */
 export function DeliveryBanner({ delivery, isLastLevel, onNext, onRemix }: DeliveryBannerProps) {
   return (
     <div id="delivery" className="delivery" hidden={delivery === null}>

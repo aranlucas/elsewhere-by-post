@@ -23,7 +23,7 @@ export function MakerBoard({ level, selected, preview, boardRef, onSelect }: Mak
       className="board"
       aria-label="Select a postcard to edit"
       tabIndex={-1}
-      style={{ "--columns": 3 }}
+      style={{ "--columns": level.columns }}
     >
       {level.cards.map((card, index) => {
         const connected = graph[index].flatMap((edge) =>

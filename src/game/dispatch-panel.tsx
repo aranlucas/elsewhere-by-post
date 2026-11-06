@@ -1,7 +1,7 @@
 import { ArrowIcon, SparkIcon } from "../icons.tsx";
 import { classes } from "../classes.ts";
 import { definition } from "../engine.ts";
-import { compass } from "../levels.ts";
+import { compass } from "../directions.ts";
 import type { Board, EchoColor, Level } from "../types.ts";
 import type { Status } from "./messages.ts";
 

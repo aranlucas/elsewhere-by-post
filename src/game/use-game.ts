@@ -15,7 +15,6 @@ export interface JourneySetup {
   session: GameSession;
 }
 
-/** One open journey: its desk, the courier, and what the desk says. */
 export function useGame({ levels, levelIndex, session }: JourneySetup) {
   const level = levels[levelIndex];
   const navigate = useNavigate();

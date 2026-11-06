@@ -1,10 +1,11 @@
+import { GAME_HISTORY_LIMIT } from "./types.ts";
 import { z } from "zod";
 import { validBoard } from "./engine.ts";
 import type { HistoryEntry, KeyValueStore, Level, LevelSave, SaveData } from "./types.ts";
 
 export const SAVE_KEY = "elsewhere-by-post-v1";
 
-export const boardSchema = z.array(z.object({ id: z.string(), rotation: z.int().min(0).max(3) }));
+const boardSchema = z.array(z.object({ id: z.string(), rotation: z.int().min(0).max(3) }));
 
 // Each part of a save is checked on its own, so one corrupt field resets only
 // itself: a bad history entry is dropped, a bad level loses only that level.
@@ -36,7 +37,7 @@ function decodeLevel(level: Level, saved: SavedLevel | null | undefined): LevelS
   }
 
   const history: HistoryEntry[] = saved.history
-    .slice(-100)
+    .slice(-GAME_HISTORY_LIMIT)
     .flatMap((entry) => (entry && validBoard(level, entry.board) ? [entry] : []));
 
   return { board: saved.board, moves: saved.moves, history };
@@ -47,10 +48,8 @@ export function decodeSave(raw: string | null | undefined, levels: Level[]): Sav
   let parsed;
 
   try {
-    // A missing save parses as null and falls through to a fresh desk.
     parsed = saveSchema.safeParse(JSON.parse(raw ?? "null"));
   } catch {
-    /* Empty, unavailable, old, or corrupt storage is a fresh desk. */
     return fresh;
   }
 

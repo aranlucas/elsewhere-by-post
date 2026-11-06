@@ -27,6 +27,7 @@ const pose = (id: string, rotation = 0): Tile => ({ id, rotation });
 export const LEVELS: Level[] = [
   {
     id: "first-turn",
+    shortName: "Turn",
     title: "A turn for the better",
     place: "The little lighthouse",
     columns: 2,
@@ -47,6 +48,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: "places-trade",
+    shortName: "Swap",
     title: "Places trade places",
     place: "The upside-down windmill",
     columns: 3,
@@ -85,6 +87,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: "scenic-route",
+    shortName: "Wander",
     title: "Take the scenic route",
     place: "The rainhouse",
     columns: 3,
@@ -124,6 +127,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: "elsewhere-door",
+    shortName: "Echo",
     title: "A door to elsewhere",
     place: "The twin archways",
     columns: 3,
@@ -163,6 +167,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: "detour-in-blue",
+    shortName: "Detour",
     title: "A detour in blue",
     place: "The floating teahouse",
     columns: 3,
@@ -203,6 +208,7 @@ export const LEVELS: Level[] = [
   },
   {
     id: "two-fold-world",
+    shortName: "Elsewhere",
     title: "The twice-folded world",
     place: "The impossible post office",
     columns: 3,
@@ -261,5 +267,3 @@ export const LEVELS: Level[] = [
     ],
   },
 ];
-
-export const compass = ["north", "east", "south", "west"];

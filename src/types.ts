@@ -32,7 +32,6 @@ export interface Tile {
 
 export type Board = Tile[];
 
-/** The rules of one board: everything the route engine needs. */
 export interface Puzzle {
   columns: number;
   start: string;
@@ -44,6 +43,7 @@ export interface Puzzle {
 }
 
 export interface Level extends Puzzle {
+  shortName: string;
   id: string;
   title: string;
   place: string;
@@ -82,6 +82,8 @@ export interface HistoryEntry {
   moves: number;
 }
 
+export const GAME_HISTORY_LIMIT = 100;
+
 export interface LevelSave {
   board: Board;
   moves: number;
@@ -96,7 +98,6 @@ export interface SaveData {
   sound: boolean;
 }
 
-/** The subset of Web Storage the game uses; tests pass an in-memory version. */
 export interface KeyValueStore {
   getItem(key: string): string | null | undefined;
   setItem(key: string, value: string): void;

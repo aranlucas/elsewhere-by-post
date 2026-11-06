@@ -54,6 +54,7 @@ test("bad slots, levels, completions and history cannot poison a saved desk", ()
         history: [{ board: LEVELS[0].initial, moves: 0 }, null, { board: [], moves: 1 }],
       },
       [LEVELS[1].id]: { board: [], moves: 100 },
+      [LEVELS[2].id]: { board: null, moves: 100 },
     },
   };
 
@@ -64,4 +65,5 @@ test("bad slots, levels, completions and history cannot poison a saved desk", ()
   expect(saved.levels[LEVELS[0].id].moves).toBe(0);
   expect(saved.levels[LEVELS[0].id].history.length).toBe(1);
   expect(saved.levels[LEVELS[1].id]).toBe(undefined);
+  expect(saved.levels[LEVELS[2].id]).toBe(undefined);
 });

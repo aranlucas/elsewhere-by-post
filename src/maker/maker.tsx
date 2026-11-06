@@ -3,7 +3,14 @@ import { useRef, useState } from "react";
 import type { ChangeEvent } from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { browserStorage } from "../browser.ts";
-import { authoredLevel, exampleMap, publishMap, validateMap } from "../custom-map.ts";
+import {
+  authoredLevel,
+  exampleMap,
+  publishMap,
+  validateMap,
+  MAP_COLUMNS,
+  MAP_CARD_COUNT,
+} from "../custom-map.ts";
 import { YOUR_MAP_PATH } from "../game/journey-url.ts";
 import { useGridArrows } from "../hooks.ts";
 import "../maker.css";
@@ -98,7 +105,7 @@ export function Maker() {
     }
   }
 
-  useGridArrows(boardRef, 3, 6);
+  useGridArrows(boardRef, MAP_COLUMNS, MAP_CARD_COUNT);
 
   return (
     <>

@@ -11,7 +11,6 @@ export function HelpDialog({ ref }: HelpDialogProps) {
   };
 
   return (
-    // `closedby="any"` lets a backdrop click or Escape dismiss it natively.
     <dialog id="help" ref={ref} aria-labelledby="help-title" closedby="any">
       <button type="button" className="close-help" aria-label="Close instructions" onClick={close}>
         ×

@@ -168,3 +168,19 @@ test.describe("touch mapmaker", () => {
     );
   });
 });
+
+test("mapmaker arrow navigation stays within rows and leaves text editing alone", async ({
+  page,
+}) => {
+  await page.goto("/maker");
+  await page.locator('.tile[data-at="1"] .tile-select').focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(page.locator('.tile[data-at="2"] .tile-select')).toBeFocused();
+  await page.keyboard.press("ArrowRight");
+  await expect(page.locator('.tile[data-at="2"] .tile-select')).toBeFocused();
+  await page.keyboard.press("ArrowDown");
+  await expect(page.locator('.tile[data-at="5"] .tile-select')).toBeFocused();
+  await page.getByLabel("Your map’s title").focus();
+  await page.keyboard.press("ArrowLeft");
+  await expect(page.getByLabel("Your map’s title")).toBeFocused();
+});

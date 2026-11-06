@@ -1,6 +1,5 @@
 import type { RefObject } from "react";
-import { arrowNeighbor } from "../browser.ts";
-import { useDocumentEvent } from "../hooks.ts";
+import { useDocumentEvent, useGridArrows } from "../hooks.ts";
 
 export interface GameKeysOptions {
   columns: number;
@@ -14,8 +13,9 @@ export interface GameKeysOptions {
   onClear: () => void;
 }
 
-/** R turns, U undoes, P sends, Escape clears and arrow keys move between postcards. */
 export function useGameKeys(options: GameKeysOptions): void {
+  useGridArrows(options.boardRef, options.columns, options.count, options.ignore);
+
   useDocumentEvent("keydown", (event) => {
     if (event.ctrlKey || event.metaKey || event.altKey || options.ignore(event)) {
       return;
@@ -50,23 +50,6 @@ export function useGameKeys(options: GameKeysOptions): void {
         return;
       case "escape":
         options.onClear();
-
-        return;
-      default:
-        break;
-    }
-
-    if (tileAt === null || !event.key.startsWith("Arrow")) {
-      return;
-    }
-
-    event.preventDefault();
-    const next = arrowNeighbor(event.key, tileAt, options.columns, options.count);
-
-    if (next !== null) {
-      options.boardRef.current
-        ?.querySelector<HTMLElement>(`.tile[data-at="${next}"] .tile-select`)
-        ?.focus();
     }
   });
 }

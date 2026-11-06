@@ -16,7 +16,6 @@ export interface Trail {
   paths: TrailPath[];
 }
 
-/** The centre of a tile's artwork, relative to the map stage. */
 export function pointOf(stage: HTMLElement, index: number): Point {
   const tile = stage
     .querySelector(`.tile[data-at="${index}"] .art-window`)
@@ -29,7 +28,6 @@ export function pointOf(stage: HTMLElement, index: number): Point {
     : { x: 0, y: 0 };
 }
 
-/** The dotted route drawn behind the courier, up to and including step `through`. */
 export function trailOf(stage: HTMLElement, journey: Journey, through: number): Trail | null {
   if (through < 1) {
     return null;

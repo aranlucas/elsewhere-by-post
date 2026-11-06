@@ -1,7 +1,6 @@
 import { expect, test } from "vitest";
 import { LEVELS } from "@/levels.ts";
 import type { Puzzle } from "@/types.ts";
-import { boardSchema } from "@/storage.ts";
 import { echoesCrossed, solveWithHints } from "@test/helpers.ts";
 import {
   portsFor,
@@ -200,8 +199,6 @@ test("all stamps need one legal journey, rather than plain network reachability"
 
 test("malformed saves and displaced anchors fail validation", () => {
   const level = LEVELS[0];
-  // Saved boards come from JSON, so the save schema must reject non-arrays.
-  expect(boardSchema.safeParse(null).success).toBe(false);
   expect(validBoard(level, [])).toBe(false);
   const board = copyBoard(level.initial);
   board[1].rotation = 4;

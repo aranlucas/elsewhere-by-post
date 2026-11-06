@@ -27,7 +27,6 @@ export function captureFlip(
   return { rects, oldBoard, turnDelta };
 }
 
-/** Animates every tile from its captured position and rotation to where it now is. */
 export function playFlip(container: HTMLElement, flip: Flip, board: Board): void {
   for (const element of tilesIn(container)) {
     const id = element.dataset.id ?? "";

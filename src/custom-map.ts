@@ -75,10 +75,16 @@ const mapCardSchema = z.object({
   echo: z.enum(ECHO_COLORS).nullable(),
 });
 
+export const MAP_COLUMNS = 3;
+
+export const MAP_CARD_COUNT = 6;
+
 const PINNED_ART = new Map<number, ArtKey>([
   [0, "home"],
-  [5, "mail"],
+  [MAP_CARD_COUNT - 1, "mail"],
 ]);
+
+export const pinnedArtAt = (index: number): ArtKey | undefined => PINNED_ART.get(index);
 
 // This boundary accepts data only: six known vector landmarks, four directions,
 // two optional echo colors, bounded text, no asset URLs or executable content.
@@ -87,11 +93,11 @@ const mapSchema = z
   .object({
     version: z.literal(1),
     title: boundedText(60),
-    cards: z.array(mapCardSchema).length(6),
+    cards: z.array(mapCardSchema).length(MAP_CARD_COUNT),
   })
   .superRefine((map, context) => {
     for (const [index, card] of map.cards.entries()) {
-      const pinned = PINNED_ART.get(index);
+      const pinned = pinnedArtAt(index);
 
       if (pinned === undefined ? !isLandmark(card.art) : card.art !== pinned) {
         context.addIssue({ code: "custom", path: ["cards", index, "art"] });
@@ -111,7 +117,6 @@ const publicationSchema = z.object({
   seed: z.int(),
 });
 
-/** The player-facing explanation for the first problem zod found in a map, by where it is. */
 function describeIssue(issue: z.core.$ZodIssue): string {
   const [field, index, property] = issue.path;
 
@@ -164,7 +169,6 @@ export function exampleMap(): PostcardMap {
   };
 }
 
-/** The canonical map, or a player-facing Error naming the first problem zod found. */
 function mapFrom(result: ReturnType<typeof mapSchema.safeParse>): PostcardMap {
   if (result.success) {
     return result.data;
@@ -199,12 +203,14 @@ export function parseMap(text: string): PostcardMap {
 }
 
 export function authoredLevel(input: PostcardMap): AuthoredLevel {
-  const map = normalizeMap(input);
+  return levelFromMap(normalizeMap(input));
+}
 
+function levelFromMap(map: PostcardMap): AuthoredLevel {
   const cards = map.cards.map((card, index) => ({
     ...card,
-    id: index === 0 ? "home" : index === 5 ? "mail" : `place-${index}`,
-    locked: index === 0 || index === 5,
+    id: pinnedArtAt(index) ?? `place-${index}`,
+    locked: pinnedArtAt(index) !== undefined,
   }));
 
   const board = cards.map((card) => ({ id: card.id, rotation: card.rotation }));
@@ -214,7 +220,7 @@ export function authoredLevel(input: PostcardMap): AuthoredLevel {
     id: "mapmaker",
     title: map.title,
     place: map.title,
-    columns: 3,
+    columns: MAP_COLUMNS,
     start: "home",
     goal: "mail",
     cards,
@@ -227,7 +233,7 @@ export function authoredLevel(input: PostcardMap): AuthoredLevel {
 export function validateMap(input: PostcardMap): MapValidation {
   try {
     const map = normalizeMap(input);
-    const level = authoredLevel(map);
+    const level = levelFromMap(map);
 
     for (const echo of level.requiredEchoes) {
       if (level.cards.filter((card) => card.echo === echo).length !== 2) {
@@ -301,6 +307,7 @@ export function playableLevel(input: PostcardMap, seed: number): Level {
     ...level,
     id: `custom-${fingerprint(map)}-${seed}`,
     initial: remixBoard(level, seed),
+    shortName: "Yours",
     letter: "Dear mapmaker,\nA world of your own. A letter that can find its way.",
     lesson: "Your own little map. Collect every stamp and cross each echo before delivery.",
     hint: "The mapmaker checked an authored route. A nudge restores one part of that arrangement.",
@@ -357,8 +364,4 @@ export function readPublishedLevel(storage: KeyValueStore | null): Level | null 
   } catch {
     return null;
   }
-}
-
-export function copyMap(map: PostcardMap): PostcardMap {
-  return structuredClone(map);
 }

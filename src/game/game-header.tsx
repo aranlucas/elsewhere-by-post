@@ -5,14 +5,11 @@ import { classes } from "../classes.ts";
 import { journeyPath } from "./journey-url.ts";
 import type { Level } from "../types.ts";
 
-const JOURNEY_NAMES = ["Turn", "Swap", "Wander", "Echo", "Detour", "Elsewhere", "Yours"];
-
 interface GameHeaderProps {
   onHelp: () => void;
   children: ReactNode;
 }
 
-/** A slim game bar: the title, whatever level picker sits in `children`, and help. */
 export function GameHeader({ onHelp, children }: GameHeaderProps) {
   return (
     <header className="masthead topbar">
@@ -51,10 +48,10 @@ export function JourneyNav({ levels, current, completed }: JourneyNavProps) {
             className={classes("journey", index === current && "current", done && "complete")}
             aria-label={`Journey ${index + 1}: ${level.title}${done ? ", delivered" : ""}`}
             aria-current={index === current ? "page" : undefined}
-            title={JOURNEY_NAMES[index]}
+            title={level.shortName}
           >
             <span className="journey-number">{index + 1}</span>
-            <span className="journey-label">{JOURNEY_NAMES[index]}</span>
+            <span className="journey-label">{level.shortName}</span>
             {done && (
               <span className="journey-check" aria-hidden="true">
                 ✓
