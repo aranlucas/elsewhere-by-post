@@ -9,7 +9,7 @@ test("author, validate, undo, publish, deliver and resume a custom map", async (
   await app.open("/maker");
   await screen.getByLabel("Your map’s title").fill("CI little world");
   await screen.getByLabel("Your map’s title").press("Enter");
-  await screen.getByLabel("Echo door", { exact: true }).selectOption("");
+  await screen.getByLabel("Echo door", { exact: true }).selectOption("No echo");
   await expect(screen.getByRole("button", "Shuffle & play my map")).toBeDisabled();
   await expect(browser.locator("#validation")).toContainText("exactly two doors");
   await screen.getByRole("button", "Undo edit").click();
